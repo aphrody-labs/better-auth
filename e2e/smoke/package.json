@@ -23,6 +23,6 @@
     "oauth4webapi": "3.8.8"
   },
   "scripts": {
-    "e2e:smoke": "node --test ./test/*.spec.ts"
+    "e2e:smoke": "bun --test ./test/*.spec.ts"
   }
 }
