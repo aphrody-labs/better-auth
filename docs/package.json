@@ -16,7 +16,7 @@
     "sync-versions": "bun scripts/sync-versions.ts",
     "sync-typesense": "bun scripts/sync-typesense.ts",
     "validate:sidebar-icons": "bun run sync-versions && bun --import=tsx scripts/validate-sidebar-icons.ts",
-    "validate:docs": "bun scripts/validate-meta.ts content/docs && bun --import=tsx scripts/validate-sidebar-icons.ts && bun scripts/validate-links.ts",
+    "validate:docs": "bun scripts/validate-meta.ts content/docs && bun run validate:sidebar-icons && bun scripts/validate-links.ts",
     "format:md": "remark . --ext md,mdx --output --quiet",
     "format:check": "remark . --ext md,mdx --quiet --frail",
     "typecheck:consumer": "git clean -xdf .next .source && next typegen && fumadocs-mdx && tsc --noEmit --incremental false"
