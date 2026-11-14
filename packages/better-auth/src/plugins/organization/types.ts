@@ -98,8 +98,7 @@ export interface OrganizationOptions {
 				 * @default Infinite
 				 */
 				maximumRolesPerOrganization?:
-					| number
-					| ((organizationId: string) => Awaitable<number>);
+					number | ((organizationId: string) => Awaitable<number>);
 		  }
 		| undefined;
 	/**

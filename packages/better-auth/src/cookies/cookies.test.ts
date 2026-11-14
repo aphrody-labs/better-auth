@@ -19,7 +19,7 @@ import {
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import {
 	expireCookie,
 	getChunkedCookie,
@@ -142,9 +142,8 @@ describe("cookies", async () => {
 			vi.resetModules();
 
 			// Re-import modules after NODE_ENV change
-			const { getTestInstance: getTestInstanceReloaded } = await import(
-				"../test-utils/test-instance"
-			);
+			const { getTestInstance: getTestInstanceReloaded } =
+				await import("../test-utils/test-instance");
 
 			const { client, testUser } = await getTestInstanceReloaded({
 				baseURL: undefined,

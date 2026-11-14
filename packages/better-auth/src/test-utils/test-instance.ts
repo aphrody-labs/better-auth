@@ -7,7 +7,7 @@ import type {
 } from "@better-auth/core";
 import type { SuccessContext } from "@better-fetch/fetch";
 import { sql } from "kysely";
-import { afterAll } from "vitest";
+import { afterAll } from "bun:test";
 import { betterAuth } from "../auth/full";
 import { createAuthClient } from "../client";
 import { parseSetCookieHeader, setCookieToHeader } from "../cookies";

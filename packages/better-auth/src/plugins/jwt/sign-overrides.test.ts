@@ -1,6 +1,6 @@
 import type { AuthContext, GenericEndpointContext } from "@better-auth/core";
 import { decodeProtectedHeader } from "jose";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { jwt } from ".";
 import { getJwksAdapter } from "./adapter";

@@ -71,13 +71,11 @@ export interface SCIMDemoEmployeeIdentity {
 	userKey: SCIMDemoUserKey;
 }
 
-export interface SCIMDemoEmployeePortalIdentity
-	extends SCIMDemoEmployeeIdentity {
+export interface SCIMDemoEmployeePortalIdentity extends SCIMDemoEmployeeIdentity {
 	role: string | null;
 }
 
-export interface SCIMDemoEmployeeVerificationRecord
-	extends SCIMDemoEmployeeIdentity {
+export interface SCIMDemoEmployeeVerificationRecord extends SCIMDemoEmployeeIdentity {
 	audience:
 		| typeof SCIM_DEMO_EMPLOYEE_ACCESS_AUDIENCE
 		| typeof SCIM_DEMO_EMPLOYEE_PORTAL_AUDIENCE;

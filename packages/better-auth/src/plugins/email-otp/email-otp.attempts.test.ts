@@ -1,6 +1,6 @@
 import type { SecondaryStorage } from "@better-auth/core/db";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { emailOTP } from ".";
 import { emailOTPClient } from "./client";
 import { splitAtLastColon, toOTPIdentifier } from "./utils";
@@ -219,9 +219,9 @@ describe("email OTP preflight attempt accounting", () => {
 			).data?.success,
 		).toBe(true);
 		expect(
-			await (await auth.$context).internalAdapter.findVerificationValue(
-				identifier,
-			),
+			await (
+				await auth.$context
+			).internalAdapter.findVerificationValue(identifier),
 		).not.toBeNull();
 
 		const verified = await client.emailOtp.verifyEmail({
@@ -231,9 +231,9 @@ describe("email OTP preflight attempt accounting", () => {
 		expect(verified.data?.status).toBe(true);
 		expect(verified.data?.user.emailVerified).toBe(true);
 		expect(
-			await (await auth.$context).internalAdapter.findVerificationValue(
-				identifier,
-			),
+			await (
+				await auth.$context
+			).internalAdapter.findVerificationValue(identifier),
 		).toBeNull();
 	});
 
@@ -275,7 +275,9 @@ describe("email OTP preflight attempt accounting", () => {
 		expect(check.data).toBeNull();
 		expect(check.error?.status).toBe(500);
 		expect(
-			await (await auth.$context).internalAdapter.findVerificationValue(
+			await (
+				await auth.$context
+			).internalAdapter.findVerificationValue(
 				toOTPIdentifier("sign-in", email),
 			),
 		).toBeNull();

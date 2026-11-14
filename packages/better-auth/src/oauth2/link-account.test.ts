@@ -7,16 +7,16 @@ import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-diale
 import { Kysely } from "kysely";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
+import assert from "node:assert";
 import {
 	afterAll,
 	afterEach,
-	assert,
 	beforeAll,
 	describe,
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import * as z from "zod";
 import { betterAuth } from "../auth/full";
 import { createAuthClient } from "../client";

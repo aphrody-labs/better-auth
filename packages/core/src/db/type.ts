@@ -9,9 +9,7 @@ import type {
 export type BaseModelNames = "user" | "account" | "session" | "verification";
 
 export type ModelNames<T extends string = LiteralString> =
-	| BaseModelNames
-	| T
-	| "rate-limit";
+	BaseModelNames | T | "rate-limit";
 
 export type InferDBValueType<T extends DBFieldType> = T extends "string"
 	? string
@@ -45,18 +43,19 @@ export type InferDBFieldInput<T extends DBFieldAttribute> = InferDBValueType<
 export type InferDBFieldsInput<Field> =
 	Field extends Record<infer Key, DBFieldAttribute>
 		? {
-				[key in Key as Field[key]["required"] extends false
-					? never
-					: Field[key]["defaultValue"] extends string | number | boolean | Date
+				[
+					key in Key as Field[key]["required"] extends false
 						? never
-						: Field[key]["input"] extends false
+						: Field[key]["defaultValue"] extends
+									string | number | boolean | Date
 							? never
-							: key]: InferDBFieldInput<Field[key]>;
+							: Field[key]["input"] extends false
+								? never
+								: key
+				]: InferDBFieldInput<Field[key]>;
 			} & {
 				[key in Key as Field[key]["input"] extends false ? never : key]?:
-					| InferDBFieldInput<Field[key]>
-					| undefined
-					| null;
+					InferDBFieldInput<Field[key]> | undefined | null;
 			}
 		: {};
 
@@ -65,29 +64,27 @@ export type InferDBFieldsOutput<
 > =
 	Fields extends Record<infer Key, DBFieldAttribute>
 		? {
-				[key in Key as Fields[key]["returned"] extends false
-					? never
-					: Fields[key]["required"] extends false
-						? Fields[key]["defaultValue"] extends
-								| boolean
-								| string
-								| number
-								| Date
-							? key
-							: never
-						: key]: InferDBFieldOutput<Fields[key]>;
-			} & {
-				[key in Key as Fields[key]["returned"] extends false
-					? never
-					: Fields[key]["required"] extends false
-						? Fields[key]["defaultValue"] extends
-								| boolean
-								| string
-								| number
-								| Date
-							? never
+				[
+					key in Key as Fields[key]["returned"] extends false
+						? never
+						: Fields[key]["required"] extends false
+							? Fields[key]["defaultValue"] extends
+									boolean | string | number | Date
+								? key
+								: never
 							: key
-						: never]?: InferDBFieldOutput<Fields[key]> | null;
+				]: InferDBFieldOutput<Fields[key]>;
+			} & {
+				[
+					key in Key as Fields[key]["returned"] extends false
+						? never
+						: Fields[key]["required"] extends false
+							? Fields[key]["defaultValue"] extends
+									boolean | string | number | Date
+								? never
+								: key
+							: never
+				]?: InferDBFieldOutput<Fields[key]> | null;
 			}
 		: never;
 
@@ -238,11 +235,7 @@ export type DBFieldAttributeConfig = {
 				 * @default "cascade"
 				 */
 				onDelete?:
-					| "no action"
-					| "restrict"
-					| "cascade"
-					| "set null"
-					| "set default";
+					"no action" | "restrict" | "cascade" | "set null" | "set default";
 		  }
 		| undefined;
 	unique?: boolean | undefined;

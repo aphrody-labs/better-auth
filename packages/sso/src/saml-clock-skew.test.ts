@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { sso } from ".";
 import { SignatureAlgorithm } from "./saml";
 import { saml } from "./samlify";

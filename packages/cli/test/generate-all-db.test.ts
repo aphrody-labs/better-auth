@@ -2,7 +2,7 @@ import type { BetterAuthOptions } from "@better-auth/core";
 import { passkey } from "@better-auth/passkey";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { twoFactor, username } from "better-auth/plugins";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { generateDrizzleSchema } from "../src/generators/drizzle";
 
 describe("generate drizzle schema for all databases", async () => {

@@ -7,7 +7,7 @@ import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import type { JWK } from "jose";
 import { exportJWK, generateKeyPair, importJWK, SignJWT } from "jose";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { oauthProvider } from "../oauth";
 
 const baseURL = "http://localhost:3000";

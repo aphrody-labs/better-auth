@@ -72,9 +72,7 @@ function isDpopChallengeError(error: APIError) {
 
 function presentedScheme(
 	request:
-		| Request
-		| Pick<ResourceRequestInput, "authorizationHeader">
-		| undefined,
+		Request | Pick<ResourceRequestInput, "authorizationHeader"> | undefined,
 ) {
 	if (!request) return undefined;
 	// Duck-type the `Request` so a cross-realm instance is still recognized.

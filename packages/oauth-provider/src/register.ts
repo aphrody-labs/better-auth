@@ -336,13 +336,11 @@ export async function registerEndpoint(
 			);
 	const isTokenAuthorized = Boolean(tokenAuthorization);
 
-	if (
-		!(
-			session ||
-			isTokenAuthorized ||
-			opts.allowUnauthenticatedClientRegistration
-		)
-	) {
+	if (!(
+		session ||
+		isTokenAuthorized ||
+		opts.allowUnauthenticatedClientRegistration
+	)) {
 		// No session, no token, and open registration disabled. A presented but
 		// invalid token already threw above, so this is the no-credentials case:
 		// answer with a bare RFC 6750 §3.1 Bearer challenge and no error code.

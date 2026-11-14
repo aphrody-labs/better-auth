@@ -1,5 +1,5 @@
 import type { User } from "better-auth/db";
-import { expect } from "vitest";
+import { expect } from "bun:test";
 import { createTestSuite } from "../create-test-suite";
 
 /**

@@ -1,5 +1,5 @@
 import type { BetterAuthOptions, DBTransactionAdapter } from "better-auth";
-import { describe, expect, expectTypeOf, it, vi } from "vitest";
+import { describe, expect, expectTypeOf, it, vi } from "bun:test";
 import type { SSOProviderUserProfile, SSOUserResolutionInput } from "./types";
 import {
 	assertSSOUserResolutionAsyncContextSupport,

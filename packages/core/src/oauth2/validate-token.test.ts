@@ -1,6 +1,6 @@
 import type { JWK } from "jose";
 import { CompactEncrypt, exportJWK, generateKeyPair, SignJWT } from "jose";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { validateToken } from "./validate-authorization-code";
 import { jwksCache, verifyJwsAccessToken } from "./verify";
 

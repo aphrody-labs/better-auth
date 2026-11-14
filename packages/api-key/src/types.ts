@@ -36,8 +36,7 @@ export interface ApiKeyConfigurationOptions {
 	 * The function to get the API key from the context
 	 */
 	customAPIKeyGetter?:
-		| ((ctx: HookEndpointContext) => string | null)
-		| undefined;
+		((ctx: HookEndpointContext) => string | null) | undefined;
 	/**
 	 * A custom function to validate the API key
 	 */

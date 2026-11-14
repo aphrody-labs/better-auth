@@ -1,5 +1,5 @@
 import type { AuthContext } from "better-auth";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { lockSSOProviderForAccountLink } from "./routes/providers";
 
 describe("SSO provider account-link locking", () => {

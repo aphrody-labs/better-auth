@@ -9,7 +9,14 @@ import Database from "better-sqlite3";
 import { defineRelationsPart } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { afterAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+} from "bun:test";
 
 const users = sqliteTable("user", {
 	id: text("id").primaryKey(),
@@ -234,9 +241,7 @@ describe("drizzle relations-v2 adapter: query key via relations internal", () =>
 });
 
 describe("drizzle relations-v2 adapter: model identity", () => {
-	it("uses the user schema when its table name matches the account model key", async ({
-		onTestFinished,
-	}) => {
+	it("uses the user schema when its table name matches the account model key", async () => {
 		const sqliteDb = new Database(":memory:");
 		onTestFinished(() => {
 			sqliteDb.close();

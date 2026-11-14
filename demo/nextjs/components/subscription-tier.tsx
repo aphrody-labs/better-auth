@@ -27,7 +27,8 @@ const tierVariants = cva(
 );
 
 export interface SubscriptionTierLabelProps
-	extends React.HTMLAttributes<HTMLSpanElement>,
+	extends
+		React.HTMLAttributes<HTMLSpanElement>,
 		VariantProps<typeof tierVariants> {
 	tier?: string;
 }

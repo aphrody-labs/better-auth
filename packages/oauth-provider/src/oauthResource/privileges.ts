@@ -9,13 +9,7 @@ import type { OAuthOptions, Scope } from "../types";
  * RBAC patterns.
  */
 type ResourceAction =
-	| "create"
-	| "read"
-	| "update"
-	| "delete"
-	| "list"
-	| "link"
-	| "unlink";
+	"create" | "read" | "update" | "delete" | "list" | "link" | "unlink";
 
 /**
  * Authorizes a resource action against the configured `resourcePrivileges`

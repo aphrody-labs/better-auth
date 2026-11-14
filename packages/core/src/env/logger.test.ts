@@ -1,4 +1,4 @@
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import type { AuthEndpointContext } from "../context";
 import { runWithEndpointContext } from "../context";
 import { safeJSONParse } from "../utils/json";

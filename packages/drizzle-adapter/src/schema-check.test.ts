@@ -8,7 +8,7 @@ import {
 } from "@better-auth/core/db/internal";
 import { relations } from "drizzle-orm";
 import { pgTable, text } from "drizzle-orm/pg-core";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { drizzleAdapter } from "./drizzle-adapter";
 import { drizzleAdapter as relationsV2Adapter } from "./relations-v2";
 import { findDrizzleSchemaProblems } from "./schema-check";

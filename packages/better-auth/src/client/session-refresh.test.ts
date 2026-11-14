@@ -1,7 +1,7 @@
-// @vitest-environment happy-dom
+import "../test-utils/dom-env";
 
 import { atom } from "nanostores";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { getGlobalBroadcastChannel } from "./broadcast-channel";
 import { getGlobalOnlineManager } from "./online-manager";
 import { createSessionRefreshManager } from "./session-refresh";

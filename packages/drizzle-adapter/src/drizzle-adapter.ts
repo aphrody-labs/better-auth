@@ -815,8 +815,7 @@ export const drizzleAdapter = (db: DB, config: DrizzleAdapterConfig) => {
 							logger.info("Falling back to regular query");
 						} else {
 							let includes:
-								| Record<string, { limit: number } | boolean>
-								| undefined;
+								Record<string, { limit: number } | boolean> | undefined;
 
 							const renamedJoinResults: { key: string; target: string }[] = [];
 							const relationKeys = getRelationKeysByModel().get(queryModel);
@@ -918,8 +917,7 @@ export const drizzleAdapter = (db: DB, config: DrizzleAdapterConfig) => {
 							logger.info("Falling back to regular query");
 						} else {
 							let includes:
-								| Record<string, { limit: number } | boolean>
-								| undefined;
+								Record<string, { limit: number } | boolean> | undefined;
 
 							const renamedJoinResults: { key: string; target: string }[] = [];
 							const relationKeys = getRelationKeysByModel().get(queryModel);

@@ -108,7 +108,9 @@ export const createInternalAdapter = (
 		];
 		return deleteManyWithHooks(liveSessions, "session", {
 			fn: async () => {
-				await (await getCurrentAdapter(adapter)).updateMany({
+				await (
+					await getCurrentAdapter(adapter)
+				).updateMany({
 					model: "session",
 					where: liveSessions,
 					update: { expiresAt: new Date() },
@@ -495,7 +497,9 @@ export const createInternalAdapter = (
 				| undefined,
 			where?: Where[] | undefined,
 		) => {
-			const users = await (await getCurrentAdapter(adapter)).findMany<User>({
+			const users = await (
+				await getCurrentAdapter(adapter)
+			).findMany<User>({
 				model: "user",
 				limit,
 				offset,
@@ -505,7 +509,9 @@ export const createInternalAdapter = (
 			return users;
 		},
 		countTotalUsers: async (where?: Where[] | undefined) => {
-			const total = await (await getCurrentAdapter(adapter)).count({
+			const total = await (
+				await getCurrentAdapter(adapter)
+			).count({
 				model: "user",
 				where,
 			});
@@ -559,8 +565,7 @@ export const createInternalAdapter = (
 			override?: (Partial<Session> & Record<string, any>) | undefined,
 			overrideAll?: boolean | undefined,
 			storageOptions?:
-				| { deferSecondaryStorageWrites?: boolean | undefined }
-				| undefined,
+				{ deferSecondaryStorageWrites?: boolean | undefined } | undefined,
 		) => {
 			const headers: Headers | undefined = await (async () => {
 				const ctx = tryGetCurrentAuthEndpointContext();
@@ -632,7 +637,9 @@ export const createInternalAdapter = (
 					now,
 				);
 
-				const user = await (await getCurrentAdapter(adapter)).findOne<User>({
+				const user = await (
+					await getCurrentAdapter(adapter)
+				).findOne<User>({
 					model: "user",
 					where: [{ field: "id", value: userId }],
 				});
@@ -1057,9 +1064,9 @@ export const createInternalAdapter = (
 				"session",
 				{
 					fn: async (where) => {
-						const deleted = await (await getCurrentAdapter(adapter)).deleteMany(
-							{ model: "session", where },
-						);
+						const deleted = await (
+							await getCurrentAdapter(adapter)
+						).deleteMany({ model: "session", where });
 						await revokeCachedSessions();
 						return deleted;
 					},
@@ -1162,7 +1169,9 @@ export const createInternalAdapter = (
 		},
 		findUserById: async (userId: string) => {
 			if (!userId) return null;
-			const user = await (await getCurrentAdapter(adapter)).findOne<User>({
+			const user = await (
+				await getCurrentAdapter(adapter)
+			).findOne<User>({
 				model: "user",
 				where: [
 					{

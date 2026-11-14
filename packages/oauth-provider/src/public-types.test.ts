@@ -10,7 +10,7 @@ import type {
 	Scope,
 	TokenEndpointAuthMethod,
 } from "@better-auth/oauth-provider";
-import { describe, expectTypeOf, it } from "vitest";
+import { describe, expectTypeOf, it } from "bun:test";
 
 type ClientPrivilegeAction = Parameters<
 	NonNullable<OAuthOptions["clientPrivileges"]>

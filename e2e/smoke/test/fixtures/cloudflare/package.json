@@ -12,12 +12,11 @@
   },
   "devDependencies": {
     "kysely-029": "npm:kysely@0.29.6",
-    "vitest": "catalog:vitest",
     "wrangler": "4.123.0"
   },
   "scripts": {
     "check": "wrangler types --check --env-interface CloudflareBindings && tsc && wrangler build",
-    "e2e:smoke": "bun run check && vitest run",
+    "e2e:smoke": "bun run check && bun test --timeout 60000",
     "dev": "wrangler dev",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "typecheck:consumer": "tsc --noEmit --project tsconfig.json",

@@ -1,5 +1,5 @@
 import type { SecretConfig } from "@better-auth/core";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { symmetricDecrypt, symmetricEncrypt } from "./index";
 import type { EncryptionPurpose } from "./purpose";
 import { derivePurposeKey } from "./purpose";

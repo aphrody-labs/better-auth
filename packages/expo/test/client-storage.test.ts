@@ -8,7 +8,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { storageAdapter } from "../src/client-storage";
 
 beforeAll(() => {

@@ -3,15 +3,8 @@ import type { Verification } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
 import { createAuthClient } from "better-auth/client";
 import { getTestInstance } from "better-auth/test";
-import {
-	afterEach,
-	assert,
-	beforeEach,
-	describe,
-	expect,
-	it,
-	vi,
-} from "vitest";
+import assert from "node:assert";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import type { Passkey, PasskeyOptions } from ".";
 import { passkey } from ".";
 import { passkeyClient } from "./client";

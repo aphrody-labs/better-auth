@@ -2,7 +2,7 @@ import type { BetterAuthOptions } from "@better-auth/core";
 import type { RowDataPacket } from "mysql2/promise";
 import { createPool } from "mysql2/promise";
 import { Pool } from "pg";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 import { getMigrations, UnsafeMigrationError } from "./get-migration";
 
 // The populated-table guard in `getMigrations` is dialect-independent by

@@ -1,5 +1,5 @@
 import type { OAuthProvider } from "@better-auth/core/oauth2";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { resolveOAuthAccountKey } from "./account-key";
 
 function createProvider(

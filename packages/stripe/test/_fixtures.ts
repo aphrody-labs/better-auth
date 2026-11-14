@@ -1,6 +1,6 @@
 import { memoryAdapter } from "better-auth/adapters/memory";
 import type Stripe from "stripe";
-import { test as baseTest, vi } from "vitest";
+import { test as baseTest, vi } from "bun:test";
 import type { StripeOptions } from "../src/types";
 
 export const TEST_WEBHOOK_SECRET = "test_secret";

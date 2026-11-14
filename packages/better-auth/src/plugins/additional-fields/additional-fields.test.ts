@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import { betterAuth } from "../../auth/full";
 import { createAuthClient } from "../../client";
 import { createAuthClient as createReactAuthClient } from "../../client/react";

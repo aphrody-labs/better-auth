@@ -49,7 +49,7 @@ export const bearer = (options?: BearerOptions | undefined) => {
 					matcher(context) {
 						return Boolean(
 							context.request?.headers.get("authorization") ||
-								context.headers?.get("authorization"),
+							context.headers?.get("authorization"),
 						);
 					},
 					handler: createAuthMiddleware(async (c) => {

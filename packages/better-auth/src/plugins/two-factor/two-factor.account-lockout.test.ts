@@ -5,7 +5,7 @@ import type {
 import type { DBAdapter } from "@better-auth/core/db/adapter";
 import { createAdapterFactory } from "@better-auth/core/db/adapter";
 import { createOTP } from "@better-auth/utils/otp";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { memoryAdapter } from "../../adapters/memory-adapter";
 import { symmetricDecrypt } from "../../crypto";
 import { convertSetCookieToCookie } from "../../test-utils/headers";

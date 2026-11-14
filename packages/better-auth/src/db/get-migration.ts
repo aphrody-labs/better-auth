@@ -535,9 +535,8 @@ async function tableHasRows(
 	table: string,
 ) {
 	const probe = db.selectFrom(table).select(sql`1`.as("present"));
-	const rows = await (dbType === "mssql"
-		? probe.top(1)
-		: probe.limit(1)
+	const rows = await (
+		dbType === "mssql" ? probe.top(1) : probe.limit(1)
 	).execute();
 	return rows.length > 0;
 }

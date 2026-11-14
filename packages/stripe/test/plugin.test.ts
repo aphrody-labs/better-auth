@@ -1,7 +1,7 @@
 import type { Auth } from "better-auth";
 import { getTestInstance } from "better-auth/test";
 import type Stripe from "stripe";
-import { describe, expectTypeOf, it } from "vitest";
+import { describe, expectTypeOf, it } from "bun:test";
 import type { StripePlugin } from "../src";
 import { stripe } from "../src";
 import { test } from "./_fixtures";

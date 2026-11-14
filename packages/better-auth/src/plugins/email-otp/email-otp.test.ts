@@ -1,5 +1,6 @@
+import assert from "node:assert";
 import { memoryAdapter } from "@better-auth/memory-adapter";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { createAuthClient } from "../../client";
 import { getCookieCache } from "../../cookies";
 import { parseSetCookieHeader } from "../../cookies/cookie-utils";
@@ -731,7 +732,9 @@ describe("email-otp password reset on an accent-insensitive database", () => {
 		const { auth, client, internalAdapter, sent, userId } = await setup();
 
 		// Confirm that the adapter applies the simulated collation.
-		const collated = await (await auth.$context).adapter.findOne<User>({
+		const collated = await (
+			await auth.$context
+		).adapter.findOne<User>({
 			model: "user",
 			where: [{ field: "email", value: lookalikeEmail }],
 		});
@@ -1461,7 +1464,7 @@ describe("change email code binding", () => {
 			},
 		});
 		const otp = otps.get(first.newEmail);
-		expect.assert.isDefined(otp);
+		assert(otp !== undefined);
 		const res = auth.api.changeEmailEmailOTP({
 			headers: secondHeaders,
 			body: {
@@ -1495,8 +1498,8 @@ describe("change email code binding", () => {
 		});
 		const firstOTP = otps.get(first.newEmail);
 		const secondOTP = otps.get(second.newEmail);
-		expect.assert.isDefined(firstOTP);
-		expect.assert.isDefined(secondOTP);
+		assert(firstOTP !== undefined);
+		assert(secondOTP !== undefined);
 		expect(firstOTP).not.toBe(secondOTP);
 		const res = auth.api.changeEmailEmailOTP({
 			headers: secondHeaders,
@@ -1524,7 +1527,7 @@ describe("change email code binding", () => {
 			},
 		});
 		const otp = otps.get("requested@binding.test");
-		expect.assert.isDefined(otp);
+		assert(otp !== undefined);
 		const res = auth.api.changeEmailEmailOTP({
 			headers: firstHeaders,
 			body: {
@@ -1551,7 +1554,7 @@ describe("change email code binding", () => {
 			},
 		});
 		const otp = otps.get(second.newEmail);
-		expect.assert.isDefined(otp);
+		assert(otp !== undefined);
 		const res = await auth.api.changeEmailEmailOTP({
 			headers: secondHeaders,
 			body: {

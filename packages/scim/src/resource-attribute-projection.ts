@@ -21,10 +21,9 @@ type SCIMProjectedAttributeValue<Value> = Value extends Date
 /** A projected resource always retains the mandatory SCIM identity fields. */
 export type SCIMProjectedResource<Resource extends SCIMProjectableResource> =
 	Pick<Resource, "schemas" | "id"> & {
-		[Key in keyof Omit<
-			Resource,
-			"schemas" | "id"
-		>]?: SCIMProjectedAttributeValue<Resource[Key]>;
+		[
+			Key in keyof Omit<Resource, "schemas" | "id">
+		]?: SCIMProjectedAttributeValue<Resource[Key]>;
 	};
 
 interface AttributePathNode {

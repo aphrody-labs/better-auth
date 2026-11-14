@@ -12,7 +12,7 @@ import type {
 	Team,
 } from "better-auth/plugins/organization";
 import { organization } from "better-auth/plugins/organization";
-import { expect } from "vitest";
+import { expect } from "bun:test";
 import { createTestSuite } from "../create-test-suite";
 
 /**

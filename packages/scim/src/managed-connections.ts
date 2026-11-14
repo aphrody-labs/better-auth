@@ -98,16 +98,11 @@ type DecommissionManagedConnectionInput = z.infer<
 
 /** Lifecycle state for a framework-managed SCIM connection. */
 export type SCIMManagedConnectionStatus =
-	| "active"
-	| "decommissioning"
-	| "decommissioned";
+	"active" | "decommissioning" | "decommissioned";
 
 /** Lifecycle state for a framework-managed SCIM credential. */
 export type SCIMManagedCredentialStatus =
-	| "active"
-	| "expired"
-	| "revoked"
-	| "decommissioned";
+	"active" | "expired" | "revoked" | "decommissioned";
 
 interface ManagedConnectionRow {
 	id: string;
@@ -1072,15 +1067,13 @@ export function createSCIMManagedConnectionEndpoints(
 					sortBy: { field: "sequence", direction: "desc" },
 				});
 				return ctx.json({
-					events: events.reverse().map(
-						(event): SCIMManagedConnectionEvent => ({
-							sequence: event.sequence,
-							type: event.type,
-							actorId: event.actorId,
-							credentialId: event.credentialId ?? null,
-							createdAt: event.createdAt,
-						}),
-					),
+					events: events.reverse().map((event): SCIMManagedConnectionEvent => ({
+						sequence: event.sequence,
+						type: event.type,
+						actorId: event.actorId,
+						credentialId: event.credentialId ?? null,
+						createdAt: event.createdAt,
+					})),
 				});
 			},
 		),

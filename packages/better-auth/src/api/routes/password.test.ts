@@ -1,5 +1,5 @@
 import { APIError } from "better-call";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils";
 import type { Account, BetterAuthOptions } from "../../types";
 

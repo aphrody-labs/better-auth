@@ -5,7 +5,7 @@ import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import type { BetterAuthPlugin, User } from "better-auth/types";
 import { decodeJwt } from "jose";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { extendOAuthProvider } from "./extensions";
 import { oauthProvider } from "./oauth";

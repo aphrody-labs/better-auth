@@ -11,7 +11,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import * as apiModule from "../../api";
 import { signJWT } from "../../crypto";
 import { getTestInstance } from "../../test-utils/test-instance";

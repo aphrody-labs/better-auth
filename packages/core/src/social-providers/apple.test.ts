@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 
 import type { JWK } from "jose";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import type { GenericEndpointContext } from "../types";
 
 vi.mock("@better-fetch/fetch", () => ({

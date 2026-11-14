@@ -48,16 +48,14 @@ export type UsernameOptions = {
 	 * By default, the username should only contain alphanumeric characters and underscores
 	 */
 	usernameValidator?:
-		| ((username: string) => boolean | Promise<boolean>)
-		| undefined;
+		((username: string) => boolean | Promise<boolean>) | undefined;
 	/**
 	 * A function to validate the display username
 	 *
 	 * By default, no validation is applied to display username
 	 */
 	displayUsernameValidator?:
-		| ((displayUsername: string) => boolean | Promise<boolean>)
-		| undefined;
+		((displayUsername: string) => boolean | Promise<boolean>) | undefined;
 	/**
 	 * A function to normalize the username
 	 *
@@ -70,8 +68,7 @@ export type UsernameOptions = {
 	 * @default false
 	 */
 	displayUsernameNormalization?:
-		| (((displayUsername: string) => string) | false)
-		| undefined;
+		(((displayUsername: string) => string) | false) | undefined;
 	/**
 	 * The order of validation
 	 *

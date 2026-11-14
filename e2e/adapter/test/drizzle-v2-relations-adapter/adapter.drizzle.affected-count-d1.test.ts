@@ -8,7 +8,7 @@
  */
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 // Real table so the adapter can resolve the where clause. The fake db short
 // circuits the actual query and returns a simulated D1 result.

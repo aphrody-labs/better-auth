@@ -13,7 +13,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createWithSpan, withSpan } from ".";
 import { getOpenTelemetryAPI } from "./api";
 import { ATTR_DB_COLLECTION_NAME, ATTR_DB_OPERATION_NAME } from "./attributes";

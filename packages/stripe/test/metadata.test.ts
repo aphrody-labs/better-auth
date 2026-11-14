@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "bun:test";
 import { customerMetadata, subscriptionMetadata } from "../src/metadata";
 
 const ROOT_PROBE_KEY = "polluted";

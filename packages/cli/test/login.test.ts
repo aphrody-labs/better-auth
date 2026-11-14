@@ -7,7 +7,7 @@ import type { AddressInfo } from "node:net";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { beforeAll, describe, expect, it, onTestFinished } from "vitest";
+import { beforeAll, describe, expect, it, onTestFinished } from "bun:test";
 import { cliPath } from "./utils";
 
 const execFileAsync = promisify(execFile);

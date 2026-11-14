@@ -2,7 +2,8 @@ import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { testAdapter } from "@better-auth/test-utils/adapter";
 import { drizzle } from "drizzle-orm/mysql2";
 import { createPool } from "mysql2/promise";
-import { assert } from "vitest";
+import assert from "node:assert";
+import {} from "bun:test";
 import {
 	authFlowTestSuite,
 	caseInsensitiveTestSuite,

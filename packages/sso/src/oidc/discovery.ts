@@ -28,10 +28,7 @@ import { DiscoveryError, REQUIRED_DISCOVERY_FIELDS } from "./types";
 const DEFAULT_DISCOVERY_TIMEOUT = 10000;
 
 type OIDCEndpointName =
-	| "discoveryEndpoint"
-	| "tokenEndpoint"
-	| "userInfoEndpoint"
-	| "jwksEndpoint";
+	"discoveryEndpoint" | "tokenEndpoint" | "userInfoEndpoint" | "jwksEndpoint";
 
 type OIDCConfigEndpointName = OIDCEndpointName | "authorizationEndpoint";
 

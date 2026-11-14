@@ -59,8 +59,7 @@ export const customerMetadata = {
 			userId: metadata?.userId,
 			organizationId: metadata?.organizationId,
 			customerType: metadata?.customerType as
-				| CustomerInternalMetadata["customerType"]
-				| undefined,
+				CustomerInternalMetadata["customerType"] | undefined,
 		};
 	},
 };

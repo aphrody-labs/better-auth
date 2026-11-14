@@ -1,7 +1,15 @@
 import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	test,
+	vi,
+} from "bun:test";
 import { getConfig } from "../src/utils/get-config";
 
 interface TmpDirFixture {
@@ -1598,7 +1606,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"resolves $lib imports in an extends setup with default and namespace forms",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			const projectRoot = path.join(tmpdir, "my-app");
 			await writeTree(tmpdir, {
 				// Poisoned modules one level above the project root.
@@ -1650,7 +1658,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"resolves $lib imports when SvelteKit lives in a monorepo subdirectory",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			const websiteRoot = path.join(tmpdir, "mc-id", "website");
 			await writeTree(tmpdir, {
 				"mc-id/src/lib/server/email-service.ts": `throw new Error("wrong path: $lib resolved to monorepo root");`,
@@ -1697,7 +1705,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"resolves mid-path wildcard substitutions across multiple sibling packages",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"tsconfig.json": `{
 					"compilerOptions": {
@@ -1742,7 +1750,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"captures multi-segment star when the import specifier spans `/`",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"tsconfig.json": `{
 					"compilerOptions": {
@@ -1781,7 +1789,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"picks the first substitution candidate in declaration order when multiple exist",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"tsconfig.json": `{
 					"compilerOptions": {
@@ -1821,7 +1829,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	/** Falls through to the next substitution when the first does not exist. */
 	tmpdirTest(
 		"falls through to the next substitution when the first does not exist on disk",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"tsconfig.json": `{
 					"compilerOptions": {
@@ -1863,7 +1871,7 @@ describe("tsconfig paths resolution (user-reported scenarios)", () => {
 	 */
 	tmpdirTest(
 		"rewrites aliased specifiers across import, re-export, and dynamic import AST nodes",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"tsconfig.json": `{
 					"compilerOptions": {
@@ -1973,7 +1981,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves $app/environment imports in a SvelteKit project",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/lib/server/auth.ts": `
@@ -2005,12 +2013,10 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 * `browser`/`building`/`dev`/`version` surface, so it must resolve identically.
 	 * @see https://github.com/sveltejs/kit/pull/15934
 	 */
-	tmpdirTest(
-		"resolves the $app/env alias surface",
-		async ({ tmpdir, expect }) => {
-			await writeTree(tmpdir, {
-				"package.json": sveltekitPackageJson,
-				"src/lib/server/auth.ts": `
+	tmpdirTest("resolves the $app/env alias surface", async ({ tmpdir }) => {
+		await writeTree(tmpdir, {
+			"package.json": sveltekitPackageJson,
+			"src/lib/server/auth.ts": `
 					import { betterAuth } from "better-auth";
 					import { browser, building, dev, version } from "$app/env";
 					export const auth = betterAuth({
@@ -2024,20 +2030,19 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 						emailAndPassword: { enabled: true },
 					});
 				`,
-			});
+		});
 
-			const config = await getConfig({
-				cwd: tmpdir,
-				configPath: "src/lib/server/auth.ts",
-				shouldThrowOnError: true,
-			});
+		const config = await getConfig({
+			cwd: tmpdir,
+			configPath: "src/lib/server/auth.ts",
+			shouldThrowOnError: true,
+		});
 
-			expect(config).toMatchObject({
-				appName: "ok",
-				emailAndPassword: { enabled: true },
-			});
-		},
-	);
+		expect(config).toMatchObject({
+			appName: "ok",
+			emailAndPassword: { enabled: true },
+		});
+	});
 
 	/**
 	 * Locks the enumerated `$app/paths` and `$app/server` export surfaces against
@@ -2045,7 +2050,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves the full $app/paths and $app/server export surface",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/lib/server/auth.ts": `
@@ -2082,7 +2087,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves $app/stores with store-shaped exports",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/lib/server/auth.ts": `
@@ -2121,7 +2126,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves Vite ?inline query imports reached through a custom kit.alias",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"svelte.config.js": `export default { kit: { alias: { $src: "src" } } };`,
@@ -2155,7 +2160,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves Vite ?raw query imports of a relative asset",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/lib/server/email.html": `<p>hello</p>`,
@@ -2189,7 +2194,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves plain asset and side-effect stylesheet imports",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/logo.svg": `<svg></svg>`,
@@ -2225,7 +2230,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"filters $env/dynamic by public/private prefix",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			vi.stubEnv("PUBLIC_BA_ENV_TEST", "pub");
 			vi.stubEnv("BA_ENV_TEST_SECRET", "secret");
 
@@ -2270,7 +2275,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves arbitrary $app/env/private and $app/env/public imports",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			vi.stubEnv("MY_SECRET_KEY", "secret");
 			vi.stubEnv("MY_PUBLIC_KEY", "public");
 
@@ -2309,7 +2314,7 @@ describe("SvelteKit virtual modules and Vite asset imports (user-reported scenar
 	 */
 	tmpdirTest(
 		"resolves Vite ?worker and .wasm?init imports",
-		async ({ tmpdir, expect }) => {
+		async ({ tmpdir }) => {
 			await writeTree(tmpdir, {
 				"package.json": sveltekitPackageJson,
 				"src/lib/server/worker.ts": `export {};`,

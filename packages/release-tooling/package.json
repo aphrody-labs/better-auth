@@ -10,7 +10,7 @@
     "auto-changeset": "bun src/commands/auto-changeset.ts",
     "release-notes": "bun src/commands/release-notes.ts",
     "release-notes:comment": "bun src/commands/release-notes-comment.ts",
-    "test": "vitest run",
+    "test": "bun test --preload ../../bun-test.plugin.ts --preload ../../bun-test.setup.ts --parallel=4",
     "typecheck": "tsc --project tsconfig.json"
   },
   "dependencies": {
@@ -32,7 +32,6 @@
     "@types/node": "^24.10.15",
     "@types/semver": "^7.7.1",
     "typescript": "catalog:",
-    "vitest": "catalog:vitest",
     "yaml": "^2.9.0"
   }
 }

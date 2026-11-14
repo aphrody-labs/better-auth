@@ -1,6 +1,6 @@
-// @vitest-environment happy-dom
+import "../../test-utils/dom-env";
 import type { BetterFetch } from "@better-fetch/fetch";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { createSignInPopup, popupBearerFetchPlugin } from "./client";
 import { OAUTH_POPUP_MESSAGE_TYPE, POPUP_TOKEN_STORAGE_KEY } from "./constants";
 

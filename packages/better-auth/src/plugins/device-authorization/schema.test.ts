@@ -1,6 +1,6 @@
 import type { DBFieldAttribute } from "@better-auth/core/db";
 import { getAuthTables } from "@better-auth/core/db";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import type { DeviceAuthorizationGrant } from ".";
 import { deviceAuthorization } from ".";

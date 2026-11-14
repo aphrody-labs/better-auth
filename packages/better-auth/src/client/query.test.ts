@@ -1,10 +1,10 @@
-// @vitest-environment happy-dom
+import "../test-utils/dom-env";
 
 import { createFetch } from "@better-fetch/fetch";
 import { atom, STORE_UNMOUNT_DELAY } from "nanostores";
 import { act, createElement, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { getGlobalFocusManager } from "./focus-manager";
 import { useAuthQuery } from "./query";
 import { createAuthClient as createReactAuthClient } from "./react";

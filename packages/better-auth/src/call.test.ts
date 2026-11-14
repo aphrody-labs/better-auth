@@ -4,7 +4,7 @@ import {
 	createAuthMiddleware,
 } from "@better-auth/core/api";
 import { APIError } from "@better-auth/core/error";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import { getEndpoints, router } from "./api";
 import { createAuthClient } from "./client";
@@ -449,7 +449,7 @@ describe("call", async () => {
 		});
 	});
 
-	it("global before hook should change the context", async (ctx) => {
+	it("global before hook should change the context", async () => {
 		const response = await api.signUpEmail({
 			body: {
 				email: "my-email@test.com",

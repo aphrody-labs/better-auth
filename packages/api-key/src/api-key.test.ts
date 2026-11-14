@@ -1,7 +1,7 @@
 import type { SecondaryStorage } from "@better-auth/core/db";
 import type { APIError } from "@better-auth/core/error";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { apiKey, API_KEY_ERROR_CODES as ERROR_CODES } from ".";
 import { apiKeyClient } from "./client";
 import type { ApiKey } from "./types";
@@ -402,7 +402,9 @@ describe("api-key", async () => {
 			body: {},
 			headers,
 		});
-		const res = await (await auth.$context).adapter.findOne<ApiKey>({
+		const res = await (
+			await auth.$context
+		).adapter.findOne<ApiKey>({
 			model: "apikey",
 			where: [
 				{
@@ -4442,12 +4444,10 @@ describe("api-key", async () => {
 	// =========================================================================
 
 	describe("organization-owned API keys", async () => {
-		const { organization } = await import(
-			"../../better-auth/src/plugins/organization"
-		);
-		const { organizationClient } = await import(
-			"../../better-auth/src/plugins/organization/client"
-		);
+		const { organization } =
+			await import("../../better-auth/src/plugins/organization");
+		const { organizationClient } =
+			await import("../../better-auth/src/plugins/organization/client");
 
 		const { auth, signInWithTestUser, client } = await getTestInstance(
 			{

@@ -1,7 +1,7 @@
 import type { BetterAuthOptions } from "@better-auth/core";
 import type { Auth, User } from "better-auth";
 import type { AuthClient } from "better-auth/client";
-import { expectTypeOf, test } from "vitest";
+import { expectTypeOf, test } from "bun:test";
 
 test("expect imports", async () => {
 	expectTypeOf<AuthClient<{}>>().not.toBeUndefined();

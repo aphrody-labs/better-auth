@@ -6,7 +6,7 @@ import type { BetterAuthOptions, DBAdapter } from "better-auth";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
 import { Kysely } from "kysely";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
 import { scim } from ".";
 
 const SHARED_PROVIDER_ID = "shared-enterprise";
@@ -56,9 +56,7 @@ describe("SCIM and SSO registration coexistence", () => {
 	 * @see https://github.com/better-auth/better-auth/pull/10224
 	 * @see https://github.com/better-auth/better-auth/pull/10390
 	 */
-	it("registers an SSO provider whose providerId equals a SCIM connection ID", async ({
-		onTestFinished,
-	}) => {
+	it("registers an SSO provider whose providerId equals a SCIM connection ID", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		const database = new Kysely({
 			dialect: new NodeSqliteDialect({ database: sqlite }),

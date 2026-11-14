@@ -1,7 +1,7 @@
 import type { GenericEndpointContext } from "@better-auth/core";
 import { runWithRequestState } from "@better-auth/core/context";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createAccessControl } from "../access";
 import { adminAc, defaultStatements, memberAc, ownerAc } from "./access";
 import { hasPermission } from "./has-permission";

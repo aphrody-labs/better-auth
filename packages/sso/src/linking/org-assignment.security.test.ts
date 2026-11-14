@@ -2,7 +2,7 @@ import type { User } from "better-auth";
 import { organization } from "better-auth/plugins";
 import { getTestInstance } from "better-auth/test";
 import { SignJWT } from "jose";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { sso } from "..";
 
 const TEST_DOMAIN = "verified-corp.test";

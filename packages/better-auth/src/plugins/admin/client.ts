@@ -60,9 +60,9 @@ export const adminClient = <O extends AdminClientOptions>(
 		getActions: () => ({
 			admin: {
 				checkRolePermission: <
-					R extends O extends { roles: any }
+					R extends (O extends { roles: any }
 						? keyof O["roles"]
-						: "admin" | "user",
+						: "admin" | "user"),
 				>(
 					data: PermissionExclusive & {
 						role: R;

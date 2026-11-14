@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { drizzleResolver } from "./adapter/drizzle";
 import { prismaResolver } from "./adapter/prisma";
 import { copySchema } from "./index";

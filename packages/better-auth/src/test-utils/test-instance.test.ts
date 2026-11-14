@@ -1,5 +1,5 @@
 import { createPool } from "mysql2/promise";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "./test-instance";
 
 let isMysqlAvailable = false;

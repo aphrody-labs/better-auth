@@ -1,7 +1,7 @@
 import type { User } from "better-auth";
 import { betterAuth } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import type {
 	SCIMCanonicalManager,
 	SCIMCanonicalUser,

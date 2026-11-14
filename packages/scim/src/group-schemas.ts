@@ -30,8 +30,7 @@ export const APIGroupSchema = z.object({
 });
 
 export type MicrosoftEntraGroupSchemaNormalization =
-	| { ok: true; body: unknown }
-	| { ok: false; detail: string };
+	{ ok: true; body: unknown } | { ok: false; detail: string };
 
 /**
  * Remove the exact classic Entra Group marker from an enabled POST request.

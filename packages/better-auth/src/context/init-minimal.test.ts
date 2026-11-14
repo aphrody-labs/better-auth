@@ -1,7 +1,7 @@
 import type { BetterAuthOptions } from "@better-auth/core";
 import { registerSchemaCheck } from "@better-auth/core/db/internal";
 import { memoryAdapter } from "@better-auth/memory-adapter";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { initMinimal } from "./init-minimal";
 
 describe("init-minimal (without Kysely)", () => {

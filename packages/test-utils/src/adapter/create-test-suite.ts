@@ -16,7 +16,7 @@ import { TTY_COLORS } from "@better-auth/core/env";
 import { generateId } from "@better-auth/core/utils/id";
 import type { Auth } from "better-auth";
 import { betterAuth } from "better-auth";
-import { test } from "vitest";
+import { test } from "bun:test";
 import type { RowsByModel } from "./cleanup";
 import { cleanupRows } from "./cleanup";
 import type { Logger } from "./test-adapter";
@@ -25,6 +25,9 @@ import type { Logger } from "./test-adapter";
  * Test entry type that supports both callback and object formats.
  * Object format allows specifying migration options that will be applied before the test runs.
  */
+/** bun:test has no runtime `skip`; a skip is a sentinel throw that ends the test early. */
+class TestSkipSignal extends Error {}
+
 export type TestEntry =
 	| ((context: {
 			readonly skip: {
@@ -869,8 +872,10 @@ export const createTestSuite = <
 
 				test.skipIf(shouldSkip)(
 					displayName,
-					{ timeout: 30000 },
-					async ({ onTestFailed, skip }) => {
+					async () => {
+						const skip = ((note?: string) => {
+							throw new TestSkipSignal(note);
+						}) as Parameters<typeof testFn>[0]["skip"];
 						resetDebugLogs();
 
 						// Apply migration options before test runs
@@ -912,13 +917,17 @@ export const createTestSuite = <
 
 						stats.testCount++;
 
-						onTestFailed(async () => {
-							printDebugLogs();
+						try {
+							await testFn({ skip });
+						} catch (error) {
+							if (!(error instanceof TestSkipSignal)) printDebugLogs();
 							await onFinish(testName);
-						});
-						await testFn({ skip });
+							if (error instanceof TestSkipSignal) return;
+							throw error;
+						}
 						await onFinish(testName);
 					},
+					{ timeout: 30000 },
 				);
 			}
 		};

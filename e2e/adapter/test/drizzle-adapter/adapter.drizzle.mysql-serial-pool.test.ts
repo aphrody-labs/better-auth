@@ -18,7 +18,7 @@ import {
 	expect,
 	it,
 	onTestFinished,
-} from "vitest";
+} from "bun:test";
 
 const DATABASE = "better_auth_drizzle_serial_pool";
 const ROOT_URI = "mysql://root:root_password@localhost:3306/";

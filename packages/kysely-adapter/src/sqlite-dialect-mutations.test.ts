@@ -2,7 +2,7 @@ import type { SQLInputValue } from "node:sqlite";
 import { DatabaseSync } from "node:sqlite";
 import type { Generated } from "kysely";
 import { Kysely } from "kysely";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { BunSqliteDialect } from "./bun-sqlite-dialect";
 import { NodeSqliteDialect } from "./node-sqlite-dialect";
 

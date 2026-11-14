@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import type { FlexibleSchema, JSONValue, LanguageModel } from "ai";
 import { asSchema } from "ai";
-import { test as baseTest, describe, expect } from "vitest";
+import { test as baseTest, describe, expect } from "bun:test";
 import type { StructuredGenerator } from "../src/ai/generate-structured.ts";
 import { models } from "../src/ai/models.ts";
 import { rewriteReleaseNotes } from "../src/release-notes/rewrite.ts";
@@ -44,8 +44,7 @@ async function validateGenerated<T>(
 
 function generatorFor(
 	value:
-		| JSONValue
-		| ((request: Parameters<StructuredGenerator>[0]) => JSONValue),
+		JSONValue | ((request: Parameters<StructuredGenerator>[0]) => JSONValue),
 	onRequest?: (request: Parameters<StructuredGenerator>[0]) => void,
 ): StructuredGenerator {
 	return async (request) => {

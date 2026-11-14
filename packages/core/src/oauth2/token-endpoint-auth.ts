@@ -55,8 +55,7 @@ export interface TokenEndpointClientOptions {
 	clientSecret?: string | undefined;
 }
 
-export interface ApplyTokenEndpointAuthInput
-	extends TokenEndpointRequestContext {
+export interface ApplyTokenEndpointAuthInput extends TokenEndpointRequestContext {
 	tokenEndpointAuth?: TokenEndpointAuth | undefined;
 	authentication?: TokenEndpointSecretAuthentication | undefined;
 }

@@ -6,7 +6,7 @@ import {
 	SchemaMismatchError,
 	schemaCheckFor,
 } from "@better-auth/core/db/internal";
-import { test as baseTest, describe, expect, vi } from "vitest";
+import { describe, expect, test as baseTest, vi } from "bun:test";
 import { getAuth } from "../utils/get-config";
 import { check } from "./check";
 
@@ -40,7 +40,7 @@ function useAdapter(adapter: object) {
 }
 
 describe("check", () => {
-	test("rejects a cwd that does not exist", async ({ expect, runCheck }) => {
+	test("rejects a cwd that does not exist", async ({ runCheck }) => {
 		const cwd = fileURLToPath(new URL("missing-directory", import.meta.url));
 		const error = vi.spyOn(console, "error").mockImplementation(() => {});
 
@@ -53,10 +53,7 @@ describe("check", () => {
 		expect(exitCode).toBe(2);
 	});
 
-	test("rejects a cwd that is not a directory", async ({
-		expect,
-		runCheck,
-	}) => {
+	test("rejects a cwd that is not a directory", async ({ runCheck }) => {
 		const cwd = fileURLToPath(import.meta.url);
 		const error = vi.spyOn(console, "error").mockImplementation(() => {});
 
@@ -68,7 +65,6 @@ describe("check", () => {
 	});
 
 	test("passes when the configured adapter schema matches", async ({
-		expect,
 		runCheck,
 	}) => {
 		const adapter = { id: "kysely" };
@@ -87,7 +83,6 @@ describe("check", () => {
 	});
 
 	test("checks the schema through the schema subcommand", async ({
-		expect,
 		runCheck,
 	}) => {
 		const adapter = { id: "kysely" };
@@ -103,7 +98,6 @@ describe("check", () => {
 	});
 
 	test("checks explicitly even when runtime validation is disabled", async ({
-		expect,
 		runCheck,
 	}) => {
 		const adapter = { id: "drizzle" };
@@ -120,7 +114,7 @@ describe("check", () => {
 		expect(exitCode).toBe(0);
 	});
 
-	test("fails on a schema mismatch", async ({ expect, runCheck }) => {
+	test("fails on a schema mismatch", async ({ runCheck }) => {
 		const adapter = { id: "kysely" };
 		registerSchemaCheck(
 			adapter,
@@ -144,7 +138,6 @@ describe("check", () => {
 	});
 
 	test("fails rather than passing an unchecked adapter", async ({
-		expect,
 		runCheck,
 	}) => {
 		useAdapter({ id: "custom" });
@@ -159,7 +152,6 @@ describe("check", () => {
 	});
 
 	test("does not print database credentials when validation cannot run", async ({
-		expect,
 		runCheck,
 	}) => {
 		const adapter = { id: "kysely" };

@@ -1,5 +1,5 @@
 import type { JSONValue } from "ai";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { createGitHubReader, parseGitHubRepository } from "../src/github.ts";
 
 function jsonResponse(

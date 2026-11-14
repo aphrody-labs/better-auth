@@ -16,8 +16,7 @@ export interface LastLoginMethodClientConfig {
 	 * Custom resolve method for retrieving the last login method
 	 */
 	customResolveMethod?:
-		| ((url: string | URL) => Awaitable<string | undefined | null>)
-		| undefined;
+		((url: string | URL) => Awaitable<string | undefined | null>) | undefined;
 }
 
 const paths = ["/callback/", "/sign-in/email", "/sign-up/email"];

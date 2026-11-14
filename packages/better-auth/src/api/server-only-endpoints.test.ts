@@ -1,5 +1,5 @@
 import type { BetterAuthPlugin } from "@better-auth/core";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { emailOTP } from "../plugins/email-otp";
 import { jwt } from "../plugins/jwt";
 import { organization } from "../plugins/organization";

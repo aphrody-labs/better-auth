@@ -19,7 +19,7 @@ import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
 import { createAuthClient } from "better-auth/client";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { cimd } from "./index";
 
 const AUTHORIZATION_SERVER = "https://auth.cimd.example.test";

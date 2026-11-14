@@ -9,7 +9,7 @@ import {
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import type {
 	BetterFetchError,
 	PreinitializedWritableAtom,
@@ -2427,7 +2427,7 @@ describe("owner can update roles", async () => {
 		expect(updated.role).toBe("custom");
 	});
 
-	it("should throw error if sole org owner tries to remove creator role"),
+	(it("should throw error if sole org owner tries to remove creator role"),
 		async () => {
 			const userEmail = "user@email.com";
 			const userPassword = "userpassword";
@@ -2456,7 +2456,7 @@ describe("owner can update roles", async () => {
 						ORGANIZATION_ERROR_CODES.YOU_CANNOT_LEAVE_THE_ORGANIZATION_WITHOUT_AN_OWNER,
 					);
 				});
-		};
+		});
 });
 
 describe("types", async () => {
@@ -2915,8 +2915,7 @@ describe("Additional Fields", async () => {
 
 		const startClientSideQuery = () => {
 			const previousWindow = global.window as
-				| (Window & typeof globalThis)
-				| undefined;
+				(Window & typeof globalThis) | undefined;
 			global.window = {} as unknown as Window & typeof globalThis;
 			return () => {
 				global.window = previousWindow as unknown as Window & typeof globalThis;
@@ -3587,8 +3586,7 @@ async function getAtomValue<Result>(
 
 	// Return the result
 	return res as
-		| { data: Result; error: null }
-		| { data: null; error: BetterFetchError };
+		{ data: Result; error: null } | { data: null; error: BetterFetchError };
 }
 describe("organization hooks", async () => {
 	let hooksCalled: string[] = [];

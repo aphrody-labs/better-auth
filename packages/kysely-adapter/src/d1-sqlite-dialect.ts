@@ -100,8 +100,7 @@ export interface D1SqliteDialectConfig {
 	 * Called once when the first query is executed.
 	 */
 	onCreateConnection?:
-		| ((connection: DatabaseConnection) => Promise<void>)
-		| undefined;
+		((connection: DatabaseConnection) => Promise<void>) | undefined;
 }
 
 class D1SqliteDriver implements Driver {

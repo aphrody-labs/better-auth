@@ -258,8 +258,8 @@ function ssoProviderAuthBoundaryChanged(
 	);
 	return Boolean(
 		currentOidcConfig &&
-			(!updatedOidcConfig ||
-				oidcIdentityBoundaryChanged(currentOidcConfig, updatedOidcConfig)),
+		(!updatedOidcConfig ||
+			oidcIdentityBoundaryChanged(currentOidcConfig, updatedOidcConfig)),
 	);
 }
 

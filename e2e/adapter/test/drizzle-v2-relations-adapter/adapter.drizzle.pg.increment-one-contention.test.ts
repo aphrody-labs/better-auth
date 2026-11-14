@@ -22,7 +22,14 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { integer, pgSchema, text } from "drizzle-orm/pg-core";
 import type { PoolClient } from "pg";
 import { Pool } from "pg";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "bun:test";
 
 // A schema of its own: the sibling suite in this directory runs
 // `DROP SCHEMA public CASCADE` while files run in parallel.

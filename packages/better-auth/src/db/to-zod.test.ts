@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import type * as z from "zod";
 import type { FieldAttributeToSchema } from "./to-zod";
 import { toZodSchema } from "./to-zod";

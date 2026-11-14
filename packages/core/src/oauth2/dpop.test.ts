@@ -1,7 +1,7 @@
 import type { JWK, JWTPayload } from "jose";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import type { DpopReplayStore } from "./dpop";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import {
 	createDpopReplayStore,
 	createInMemoryDpopReplayStore,

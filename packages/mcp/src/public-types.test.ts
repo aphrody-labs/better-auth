@@ -2,7 +2,7 @@ import type {
 	McpProtectedRequestHandlerOptions,
 	RequireMcpAuthOptions,
 } from "@better-auth/mcp";
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import mcpPackage from "../package.json";
 import * as mcpExports from "./index";
 

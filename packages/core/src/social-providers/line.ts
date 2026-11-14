@@ -28,8 +28,9 @@ export interface LineUserInfo {
 	email?: string | undefined;
 }
 
-export interface LineOptions
-	extends ProviderOptions<LineUserInfo | LineIdTokenPayload> {
+export interface LineOptions extends ProviderOptions<
+	LineUserInfo | LineIdTokenPayload
+> {
 	clientId: string;
 }
 

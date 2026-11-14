@@ -78,8 +78,7 @@ export type SCIMDemoOIDCAuthorizationView =
 	  };
 
 export type SCIMDemoOIDCSearchParams =
-	| URLSearchParams
-	| Readonly<Record<string, string | string[] | undefined>>;
+	URLSearchParams | Readonly<Record<string, string | string[] | undefined>>;
 
 export interface SCIMDemoOIDCAuthorizationCodeStore {
 	consumeVerificationValue(

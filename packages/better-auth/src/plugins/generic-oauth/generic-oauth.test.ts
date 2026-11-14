@@ -18,17 +18,17 @@ import type {
 	TokenRequestIncomingMessage,
 } from "oauth2-mock-server";
 import { OAuth2Server } from "oauth2-mock-server";
+import assert from "node:assert";
 import {
 	afterAll,
 	afterEach,
-	assert,
 	beforeAll,
 	describe,
 	expect,
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createAuthClient } from "../../client";
 import { getAwaitableValue } from "../../context/helpers";
 import { parseSetCookieHeader } from "../../cookies";

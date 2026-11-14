@@ -1,5 +1,5 @@
 import { createAuthEndpoint } from "@better-auth/core/api";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import * as z from "zod";
 import { createAuthClient } from "../../client";
 import { parseSetCookieHeader } from "../../cookies";
@@ -23,7 +23,7 @@ describe("Origin Check", async () => {
 		},
 	});
 
-	it("should allow trusted origins", async (ctx) => {
+	it("should allow trusted origins", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -41,7 +41,7 @@ describe("Origin Check", async () => {
 		expect(res.data?.user).toBeDefined();
 	});
 
-	it("should not allow untrusted origins", async (ctx) => {
+	it("should not allow untrusted origins", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -57,7 +57,7 @@ describe("Origin Check", async () => {
 		expect(res.error?.message).toBe("Invalid callbackURL");
 	});
 
-	it("should reject untrusted origin headers", async (ctx) => {
+	it("should reject untrusted origin headers", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -75,7 +75,7 @@ describe("Origin Check", async () => {
 		expect(res.error?.status).toBe(403);
 	});
 
-	it("should reject untrusted origin even without cookies", async (ctx) => {
+	it("should reject untrusted origin even without cookies", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -92,7 +92,7 @@ describe("Origin Check", async () => {
 		expect(res.error?.status).toBe(403);
 	});
 
-	it("should reject untrusted redirectTo", async (ctx) => {
+	it("should reject untrusted redirectTo", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -107,7 +107,7 @@ describe("Origin Check", async () => {
 		expect(res.error?.message).toBe("Invalid redirectURL");
 	});
 
-	it("should work with list of trusted origins", async (ctx) => {
+	it("should work with list of trusted origins", async () => {
 		const client = createAuthClient({
 			baseURL: "http://localhost:3000",
 			fetchOptions: {
@@ -135,7 +135,7 @@ describe("Origin Check", async () => {
 		expect(res2.data?.user).toBeDefined();
 	});
 
-	it("should work with wildcard trusted origins", async (ctx) => {
+	it("should work with wildcard trusted origins", async () => {
 		const client = createAuthClient({
 			baseURL: "https://sub-domain.my-site.com",
 			fetchOptions: {
@@ -153,7 +153,7 @@ describe("Origin Check", async () => {
 		expect(res.data?.user).toBeDefined();
 	});
 
-	it("should work with GET requests", async (ctx) => {
+	it("should work with GET requests", async () => {
 		const client = createAuthClient({
 			baseURL: "https://sub-domain.my-site.com",
 			fetchOptions: {
@@ -168,7 +168,7 @@ describe("Origin Check", async () => {
 		expect(res.data).toMatchObject({ ok: true });
 	});
 
-	it("should handle POST requests with proper origin validation", async (ctx) => {
+	it("should handle POST requests with proper origin validation", async () => {
 		// Test with valid origin
 		const validClient = createAuthClient({
 			baseURL: "http://localhost:3000",
@@ -257,7 +257,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		},
 	});
 
-	it("should block cross-site navigation on first-login (no session cookie)", async (ctx) => {
+	it("should block cross-site navigation on first-login (no session cookie)", async () => {
 		const maliciousRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -284,7 +284,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		);
 	});
 
-	it("should allow same-origin navigation on first-login (no session cookie)", async (ctx) => {
+	it("should allow same-origin navigation on first-login (no session cookie)", async () => {
 		const legitimateRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -314,7 +314,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		}
 	});
 
-	it("should allow same-site navigation on first-login (no session cookie)", async (ctx) => {
+	it("should allow same-site navigation on first-login (no session cookie)", async () => {
 		const legitimateRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -344,7 +344,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		}
 	});
 
-	it("should fallback to origin validation when Fetch Metadata is missing", async (ctx) => {
+	it("should fallback to origin validation when Fetch Metadata is missing", async () => {
 		const requestWithoutMetadata = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -365,7 +365,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		expect(response.status).not.toBe(403);
 	});
 
-	it("should reject an untrusted origin on first-login when Fetch Metadata is missing", async (ctx) => {
+	it("should reject an untrusted origin on first-login when Fetch Metadata is missing", async () => {
 		const crossOriginRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -386,7 +386,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		expect(response.status).toBe(403);
 	});
 
-	it("should reject an untrusted Referer on first-login when Fetch Metadata is missing", async (ctx) => {
+	it("should reject an untrusted Referer on first-login when Fetch Metadata is missing", async () => {
 		const crossRefererRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -407,7 +407,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		expect(response.status).toBe(403);
 	});
 
-	it("should allow a first-login request that sends no cookies, Fetch Metadata, or origin", async (ctx) => {
+	it("should allow a first-login request that sends no cookies, Fetch Metadata, or origin", async () => {
 		const nonBrowserRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -427,7 +427,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		expect(response.status).not.toBe(403);
 	});
 
-	it("should use existing origin validation when session cookie exists", async (ctx) => {
+	it("should use existing origin validation when session cookie exists", async () => {
 		const signInResponse = await auth.api.signInEmail({
 			body: {
 				email: testUser.email,
@@ -466,7 +466,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		expect(response.status).not.toBe(403);
 	});
 
-	it("should block cross-site navigation for sign-up endpoint", async (ctx) => {
+	it("should block cross-site navigation for sign-up endpoint", async () => {
 		const maliciousRequest = new Request(
 			"http://localhost:3000/api/auth/sign-up/email",
 			{
@@ -494,7 +494,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		);
 	});
 
-	it("should allow cors mode requests (fetch/XHR)", async (ctx) => {
+	it("should allow cors mode requests (fetch/XHR)", async () => {
 		const fetchRequest = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{
@@ -524,7 +524,7 @@ describe("Fetch Metadata CSRF Protection", async () => {
 		}
 	});
 
-	it("should allow requests with expired session cookie (cookie presence check)", async (ctx) => {
+	it("should allow requests with expired session cookie (cookie presence check)", async () => {
 		const requestWithExpiredCookie = new Request(
 			"http://localhost:3000/api/auth/sign-in/email",
 			{

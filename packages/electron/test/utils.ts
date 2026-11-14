@@ -8,7 +8,7 @@ import { createAuthClient } from "better-auth/client";
 import { getMigrations } from "better-auth/db/migration";
 import { oAuthProxy } from "better-auth/plugins";
 import Database from "better-sqlite3";
-import { afterAll, afterEach, beforeAll, test, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, test, vi } from "bun:test";
 import { electronClient } from "../src/client";
 import { electron } from "../src/index";
 import { electronProxyClient } from "../src/proxy";

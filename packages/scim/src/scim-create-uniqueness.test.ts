@@ -7,7 +7,7 @@ import type {
 import { betterAuth } from "better-auth";
 import type { MemoryDB } from "better-auth/adapters/memory";
 import { memoryAdapter } from "better-auth/adapters/memory";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { SCIMIdentity } from ".";
 import { scim } from ".";
 import type { SCIMGroup, SCIMUser } from "./persistence";

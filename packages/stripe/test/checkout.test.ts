@@ -1,6 +1,6 @@
 import { getTestInstance } from "better-auth/test";
 import type Stripe from "stripe";
-import { describe, expect, vi } from "vitest";
+import { describe, expect, vi } from "bun:test";
 import { stripe } from "../src";
 import { stripeClient } from "../src/client";
 import type { StripeOptions, Subscription } from "../src/types";

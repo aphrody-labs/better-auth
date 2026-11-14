@@ -1,5 +1,5 @@
 import { APIError } from "@better-auth/core/error";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 
 /**
@@ -995,7 +995,9 @@ describe("Email Verification Secondary Storage", async () => {
 
 		const { runWithUser, user } = await signInWithTestUser();
 		// Only a requester with a verified current address gets a verified new one.
-		await (await auth.$context).internalAdapter.updateUser(user.id, {
+		await (
+			await auth.$context
+		).internalAdapter.updateUser(user.id, {
 			emailVerified: true,
 		});
 

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { ImportGroup } from "./imports";
 import { createImport, getImportString, groupImports } from "./imports";
 

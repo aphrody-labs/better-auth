@@ -33,8 +33,7 @@ export interface FacebookLimitedLoginProfile {
 }
 
 export type FacebookProfile =
-	| FacebookGraphProfile
-	| FacebookLimitedLoginProfile;
+	FacebookGraphProfile | FacebookLimitedLoginProfile;
 
 interface FacebookDebugTokenData {
 	app_id?: string;

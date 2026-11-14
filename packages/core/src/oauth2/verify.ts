@@ -80,8 +80,7 @@ type ResolvedJwks = {
 	 * Absent when `jwks` was just fetched.
 	 */
 	refresh?:
-		| ((failed: JSONWebKeySet) => Promise<JSONWebKeySet | undefined>)
-		| undefined;
+		((failed: JSONWebKeySet) => Promise<JSONWebKeySet | undefined>) | undefined;
 };
 
 /**
@@ -307,8 +306,7 @@ export interface VerifyAccessTokenOptions {
 	remoteVerify?: VerifyAccessTokenRemote;
 }
 
-export interface VerifyAccessTokenRequestOptions
-	extends VerifyAccessTokenOptions {
+export interface VerifyAccessTokenRequestOptions extends VerifyAccessTokenOptions {
 	dpop?: {
 		proofMaxAgeSeconds?: number;
 		/**

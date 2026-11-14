@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { tempPluginsConfig } from "../configs/temp-plugins.config";
 import { generateInnerAuthConfigCode } from "./auth-config";
 import { getDatabaseCode } from "./database";

@@ -4,7 +4,7 @@ import { sessionMiddleware } from "better-auth/api";
 import { createAuthClient } from "better-auth/client";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "bun:test";
 import * as z from "zod";
 import { oauthProviderClient } from "../client";
 import { oauthProvider } from "../oauth";

@@ -67,8 +67,7 @@ const MAX_AUD_VALUES = 64;
  * @internal
  */
 export type IdentifierCheckResult =
-	| { ok: true }
-	| { ok: false; reason: string };
+	{ ok: true } | { ok: false; reason: string };
 
 /**
  * Validates a resource `identifier` per RFC 8707 §2 (absolute URI, no

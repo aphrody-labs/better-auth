@@ -1,6 +1,6 @@
 import type { User } from "@better-auth/core/db";
 import { createTestSuite } from "@better-auth/test-utils/adapter";
-import { expect } from "vitest";
+import { expect } from "bun:test";
 
 /**
  * `findUserByEmail` must return only the stored address, even where the

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 
 vi.mock(import("@better-fetch/fetch"), () => ({
 	betterFetch: vi.fn(),

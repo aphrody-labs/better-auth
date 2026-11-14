@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import type { JWK } from "jose";
 import { createLocalJWKSet, exportJWK, generateKeyPair, SignJWT } from "jose";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { apple } from "../social-providers/apple";
 import { cognito } from "../social-providers/cognito";
 import { facebook } from "../social-providers/facebook";

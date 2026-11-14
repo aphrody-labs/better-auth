@@ -1,5 +1,5 @@
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { applySetCookies } from "../../cookies/cookie-utils";
 import { twoFactor } from "../two-factor";
 import { anonymous } from ".";

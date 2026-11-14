@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { initGetDefaultModelName } from "../adapter/get-default-model-name";
 import { getAuthTables } from "../get-tables";
 

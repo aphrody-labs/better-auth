@@ -5,7 +5,7 @@ import { createAuthClient, InferPlugin } from "better-auth/client";
 import { customSession } from "better-auth/plugins/custom-session";
 import type { GenericOAuthUserInfo } from "better-auth/plugins/generic-oauth";
 import { genericOAuth } from "better-auth/plugins/generic-oauth";
-import { describe, expectTypeOf, test } from "vitest";
+import { describe, expectTypeOf, test } from "bun:test";
 
 describe("Endpoint method types", () => {
 	test("createAuthEndpoint preserves literal method for POST", () => {

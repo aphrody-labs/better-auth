@@ -22,7 +22,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createAuthMiddleware } from "./api";
 import { getTestInstance } from "./test-utils";
 

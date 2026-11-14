@@ -3,7 +3,7 @@ import type { User } from "better-auth";
 import { organization } from "better-auth/plugins/organization";
 import { getTestInstance } from "better-auth/test";
 import type Stripe from "stripe";
-import { describe, expect, vi } from "vitest";
+import { describe, expect, vi } from "bun:test";
 import { stripe } from "../src";
 import { stripeClient } from "../src/client";
 import type { StripeOptions } from "../src/types";
@@ -1003,11 +1003,10 @@ describe("stripe customer", () => {
 			},
 		])(
 			"signup: $when",
-			async ({ metadata, verified, createCalls, expectedId }, {
-				stripeMock,
-				memory,
-				stripeOptions,
-			}) => {
+			async (
+				{ metadata, verified, createCalls, expectedId },
+				{ stripeMock, memory, stripeOptions },
+			) => {
 				const email = "owner@example.com";
 				stripeMock.customers.search.mockResolvedValueOnce({
 					data: [{ id: "cus_existing", email, ...(metadata && { metadata }) }],

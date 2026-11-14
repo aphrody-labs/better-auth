@@ -1,6 +1,6 @@
 import type { BetterAuthOptions } from "@better-auth/core";
 import ts from "typescript";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { generateDrizzleSchema } from "./generate-drizzle-schema";
 
 const TYPE_CHECK_TIMEOUT_MS = 60_000;

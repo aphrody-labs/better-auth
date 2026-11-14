@@ -4,7 +4,7 @@ import {
 } from "@better-auth/core/api";
 import { APIError } from "@better-auth/core/error";
 import { kAPIErrorHeaderSymbol } from "better-call";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import { init } from "../context/init";
 import { parseSetCookieHeader } from "../cookies";

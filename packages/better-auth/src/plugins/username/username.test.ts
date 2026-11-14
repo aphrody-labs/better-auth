@@ -1,5 +1,6 @@
 import { UnsecuredJWT } from "jose";
-import { assert, describe, expect, it, vi } from "vitest";
+import assert from "node:assert";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { USERNAME_ERROR_CODES, username } from ".";
 import { usernameClient } from "./client";

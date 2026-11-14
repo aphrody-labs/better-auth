@@ -142,8 +142,7 @@ export async function createAdminAction(opts: unknown) {
 
 	const auth = betterAuth(config);
 	const createUser = (auth.api as Record<string, unknown>).createUser as
-		| CreateUserApi
-		| undefined;
+		CreateUserApi | undefined;
 
 	if (typeof createUser !== "function") {
 		exitWithError(

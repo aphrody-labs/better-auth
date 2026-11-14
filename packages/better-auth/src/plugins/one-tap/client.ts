@@ -149,8 +149,10 @@ export interface GoogleOneTapOptions {
 		| undefined;
 }
 
-export interface GoogleOneTapActionOptions
-	extends Omit<GoogleOneTapOptions, "clientId" | "promptOptions"> {
+export interface GoogleOneTapActionOptions extends Omit<
+	GoogleOneTapOptions,
+	"clientId" | "promptOptions"
+> {
 	fetchOptions?: ClientFetchOption | undefined;
 	/**
 	 * Callback URL.

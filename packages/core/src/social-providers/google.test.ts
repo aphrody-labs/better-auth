@@ -1,5 +1,5 @@
 import { exportJWK, generateKeyPair, generateSecret, SignJWT } from "jose";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 
 vi.mock("@better-fetch/fetch", () => ({
 	betterFetch: vi.fn(),

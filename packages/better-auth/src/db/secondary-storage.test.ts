@@ -1,7 +1,7 @@
 import type { SecondaryStorage, Session } from "@better-auth/core/db";
 import { safeJSONParse } from "@better-auth/core/utils/json";
 import { memoryAdapter } from "@better-auth/memory-adapter";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { admin } from "../plugins/admin/admin";
 import { adminClient } from "../plugins/admin/client";
 import { anonymous } from "../plugins/anonymous";

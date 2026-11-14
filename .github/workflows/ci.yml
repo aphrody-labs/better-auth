@@ -61,7 +61,7 @@ jobs:
         run: pnpm build
 
       - name: Lint
-        run: pnpm biome ci --error-on-warnings
+        run: bun run lint && bun run format:check
 
       - name: Lint Dependencies
         env:
@@ -163,7 +163,7 @@ jobs:
 
       - name: Test release tooling
         if: matrix.node-version == '24.x'
-        run: pnpm --filter @better-auth/release-tooling test
+        run: bun run --filter @better-auth/release-tooling test
 
       - name: Rebuild native bindings for matrix node
         run: pnpm -r rebuild better-sqlite3

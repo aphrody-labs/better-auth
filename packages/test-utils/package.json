@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "test": "vitest"
+    "test": "bun test --preload ../../bun-test.plugin.ts --parallel=4"
   },
   "files": [
     "dist"
@@ -43,12 +43,10 @@
   "devDependencies": {
     "@better-auth/core": "workspace:*",
     "better-auth": "workspace:*",
-    "tsdown": "catalog:",
-    "vitest": "catalog:vitest"
+    "tsdown": "catalog:"
   },
   "peerDependencies": {
     "@better-auth/core": "workspace:^",
-    "better-auth": "workspace:^",
-    "vitest": "^4.0.0 || ^5.0.0"
+    "better-auth": "workspace:^"
   }
 }

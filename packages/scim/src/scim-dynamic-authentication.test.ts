@@ -3,7 +3,7 @@ import { DatabaseSync } from "node:sqlite";
 import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-dialect";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
 import type { SCIMAuthenticationOptions, SCIMBearerTokenVerification } from ".";
 import { scim } from ".";
 import type { SCIMConnectionOptions, SCIMScope } from "./configuration";
@@ -256,9 +256,7 @@ describe("SCIM dynamic connection authentication", () => {
 		).toThrow(expectedError);
 	});
 
-	it("resolves application-owned credentials and isolates equal external IDs over HTTP", async ({
-		onTestFinished,
-	}) => {
+	it("resolves application-owned credentials and isolates equal external IDs over HTTP", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "tenant-a-token",
@@ -390,9 +388,7 @@ describe("SCIM dynamic connection authentication", () => {
 		]);
 	});
 
-	it("rejects unknown, malformed, ambiguous, and static-colliding resolutions before writes", async ({
-		onTestFinished,
-	}) => {
+	it("rejects unknown, malformed, ambiguous, and static-colliding resolutions before writes", async () => {
 		const validFields = {
 			credentialId: "dynamic-credential",
 			scopes: ["scim.users.read"] as const,
@@ -528,9 +524,7 @@ describe("SCIM dynamic connection authentication", () => {
 		);
 	});
 
-	it("checks dynamic credential scopes and expiry before binding or provisioning", async ({
-		onTestFinished,
-	}) => {
+	it("checks dynamic credential scopes and expiry before binding or provisioning", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "read-only-token",
@@ -581,9 +575,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("applies dynamic credential revocation prospectively to real HTTP requests", async ({
-		onTestFinished,
-	}) => {
+	it("applies dynamic credential revocation prospectively to real HTTP requests", async () => {
 		let markCredentialAccepted: (() => void) | undefined;
 		let releaseAcceptedRequest: (() => void) | undefined;
 		const credentialAccepted = new Promise<void>((resolve) => {
@@ -651,9 +643,7 @@ describe("SCIM dynamic connection authentication", () => {
 		]);
 	});
 
-	it("preserves the first dynamic connection-to-domain binding on remap attempts", async ({
-		onTestFinished,
-	}) => {
+	it("preserves the first dynamic connection-to-domain binding on remap attempts", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		const credential = await addCredential(instance, {
 			token: "remap-token",
@@ -685,9 +675,7 @@ describe("SCIM dynamic connection authentication", () => {
 		]);
 	});
 
-	it("rejects a resolved dynamic connection after terminal decommissioning", async ({
-		onTestFinished,
-	}) => {
+	it("rejects a resolved dynamic connection after terminal decommissioning", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "decommissioned-token",
@@ -726,9 +714,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("permanently decommissions a dynamic connection before its first request", async ({
-		onTestFinished,
-	}) => {
+	it("permanently decommissions a dynamic connection before its first request", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "never-used-decommissioned-token",
@@ -780,9 +766,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("keeps a never-used terminal binding idempotent and immutable", async ({
-		onTestFinished,
-	}) => {
+	it("keeps a never-used terminal binding idempotent and immutable", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		const body = {
 			connectionId: "idempotent-tombstone-tenant",
@@ -826,9 +810,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("preserves the missing-binding error for legacy decommission calls", async ({
-		onTestFinished,
-	}) => {
+	it("preserves the missing-binding error for legacy decommission calls", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 
 		await expect(
@@ -849,9 +831,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("does not mutate an active binding when decommissioning names another domain", async ({
-		onTestFinished,
-	}) => {
+	it("does not mutate an active binding when decommissioning names another domain", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "active-domain-mismatch-token",
@@ -891,9 +871,7 @@ describe("SCIM dynamic connection authentication", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("converges authentication racing a never-used tombstone", async ({
-		onTestFinished,
-	}) => {
+	it("converges authentication racing a never-used tombstone", async () => {
 		let continueAuthentication: (() => void) | undefined;
 		const authenticationMayContinue = new Promise<void>((resolve) => {
 			continueAuthentication = resolve;
@@ -941,9 +919,7 @@ describe("SCIM dynamic connection authentication", () => {
 		]);
 	});
 
-	it("converges parallel first use on one dynamic binding", async ({
-		onTestFinished,
-	}) => {
+	it("converges parallel first use on one dynamic binding", async () => {
 		const instance = await createDynamicInstance(onTestFinished);
 		await addCredential(instance, {
 			token: "parallel-token",
@@ -972,9 +948,7 @@ describe("SCIM dynamic connection authentication", () => {
 		]);
 	});
 
-	it("preserves verifier infrastructure failures as server errors", async ({
-		onTestFinished,
-	}) => {
+	it("preserves verifier infrastructure failures as server errors", async () => {
 		const instance = await createDynamicInstance(onTestFinished, {
 			overrides: new Map([
 				[

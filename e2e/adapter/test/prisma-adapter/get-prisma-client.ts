@@ -7,9 +7,8 @@ type PC = InstanceType<typeof PrismaClient>;
 
 async function createAdapter(dialect: Dialect) {
 	if (dialect === "sqlite") {
-		const { PrismaBetterSqlite3 } = await import(
-			"@prisma/adapter-better-sqlite3"
-		);
+		const { PrismaBetterSqlite3 } =
+			await import("@prisma/adapter-better-sqlite3");
 		return new PrismaBetterSqlite3({ url: DATABASE_URLS[dialect] });
 	}
 	if (dialect === "postgresql") {

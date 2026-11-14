@@ -14,8 +14,7 @@ type AuthEndpointContextStorage = AsyncLocalStorage<AuthEndpointContext>;
 
 const getExistingEndpointContextStorage = () => {
 	return __getBetterAuthGlobal().context.endpointContextAsyncStorage as
-		| AuthEndpointContextStorage
-		| undefined;
+		AuthEndpointContextStorage | undefined;
 };
 
 const getOrCreateEndpointContextStorage = async () => {

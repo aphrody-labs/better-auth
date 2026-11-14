@@ -6,7 +6,7 @@ import {
 	expectTypeOf,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { bearer } from "../bearer";
 import { emailOTP } from "../email-otp";
@@ -157,7 +157,9 @@ describe("consume phone-number OTP", async () => {
 			}),
 		).toHaveLength(0);
 		expect(
-			await (await auth.$context).internalAdapter.findVerificationValue(
+			await (
+				await auth.$context
+			).internalAdapter.findVerificationValue(
 				`phone-number-otp-${phoneNumber}`,
 			),
 		).toBeNull();
@@ -194,12 +196,11 @@ describe("consume phone-number OTP", async () => {
 	it("keeps attempt limiting active when a stored attempt count is corrupt", async () => {
 		const phoneNumber = "+251911121303";
 		await client.phoneNumber.sendOtp({ phoneNumber });
-		await (await auth.$context).internalAdapter.updateVerificationByIdentifier(
-			phoneNumber,
-			{
-				value: `${otp}:not-a-number`,
-			},
-		);
+		await (
+			await auth.$context
+		).internalAdapter.updateVerificationByIdentifier(phoneNumber, {
+			value: `${otp}:not-a-number`,
+		});
 
 		for (let attempt = 0; attempt < 3; attempt++) {
 			const res = await client.phoneNumber.verify({
@@ -1069,9 +1070,9 @@ describe("reset password with requireVerification", async () => {
 
 		expect(reset.error?.code).toBe("PHONE_NUMBER_PENDING_VERIFICATION");
 		expect(
-			await (await auth.$context).internalAdapter.findCredentialAccount(
-				user.id,
-			),
+			await (
+				await auth.$context
+			).internalAdapter.findCredentialAccount(user.id),
 		).toBeNull();
 	});
 
@@ -2222,7 +2223,9 @@ describe("phone-number sign-in password length", async () => {
 				name: "Long Password",
 			},
 		});
-		await (await auth.$context).internalAdapter.updateUser(user.id, {
+		await (
+			await auth.$context
+		).internalAdapter.updateUser(user.id, {
 			phoneNumber: "+251911121314",
 		});
 		hash.mockClear();

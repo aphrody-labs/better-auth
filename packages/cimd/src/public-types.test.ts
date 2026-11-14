@@ -10,7 +10,7 @@ import type {
 	SchemaClient,
 	Scope,
 } from "@better-auth/oauth-provider";
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import * as cimdExports from "./index";
 
 function assertValidationResultNarrowing(

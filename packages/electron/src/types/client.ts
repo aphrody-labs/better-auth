@@ -137,8 +137,7 @@ export interface ElectronClientOptions extends ElectronSharedClientOptions {
 	disableCache?: boolean | undefined;
 }
 
-export interface ElectronProxyClientOptions
-	extends ElectronSharedClientOptions {
+export interface ElectronProxyClientOptions extends ElectronSharedClientOptions {
 	/**
 	 * The prefix to use for cookies set by the plugin.
 	 *
