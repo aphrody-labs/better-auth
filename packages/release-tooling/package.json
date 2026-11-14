@@ -7,9 +7,9 @@
     "node": ">=24"
   },
   "scripts": {
-    "auto-changeset": "node src/commands/auto-changeset.ts",
-    "release-notes": "node src/commands/release-notes.ts",
-    "release-notes:comment": "node src/commands/release-notes-comment.ts",
+    "auto-changeset": "bun src/commands/auto-changeset.ts",
+    "release-notes": "bun src/commands/release-notes.ts",
+    "release-notes:comment": "bun src/commands/release-notes-comment.ts",
     "test": "vitest run",
     "typecheck": "tsc --project tsconfig.json"
   },

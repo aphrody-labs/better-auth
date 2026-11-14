@@ -15,7 +15,6 @@ import { generateSecret } from "./commands/secret";
 import { upgrade } from "./commands/upgrade";
 import { cliVersion } from "./version";
 
-import "dotenv/config";
 
 // handle exit
 // 128 + signal number, so an interrupted run never reads as a success.
