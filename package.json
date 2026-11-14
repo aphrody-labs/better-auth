@@ -2,7 +2,7 @@
   "name": "@better-auth/root",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.18.0",
+  "packageManager": "bun@1.4.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/better-auth/better-auth.git"
@@ -12,8 +12,8 @@
     "dev": "turbo dev --filter=./packages/* --filter=!./packages/cli",
     "clean": "turbo clean --filter=./packages/* && rm -rf node_modules",
     "format": "biome format . --write",
-    "format:md": "pnpm --filter docs format:md",
-    "format:check": "pnpm --filter docs format:check",
+    "format:md": "bun run --filter docs format:md",
+    "format:check": "bun run --filter docs format:check",
     "lint": "biome check . --error-on-warnings",
     "lint:dependencies": "knip && knip --production",
     "lint:fix": "biome check . --fix --unsafe",
@@ -21,11 +21,11 @@
     "lint:types": "turbo lint:types --filter=./packages/*",
     "lint:packages": "turbo lint:package --filter=./packages/*",
     "changeset": "changeset",
-    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+    "ci:version": "changeset version && bun install --no-frozen-lockfile",
     "ci:release": "turbo clean --filter=./packages/* && turbo build --filter=./packages/* && changeset publish",
     "test": "turbo test --continue --filter=./packages/* --filter=./test/*",
     "coverage": "turbo coverage --filter=./packages/* --filter=./test/*",
-    "postcoverage": "pnpm coverage:collect && pnpm coverage:merge && pnpm coverage:report",
+    "postcoverage": "bun run coverage:collect && bun run coverage:merge && bun run coverage:report",
     "coverage:merge": "nyc merge coverage/raw coverage/merged/merged-coverage.json",
     "coverage:collect": "rm -rf coverage && mkdir -p coverage/raw && for f in $(find packages test -name coverage-final.json); do pkg=$(basename \"$(dirname \"$(dirname \"$f\")\")\"); cp \"$f\" \"./coverage/raw/$pkg-coverage-final.json\"; done",
     "coverage:report": "nyc --temp-dir=./coverage/raw report --reporter=lcov --reporter text-summary",
@@ -54,5 +54,98 @@
     "turbo": "^2.9.18",
     "typescript": "catalog:",
     "vitest": "catalog:vitest"
-  }
+  },
+  "workspaces": {
+    "packages": [
+      "packages/**",
+      "docs",
+      "e2e/**",
+      "test"
+    ],
+    "catalog": {
+      "@better-auth/utils": "0.5.1",
+      "@better-fetch/fetch": "1.3.3",
+      "better-call": "1.4.5",
+      "kysely": "^0.28.17 || ^0.29.0",
+      "nanostores": "^1.3.0",
+      "tsdown": "0.23.1",
+      "typescript": "^6.0.3",
+      "zod": "^4.5.4"
+    },
+    "catalogs": {
+      "peer": {
+        "@better-auth/utils": "^0.4.2 || ^0.5.0",
+        "better-call": "~1.4.5",
+        "kysely": "^0.28.5 || ^0.29.0",
+        "nanostores": "^1.0.1"
+      },
+      "react19": {
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1"
+      },
+      "tailwind": {
+        "@tailwindcss/postcss": "^4.3.1",
+        "tailwindcss": "^4.3.1",
+        "tailwindcss-animate": "^1.0.7"
+      },
+      "vitest": {
+        "@vitest/coverage-istanbul": "^5.0.0",
+        "@vitest/ui": "^5.0.0",
+        "vitest": "^5.0.0"
+      }
+    }
+  },
+  "overrides": {
+    "kysely": "0.28.17",
+    "fast-xml-parser": "5.12.0",
+    "h3@<2": "^1.15.11",
+    "h3-v2": "npm:h3@^2.0.1-rc.15",
+    "minimatch@<10": ">=10.2.4 <11",
+    "cookie@<0.7.0": ">=0.7.2 <0.8",
+    "esbuild@<0.28.1": ">=0.28.1 <0.29",
+    "@hono/node-server@<2.0.5": ">=2.0.5 <3",
+    "postcss@<8.5.18": ">=8.5.18 <9",
+    "ws@<7.5.11": ">=7.5.11 <8",
+    "uuid@<11.1.1": ">=11.1.1 <12",
+    "valibot@<1.4.2": ">=1.4.2 <2",
+    "sharp": ">=0.35.5 <0.36"
+  },
+  "patchedDependencies": {
+    "@changesets/assemble-release-plan": "patches/@changesets__assemble-release-plan.patch"
+  },
+  "packageExtensions": {
+    "@hookform/resolvers@5.4.0": {
+      "peerDependencies": {
+        "zod": "^3.25.0 || ^4.0.0"
+      },
+      "peerDependenciesMeta": {
+        "zod": {
+          "optional": true
+        }
+      }
+    },
+    "drizzle-kit": {
+      "peerDependencies": {
+        "drizzle-orm": "*"
+      }
+    }
+  },
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "@prisma/client",
+    "@prisma/engines",
+    "@swc/core",
+    "@tsparticles/engine",
+    "better-sqlite3",
+    "esbuild",
+    "lefthook",
+    "less",
+    "msw",
+    "prisma",
+    "protobufjs",
+    "sharp",
+    "workerd"
+  ]
 }
