@@ -1,5 +1,5 @@
 import { Db, MongoClient } from "mongodb";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 
 let isMongodbAvailable = false;
 try {

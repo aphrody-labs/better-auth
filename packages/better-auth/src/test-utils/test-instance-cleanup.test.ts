@@ -1,7 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 import type { Kysely } from "kysely";
 import { sql } from "kysely";
-import { afterAll, expect, it } from "vitest";
+import { afterAll, expect, it } from "bun:test";
 
 let sqlite: DatabaseSync | undefined;
 let postgres: Kysely<unknown> | undefined;
@@ -24,8 +24,7 @@ afterAll(async () => {
 const { getTestInstance } = await import("./test-instance");
 
 let fileHookAuth:
-	| Awaited<ReturnType<typeof getTestInstance>>["auth"]
-	| undefined;
+	Awaited<ReturnType<typeof getTestInstance>>["auth"] | undefined;
 
 // Registered after the import, so it runs before the cleanup closes the
 // database, like an afterAll hook in any test file that uses getTestInstance.

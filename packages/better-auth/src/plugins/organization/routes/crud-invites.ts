@@ -81,15 +81,10 @@ type DynamicOrganizationRole<O extends OrganizationOptions> = O extends {
 	: never;
 
 type OrganizationInvitationRole<O extends OrganizationOptions> =
-	| InferOrganizationRolesFromOption<O>
-	| DynamicOrganizationRole<O>;
+	InferOrganizationRolesFromOption<O> | DynamicOrganizationRole<O>;
 
 type ConfiguredGenerateIdOption =
-	| GenerateIdFn
-	| false
-	| "serial"
-	| "uuid"
-	| undefined;
+	GenerateIdFn | false | "serial" | "uuid" | undefined;
 
 const getAdvancedGenerateId = (
 	advancedOptions: unknown,
@@ -160,8 +155,7 @@ export const createInvitation = <O extends OrganizationOptions>(option: O) => {
 						 * The role to assign to the user
 						 */
 						role:
-							| OrganizationInvitationRole<O>
-							| OrganizationInvitationRole<O>[];
+							OrganizationInvitationRole<O> | OrganizationInvitationRole<O>[];
 						/**
 						 * The organization ID to invite
 						 * the user to

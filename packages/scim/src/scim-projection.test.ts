@@ -8,7 +8,7 @@ import type {
 import { betterAuth } from "better-auth";
 import type { MemoryDB } from "better-auth/adapters/memory";
 import { memoryAdapter } from "better-auth/adapters/memory";
-import { describe, expect, expectTypeOf, it, vi } from "vitest";
+import { describe, expect, expectTypeOf, it, vi } from "bun:test";
 import type {
 	SCIMAuthorizationSource,
 	SCIMProjectedRoleGrant,
@@ -1013,8 +1013,7 @@ describe("SCIM role projection", () => {
 				markReconciliationStarted = resolve;
 			});
 			let reportConcurrencyOutcome:
-				| ((outcome: "blocked" | "duplicate-callback") => void)
-				| undefined;
+				((outcome: "blocked" | "duplicate-callback") => void) | undefined;
 			const concurrencyOutcome = new Promise<"blocked" | "duplicate-callback">(
 				(resolve) => {
 					reportConcurrencyOutcome = resolve;

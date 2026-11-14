@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 
 /**
  * `nodeENV` / `isProduction` are evaluated at module load time, so each scenario

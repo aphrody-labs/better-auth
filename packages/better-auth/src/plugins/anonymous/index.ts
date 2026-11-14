@@ -408,8 +408,7 @@ export const anonymous = (options?: AnonymousOptions | undefined) => {
 							});
 						}
 						const newSessionUser = newSession.user as
-							| (UserWithAnonymous & Record<string, any>)
-							| undefined;
+							(UserWithAnonymous & Record<string, any>) | undefined;
 						const isSameUser = newSessionUser?.id === session.user.id;
 						const newSessionIsAnonymous = Boolean(newSessionUser?.isAnonymous);
 						if (

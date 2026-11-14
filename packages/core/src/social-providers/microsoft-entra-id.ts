@@ -130,8 +130,7 @@ export interface MicrosoftEntraIDProfile extends Record<string, any> {
 	given_name: string;
 }
 
-export interface MicrosoftOptions
-	extends ProviderOptions<MicrosoftEntraIDProfile> {
+export interface MicrosoftOptions extends ProviderOptions<MicrosoftEntraIDProfile> {
 	clientId: string | string[];
 	/**
 	 * The tenant ID of the Microsoft account
@@ -325,7 +324,7 @@ export const microsoft = (options: MicrosoftOptions) => {
 				user.email_verified !== undefined
 					? (parseStringBoolean(user.email_verified) ?? false)
 					: user.email &&
-							(user.verified_primary_email?.includes(user.email) ||
+						  (user.verified_primary_email?.includes(user.email) ||
 								user.verified_secondary_email?.includes(user.email))
 						? true
 						: false;

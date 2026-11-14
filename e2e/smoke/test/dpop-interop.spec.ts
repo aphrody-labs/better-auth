@@ -98,123 +98,130 @@ async function startAuthServer(setup: ServerSetup, t: TestContext) {
 
 describe("DPoP interop with an independent OAuth client", () => {
 	for (const setup of setups) {
-		it(`accepts the client's DPoP proofs at the token and UserInfo endpoints: ${setup.name}`, {
-			todo: setup.todo,
-		}, async (t) => {
-			const { auth, publicOrigin, toServerUrl, proxyFetch } =
-				await startAuthServer(setup, t);
+		it(
+			`accepts the client's DPoP proofs at the token and UserInfo endpoints: ${setup.name}`,
+			{
+				todo: setup.todo,
+			},
+			async (t) => {
+				const { auth, publicOrigin, toServerUrl, proxyFetch } =
+					await startAuthServer(setup, t);
 
-			const signUp = await auth.api.signUpEmail({
-				body: {
-					email: "alice@example.com",
-					password: "smoke-test-password-1",
-					name: "Alice",
-				},
-				returnHeaders: true,
-			});
-			const cookie = signUp.headers.get("set-cookie") ?? "";
-			const registered = await auth.api.adminCreateOAuthClient({
-				headers: new Headers({ cookie }),
-				body: {
-					redirect_uris: [redirectUri],
-					token_endpoint_auth_method: "client_secret_post",
-					grant_types: ["authorization_code", "refresh_token"],
-					skip_consent: true,
-				},
-			});
+				const signUp = await auth.api.signUpEmail({
+					body: {
+						email: "alice@example.com",
+						password: "smoke-test-password-1",
+						name: "Alice",
+					},
+					returnHeaders: true,
+				});
+				const cookie = signUp.headers.get("set-cookie") ?? "";
+				const registered = await auth.api.adminCreateOAuthClient({
+					headers: new Headers({ cookie }),
+					body: {
+						redirect_uris: [redirectUri],
+						token_endpoint_auth_method: "client_secret_post",
+						grant_types: ["authorization_code", "refresh_token"],
+						skip_consent: true,
+					},
+				});
 
-			const metadata = await auth.api.getOpenIdConfig();
-			const slash = setup.trailingSlash ? "/" : "";
-			const as: oauth.AuthorizationServer = {
-				...metadata,
-				token_endpoint: `${metadata.token_endpoint}${slash}`,
-				userinfo_endpoint: `${metadata.userinfo_endpoint}${slash}`,
-			};
-			assert.ok(
-				as.token_endpoint?.startsWith(publicOrigin),
-				`token endpoint should use the public origin: ${as.token_endpoint}`,
-			);
-			const client: oauth.Client = { client_id: registered.client_id };
-			const clientAuth = oauth.ClientSecretPost(registered.client_secret!);
-			const DPoP = oauth.DPoP(client, await oauth.generateKeyPair("ES256"));
-			const requestOptions = {
-				DPoP,
-				[oauth.allowInsecureRequests]: true,
-				[oauth.customFetch]: proxyFetch,
-			};
+				const metadata = await auth.api.getOpenIdConfig();
+				const slash = setup.trailingSlash ? "/" : "";
+				const as: oauth.AuthorizationServer = {
+					...metadata,
+					token_endpoint: `${metadata.token_endpoint}${slash}`,
+					userinfo_endpoint: `${metadata.userinfo_endpoint}${slash}`,
+				};
+				assert.ok(
+					as.token_endpoint?.startsWith(publicOrigin),
+					`token endpoint should use the public origin: ${as.token_endpoint}`,
+				);
+				const client: oauth.Client = { client_id: registered.client_id };
+				const clientAuth = oauth.ClientSecretPost(registered.client_secret!);
+				const DPoP = oauth.DPoP(client, await oauth.generateKeyPair("ES256"));
+				const requestOptions = {
+					DPoP,
+					[oauth.allowInsecureRequests]: true,
+					[oauth.customFetch]: proxyFetch,
+				};
 
-			const codeVerifier = oauth.generateRandomCodeVerifier();
-			const state = oauth.generateRandomState();
-			const authorizationUrl = new URL(metadata.authorization_endpoint);
-			authorizationUrl.search = new URLSearchParams({
-				client_id: client.client_id,
-				response_type: "code",
-				redirect_uri: redirectUri,
-				scope: "openid profile email offline_access",
-				state,
-				code_challenge: await oauth.calculatePKCECodeChallenge(codeVerifier),
-				code_challenge_method: "S256",
-			}).toString();
-			const authorizeResponse = await fetch(
-				toServerUrl(authorizationUrl.href),
-				{ headers: { cookie, accept: "application/json" }, redirect: "manual" },
-			);
-			const { url: callbackUrl } = (await authorizeResponse.json()) as {
-				url: string;
-			};
-			const callbackParameters = oauth.validateAuthResponse(
-				as,
-				client,
-				new URL(callbackUrl),
-				state,
-			);
-
-			const tokens = await oauth.processAuthorizationCodeResponse(
-				as,
-				client,
-				await oauth.authorizationCodeGrantRequest(
+				const codeVerifier = oauth.generateRandomCodeVerifier();
+				const state = oauth.generateRandomState();
+				const authorizationUrl = new URL(metadata.authorization_endpoint);
+				authorizationUrl.search = new URLSearchParams({
+					client_id: client.client_id,
+					response_type: "code",
+					redirect_uri: redirectUri,
+					scope: "openid profile email offline_access",
+					state,
+					code_challenge: await oauth.calculatePKCECodeChallenge(codeVerifier),
+					code_challenge_method: "S256",
+				}).toString();
+				const authorizeResponse = await fetch(
+					toServerUrl(authorizationUrl.href),
+					{
+						headers: { cookie, accept: "application/json" },
+						redirect: "manual",
+					},
+				);
+				const { url: callbackUrl } = (await authorizeResponse.json()) as {
+					url: string;
+				};
+				const callbackParameters = oauth.validateAuthResponse(
 					as,
 					client,
-					clientAuth,
-					callbackParameters,
-					redirectUri,
-					codeVerifier,
-					requestOptions,
-				),
-			);
-			assert.equal(tokens.token_type, "dpop");
-			const subject = oauth.getValidatedIdTokenClaims(tokens)?.sub;
-			assert.ok(subject, "the ID token should carry a subject");
+					new URL(callbackUrl),
+					state,
+				);
 
-			const userInfo = await oauth.processUserInfoResponse(
-				as,
-				client,
-				subject,
-				await oauth.userInfoRequest(
+				const tokens = await oauth.processAuthorizationCodeResponse(
 					as,
 					client,
-					tokens.access_token,
-					requestOptions,
-				),
-			);
-			assert.equal(userInfo.email, "alice@example.com");
+					await oauth.authorizationCodeGrantRequest(
+						as,
+						client,
+						clientAuth,
+						callbackParameters,
+						redirectUri,
+						codeVerifier,
+						requestOptions,
+					),
+				);
+				assert.equal(tokens.token_type, "dpop");
+				const subject = oauth.getValidatedIdTokenClaims(tokens)?.sub;
+				assert.ok(subject, "the ID token should carry a subject");
 
-			assert.ok(
-				tokens.refresh_token,
-				"offline_access should issue a refresh token",
-			);
-			const refreshed = await oauth.processRefreshTokenResponse(
-				as,
-				client,
-				await oauth.refreshTokenGrantRequest(
+				const userInfo = await oauth.processUserInfoResponse(
 					as,
 					client,
-					clientAuth,
+					subject,
+					await oauth.userInfoRequest(
+						as,
+						client,
+						tokens.access_token,
+						requestOptions,
+					),
+				);
+				assert.equal(userInfo.email, "alice@example.com");
+
+				assert.ok(
 					tokens.refresh_token,
-					requestOptions,
-				),
-			);
-			assert.equal(refreshed.token_type, "dpop");
-		});
+					"offline_access should issue a refresh token",
+				);
+				const refreshed = await oauth.processRefreshTokenResponse(
+					as,
+					client,
+					await oauth.refreshTokenGrantRequest(
+						as,
+						client,
+						clientAuth,
+						tokens.refresh_token,
+						requestOptions,
+					),
+				);
+				assert.equal(refreshed.token_type, "dpop");
+			},
+		);
 	}
 });

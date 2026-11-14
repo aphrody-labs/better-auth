@@ -31,9 +31,6 @@ export { getOAuthProviderApi } from "./token";
 export type * from "./types";
 export type { OAuthClient, ResourceServerMetadata } from "./types/oauth";
 export type { OAuthClientMetadata } from "./types/zod";
-export {
-	oauthClientMetadataSchema,
-	ResourceUriSchema,
-} from "./types/zod";
+export { oauthClientMetadataSchema, ResourceUriSchema } from "./types/zod";
 export { verifyOAuthQueryParams } from "./utils";
 export { consumeClientAssertion } from "./utils/client-assertion";

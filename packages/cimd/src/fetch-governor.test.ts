@@ -4,7 +4,7 @@ import { oauthProviderClient } from "@better-auth/oauth-provider/client";
 import { createAuthClient } from "better-auth/client";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { cimd, createCimdClientDiscovery } from "./index";
 import type { CimdMetadataFetchPolicy } from "./types";
 

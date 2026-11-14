@@ -1,6 +1,6 @@
 import { betterFetch } from "@better-fetch/fetch";
 import { SignJWT } from "jose";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import type { PayPalProfile } from "./paypal";
 import { paypal } from "./paypal";
 

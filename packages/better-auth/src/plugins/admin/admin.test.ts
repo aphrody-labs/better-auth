@@ -12,7 +12,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createAuthMiddleware, getSessionFromCtx } from "../../api";
 import { createAuthClient } from "../../client";
 import { signJWT } from "../../crypto";

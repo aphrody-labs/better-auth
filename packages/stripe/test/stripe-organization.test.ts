@@ -2,7 +2,7 @@ import { organizationClient } from "better-auth/client/plugins";
 import { organization } from "better-auth/plugins/organization";
 import { getTestInstance } from "better-auth/test";
 import type Stripe from "stripe";
-import { describe, expect, vi } from "vitest";
+import { describe, expect, vi } from "bun:test";
 import { stripe } from "../src";
 import { stripeClient } from "../src/client";
 import type { StripeOptions, Subscription } from "../src/types";

@@ -5,7 +5,7 @@ import { DPOP_SIGNING_ALGORITHMS } from "better-auth/oauth2";
 import type { JwtOptions } from "better-auth/plugins/jwt";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProviderResourceClient } from "./client-resource";
 import {

@@ -15,7 +15,6 @@ import { generateSecret } from "./commands/secret";
 import { upgrade } from "./commands/upgrade";
 import { cliVersion } from "./version";
 
-
 // handle exit
 // 128 + signal number, so an interrupted run never reads as a success.
 process.on("SIGINT", () => process.exit(130));

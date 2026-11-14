@@ -6,7 +6,7 @@ import {
 	generateKeyPair,
 	jwtVerify,
 } from "jose";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import {
 	createPrivateKeyJwtClientAssertionGetter,
 	signPrivateKeyJwtClientAssertion,

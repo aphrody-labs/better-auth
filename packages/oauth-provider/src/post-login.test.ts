@@ -2,7 +2,7 @@ import { APIError } from "better-auth/api";
 import { jwt } from "better-auth/plugins/jwt";
 import { organization } from "better-auth/plugins/organization";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
 import { postLoginClearedParam } from "./signed-query";

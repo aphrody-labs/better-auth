@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "e2e:integration": "vitest run"
+    "e2e:integration": "bun test --preload ../../../../bun-test.plugin.ts --parallel=4"
   },
   "dependencies": {
     "@better-auth/core": "workspace:*",

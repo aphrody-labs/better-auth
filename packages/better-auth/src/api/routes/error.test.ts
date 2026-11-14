@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 
 describe("error page security", async () => {

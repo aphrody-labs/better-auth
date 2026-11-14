@@ -11,8 +11,9 @@ import {
 	describe,
 	expect,
 	it,
+	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { getMigrations } from "../../better-auth/src/db/get-migration";
 import { sso } from ".";
 import type { SSOOptions, SSOUserResolutionInput } from "./types";
@@ -170,9 +171,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		return { callback, cookies };
 	}
 
-	it("links the exact selected user without email fallback and resolves returning sign-ins", async ({
-		onTestFinished,
-	}) => {
+	it("links the exact selected user without email fallback and resolves returning sign-ins", async () => {
 		subject = "directory-user-1";
 		email = "distinct-provider@example.com";
 		const firstProviderEmail = email;
@@ -285,9 +284,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		});
 	});
 
-	it("preserves an unverified selected profile on a same-email first link", async ({
-		onTestFinished,
-	}) => {
+	it("preserves an unverified selected profile on a same-email first link", async () => {
 		subject = "preserved-profile-user";
 		email = "same-email@example.com";
 		let selectedUserId = "";
@@ -331,9 +328,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		});
 	});
 
-	it("updates an explicitly selected user from the provider profile", async ({
-		onTestFinished,
-	}) => {
+	it("updates an explicitly selected user from the provider profile", async () => {
 		subject = "provider-profile-user";
 		email = "provider-profile@example.com";
 		let selectedUserId = "";
@@ -376,9 +371,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		});
 	});
 
-	it("rejects missing selected users and account ownership conflicts", async ({
-		onTestFinished,
-	}) => {
+	it("rejects missing selected users and account ownership conflicts", async () => {
 		subject = "selected-user-conflict";
 		email = "selected-user-conflict@example.com";
 		let selectedUserId = "missing-user";
@@ -457,9 +450,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10473#discussion_r3629488656
 	 */
-	it("rolls back resolver and authentication writes without publishing side effects", async ({
-		onTestFinished,
-	}) => {
+	it("rolls back resolver and authentication writes without publishing side effects", async () => {
 		subject = "rollback-user";
 		email = "rollback@example.com";
 		emailVerified = false;
@@ -537,9 +528,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		expect(sendVerificationEmail).toHaveBeenCalledTimes(1);
 	});
 
-	it("keeps case-distinct OIDC subjects as different account keys", async ({
-		onTestFinished,
-	}) => {
+	it("keeps case-distinct OIDC subjects as different account keys", async () => {
 		subject = "CaseSensitiveSubject";
 		email = "case-sensitive@example.com";
 		const instance = await createInstance(
@@ -565,9 +554,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		);
 	});
 
-	it("rejects a persisted provider replacement between token exchange and finalization", async ({
-		onTestFinished,
-	}) => {
+	it("rejects a persisted provider replacement between token exchange and finalization", async () => {
 		subject = "provider-replacement-user";
 		email = "provider-replacement@example.com";
 		let resolverCalls = 0;
@@ -626,9 +613,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		expect(await instance.db.count({ model: "account", where: [] })).toBe(0);
 	});
 
-	it("returns committed session cookies when secondary mirroring fails", async ({
-		onTestFinished,
-	}) => {
+	it("returns committed session cookies when secondary mirroring fails", async () => {
 		subject = "secondary-storage-failure-user";
 		email = "secondary-storage-failure@example.com";
 		const secondaryValues = new Map<string, string>();
@@ -674,9 +659,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		expect(mirrorSet).toHaveBeenCalled();
 	});
 
-	it("rejects missing ID Tokens and UserInfo subject mismatches before resolution", async ({
-		onTestFinished,
-	}) => {
+	it("rejects missing ID Tokens and UserInfo subject mismatches before resolution", async () => {
 		subject = "verified-token-user";
 		email = "verified-token@example.com";
 		let resolverCalls = 0;
@@ -712,9 +695,7 @@ describe("SSO OIDC user resolution HTTP", () => {
 		expect(resolverCalls).toBe(0);
 	});
 
-	it("fails before resolution when native transactions are unavailable", async ({
-		onTestFinished,
-	}) => {
+	it("fails before resolution when native transactions are unavailable", async () => {
 		subject = "unsupported-transaction-user";
 		email = "unsupported-transaction@example.com";
 		let resolverCalls = 0;

@@ -11,7 +11,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { organization, twoFactor, username } from "better-auth/plugins";
 import Database from "better-sqlite3";
 import prompts from "prompts";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { generate } from "../src/commands/generate";
 import { generateSchema } from "../src/generators";
 import { generateDrizzleSchema } from "../src/generators/drizzle";

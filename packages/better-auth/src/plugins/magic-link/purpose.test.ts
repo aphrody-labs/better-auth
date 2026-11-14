@@ -1,5 +1,5 @@
 import type { SecondaryStorage } from "@better-auth/core/db";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { oauthPopup } from "../oauth-popup";
 import { magicLink } from ".";
@@ -213,9 +213,9 @@ describe("verification record purpose", () => {
 			});
 			expect(result.error).toBeNull();
 			expect(result.data?.user.email).toBe(email);
-			const user = await (await auth.$context).internalAdapter.findUserByEmail(
-				email,
-			);
+			const user = await (
+				await auth.$context
+			).internalAdapter.findUserByEmail(email);
 			expect(user?.user.name).toBe(name);
 		},
 	);

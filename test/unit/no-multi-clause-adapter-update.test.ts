@@ -1,7 +1,7 @@
 import { globSync, readFileSync } from "node:fs";
 import { dirname, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 /**
  * Structural lock for the adapter compare-and-swap class of bug.

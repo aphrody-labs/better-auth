@@ -23,8 +23,7 @@ interface ClientCredentialsTokenRequestBaseInput {
 	extraParams?: Record<string, string> | undefined;
 }
 
-interface ClientCredentialsTokenInput
-	extends ClientCredentialsTokenRequestInput {
+interface ClientCredentialsTokenInput extends ClientCredentialsTokenRequestInput {
 	tokenEndpoint: string;
 	scope: string;
 }

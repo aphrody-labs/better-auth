@@ -223,8 +223,7 @@ export async function verifyTwoFactor(ctx: GenericEndpointContext) {
 
 function resolveAccountLockoutConfig(ctx: GenericEndpointContext) {
 	const options = ctx.context.getPlugin("two-factor")?.options as
-		| TwoFactorOptions
-		| undefined;
+		TwoFactorOptions | undefined;
 	const lockout = options?.accountLockout;
 	return {
 		enabled: lockout?.enabled ?? true,

@@ -353,8 +353,7 @@ export interface SSOSAMLUserResolutionInput extends BaseSSOUserResolutionInput {
 
 /** Verified SSO identity and provider data available to an application resolver. */
 export type SSOUserResolutionInput =
-	| SSOOIDCUserResolutionInput
-	| SSOSAMLUserResolutionInput;
+	SSOOIDCUserResolutionInput | SSOSAMLUserResolutionInput;
 
 /** Transaction-bound capabilities available while resolving an SSO user. */
 export interface SSOUserResolutionContext {

@@ -100,10 +100,7 @@ const tiers: readonly Tier[] = [
 ];
 
 type CellValue =
-	| boolean
-	| string
-	| readonly [string, string]
-	| { addon: string };
+	boolean | string | readonly [string, string] | { addon: string };
 
 type CompareRow = {
 	label: string;

@@ -26,7 +26,7 @@
     "lint:package": "publint run --strict --pack false",
     "lint:types": "attw --profile esm-only --pack .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "bun test --preload ../../bun-test.plugin.ts --parallel=4"
   },
   "files": [
     "dist"
@@ -50,7 +50,6 @@
     "@types/node": "^25.9.3",
     "ioredis": "^5.11.1",
     "tsdown": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:vitest"
+    "typescript": "catalog:"
   }
 }

@@ -92,15 +92,12 @@ type CloudflareClientAuthentication =
 			 * @default { method: "client_secret_basic" }
 			 */
 			tokenEndpointAuth?:
-				| { method: "client_secret_basic" | "client_secret_post" }
-				| undefined;
+				{ method: "client_secret_basic" | "client_secret_post" } | undefined;
 			/**
 			 * @deprecated Use `tokenEndpointAuth` instead.
 			 */
 			tokenEndpointAuthMethod?:
-				| "client_secret_basic"
-				| "client_secret_post"
-				| undefined;
+				"client_secret_basic" | "client_secret_post" | undefined;
 	  }
 	| {
 			/**

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { promisify } from "node:util";
 import Database from "better-sqlite3";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, describe, expect, it } from "bun:test";
 import { cliPath } from "./utils";
 
 const execFileAsync = promisify(execFile);

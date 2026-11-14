@@ -1,6 +1,6 @@
 import * as betterFetchModule from "@better-fetch/fetch";
 import { checkBotId as vercelCheckBotId } from "botid/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { emailOTP } from "../email-otp";
 import { emailOTPClient } from "../email-otp/client";

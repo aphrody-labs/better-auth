@@ -1,6 +1,6 @@
 import { openAPI } from "better-auth/plugins";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { passkey } from ".";
 
 describe("passkey open-api", async () => {

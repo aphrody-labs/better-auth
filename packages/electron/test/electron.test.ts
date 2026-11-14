@@ -8,7 +8,7 @@ import { generateRandomString } from "better-auth/crypto";
 import { getMigrations } from "better-auth/db/migration";
 import { generateCodeChallenge } from "better-auth/oauth2";
 import { getTestInstance } from "better-auth/test";
-import { beforeEach, describe, expect, vi } from "vitest";
+import { beforeEach, describe, expect, vi } from "bun:test";
 import { authenticate, kElectron } from "../src/authenticate";
 import { electronClient } from "../src/client";
 import { getCookie } from "../src/cookies";
@@ -270,7 +270,9 @@ describe("Electron", () => {
 		const codeChallenge = await s256Challenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -326,7 +328,9 @@ describe("Electron", () => {
 		const codeChallenge = await generateCodeChallenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -381,7 +385,9 @@ describe("Electron", () => {
 		]);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -456,7 +462,9 @@ describe("Electron", () => {
 		]);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -706,7 +714,9 @@ describe("Electron", () => {
 		const codeChallenge = await s256Challenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -761,7 +771,9 @@ describe("Electron", () => {
 		const codeChallenge = await s256Challenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -856,7 +868,9 @@ describe("Electron", () => {
 		]);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -913,7 +927,9 @@ describe("Electron", () => {
 		]);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -954,7 +970,9 @@ describe("Electron", () => {
 		const codeChallenge = await s256Challenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -1284,7 +1302,9 @@ describe("Electron", () => {
 			});
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1325,7 +1345,9 @@ describe("Electron", () => {
 			]);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1370,7 +1392,9 @@ describe("Electron", () => {
 			]);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1409,7 +1433,9 @@ describe("Electron", () => {
 			});
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1448,7 +1474,9 @@ describe("Electron", () => {
 			const actualChallenge = await s256Challenge(actualVerifier);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1493,7 +1521,9 @@ describe("Electron", () => {
 			// pre-hardening flow could persist. It must never be exchangeable: the
 			// token endpoint always verifies the verifier's SHA-256 digest.
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1667,7 +1697,9 @@ describe("Electron", () => {
 				body: { email: "test@test.com", password: "password" },
 			});
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -1708,7 +1740,7 @@ describe("Electron", () => {
 			await setupSessionWithTokenExchange();
 
 			const c = client.getCookie();
-			expect(c).includes("better-auth.session_token");
+			expect(c).toContain("better-auth.session_token");
 		});
 
 		it("should not trigger infinite refetch with non-./src/cookies", async ({
@@ -1996,7 +2028,9 @@ describe("Electron", () => {
 		const codeChallenge = await s256Challenge(codeVerifier);
 
 		const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-		await (await auth.$context).adapter.create({
+		await (
+			await auth.$context
+		).adapter.create({
 			model: "verification",
 			data: {
 				identifier: `electron:${identifier}`,
@@ -2067,7 +2101,9 @@ describe("Electron", () => {
 			const codeChallenge = await s256Challenge(codeVerifier);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -2266,7 +2302,9 @@ describe("Electron", () => {
 			]);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -2327,7 +2365,9 @@ describe("Electron", () => {
 			]);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,
@@ -2514,7 +2554,9 @@ describe("Electron", () => {
 			]);
 
 			const identifier = generateRandomString(16, "A-Z", "a-z", "0-9");
-			await (await auth.$context).adapter.create({
+			await (
+				await auth.$context
+			).adapter.create({
 				model: "verification",
 				data: {
 					identifier: `electron:${identifier}`,

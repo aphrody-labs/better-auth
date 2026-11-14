@@ -184,9 +184,8 @@ function createNextDemoRuntime() {
 		},
 		stop: async () => {
 			stopped = true;
-			const { terminate } = await import(
-				"@better-auth-test/test-utils/playwright"
-			);
+			const { terminate } =
+				await import("@better-auth-test/test-utils/playwright");
 			await Promise.all([...children].map(terminate));
 			if (!temporaryDirectory) return;
 			await rm(temporaryDirectory, { recursive: true, force: true });

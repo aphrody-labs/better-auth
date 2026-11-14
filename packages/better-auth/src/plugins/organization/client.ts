@@ -159,9 +159,9 @@ export const organizationClient = <CO extends OrganizationClientOptions>(
 			},
 			organization: {
 				checkRolePermission: <
-					R extends CO extends { roles: any }
+					R extends (CO extends { roles: any }
 						? keyof CO["roles"]
-						: "admin" | "member" | "owner",
+						: "admin" | "member" | "owner"),
 				>(
 					data: PermissionExclusive & {
 						role: R;
@@ -315,9 +315,9 @@ export const inferOrgAdditionalFields = <
 	// if we don't remove all other properties we may see assignability issues
 
 	type ExtractClientOnlyFields<T> = {
-		[K in keyof T as T[K] extends { additionalFields: unknown }
-			? K
-			: never]: T[K];
+		[
+			K in keyof T as T[K] extends { additionalFields: unknown } ? K : never
+		]: T[K];
 	};
 
 	type Schema = O extends Object

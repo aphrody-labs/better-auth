@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "bun:test";
 import { createAuthClient } from "../../client";
 import { setCookieToHeader } from "../../cookies";
 import { getTestInstance } from "../../test-utils/test-instance";

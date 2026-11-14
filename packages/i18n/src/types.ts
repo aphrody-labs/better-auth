@@ -7,10 +7,9 @@ import type {
 
 type ALL_PLUGIN_ERROR_CODE_KEYS = keyof UnionToIntersection<
 	{
-		[Key in Exclude<
-			BetterAuthPluginRegistryIdentifier,
-			"i18n"
-		>]: BetterAuthPluginRegistry<unknown, unknown>[Key] extends {
+		[
+			Key in Exclude<BetterAuthPluginRegistryIdentifier, "i18n">
+		]: BetterAuthPluginRegistry<unknown, unknown>[Key] extends {
 			creator: infer C;
 		}
 			? C extends (...args: any[]) => infer P
@@ -38,10 +37,7 @@ export type TranslationDictionary = InternalTranslationDictionary &
  * Locale detection strategy
  */
 export type LocaleDetectionStrategy =
-	| "header"
-	| "cookie"
-	| "session"
-	| "callback";
+	"header" | "cookie" | "session" | "callback";
 
 /**
  * Options for the i18n plugin

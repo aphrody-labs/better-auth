@@ -1,4 +1,4 @@
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { betterAuth } from "../../auth/full";
 import { createAuthClient } from "../../client";
 import { getTestInstance } from "../../test-utils/test-instance";

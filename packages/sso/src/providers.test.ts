@@ -14,7 +14,7 @@ import { getMigrations } from "better-auth/db/migration";
 import { organization } from "better-auth/plugins";
 import { getHttpTestInstance } from "better-auth/test";
 import { OAuth2Server } from "oauth2-mock-server";
-import { describe, expect, expectTypeOf, it, onTestFinished } from "vitest";
+import { describe, expect, expectTypeOf, it, onTestFinished } from "bun:test";
 import { sso } from ".";
 import { ssoClient } from "./client";
 import { lockSSOProviderForAccountLink } from "./routes/providers";
@@ -3120,9 +3120,7 @@ kBGIJYs=
 			});
 		});
 
-		it("serializes a concurrent account link before deleting the provider and its account", async ({
-			onTestFinished,
-		}) => {
+		it("serializes a concurrent account link before deleting the provider and its account", async () => {
 			const sqlite = new DatabaseSync(":memory:");
 			onTestFinished(() => sqlite.close());
 			const auth = betterAuth({
@@ -3253,9 +3251,7 @@ kBGIJYs=
 			).toEqual([]);
 		});
 
-		it("waits for a Postgres OIDC account link before deleting its exact provider and account", async ({
-			onTestFinished,
-		}) => {
+		it("waits for a Postgres OIDC account link before deleting its exact provider and account", async () => {
 			const identityProvider = await startOIDCIdentityProvider(
 				"postgres-link-first",
 			);
@@ -3378,9 +3374,7 @@ kBGIJYs=
 			).toEqual([]);
 		}, 20_000);
 
-		it("rejects a Postgres OIDC callback waiting behind provider deletion", async ({
-			onTestFinished,
-		}) => {
+		it("rejects a Postgres OIDC callback waiting behind provider deletion", async () => {
 			const identityProvider = await startOIDCIdentityProvider(
 				"postgres-delete-first",
 			);

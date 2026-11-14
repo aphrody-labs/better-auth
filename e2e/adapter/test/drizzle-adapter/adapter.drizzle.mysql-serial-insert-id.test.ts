@@ -1,7 +1,7 @@
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import type { SQL } from "drizzle-orm";
 import { int, MySqlDialect, mysqlTable, varchar } from "drizzle-orm/mysql-core";
-import { describe, expect, it, test } from "vitest";
+import { describe, expect, it, test } from "bun:test";
 
 const INSERT_ID = 42;
 const STALE_POOL_INSERT_ID = 7;

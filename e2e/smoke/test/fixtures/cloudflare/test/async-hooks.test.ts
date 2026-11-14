@@ -1,12 +1,5 @@
-import {
-	afterEach,
-	describe,
-	expect,
-	it,
-	onTestFailed,
-	onTestFinished,
-	vi,
-} from "vitest";
+import { afterEach, describe, expect, it, onTestFinished, vi } from "bun:test";
+import { onTestFailed } from "../../../../../../bun-test.compat";
 import { createTestHarness } from "wrangler";
 
 const workerConfig = {

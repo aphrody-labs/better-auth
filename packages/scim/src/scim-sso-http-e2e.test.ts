@@ -8,7 +8,14 @@ import type { Account, DBTransactionAdapter } from "better-auth";
 import { getHttpTestInstance } from "better-auth/test";
 import { Kysely } from "kysely";
 import { OAuth2Server } from "oauth2-mock-server";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+} from "bun:test";
 import { getMigrations } from "../../better-auth/src/db/get-migration";
 import { acquireActiveSCIMUserLink, scim } from ".";
 import type { SCIMConnectionBinding, SCIMSubject } from "./persistence";
@@ -103,9 +110,7 @@ describe("SCIM-provisioned SSO authentication over HTTP", () => {
 		await identityProvider.stop();
 	});
 
-	it("authenticates only the active User owned by the paired SCIM connection", async ({
-		onTestFinished,
-	}) => {
+	it("authenticates only the active User owned by the paired SCIM connection", async () => {
 		let resolverPause:
 			| {
 					reached: ReturnType<typeof createDeferred>;

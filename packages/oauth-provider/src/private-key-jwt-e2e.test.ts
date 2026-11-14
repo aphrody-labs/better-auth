@@ -5,7 +5,15 @@ import { genericOAuth } from "better-auth/plugins/generic-oauth";
 import { jwt } from "better-auth/plugins/jwt";
 import { getHttpTestInstance, getTestInstance } from "better-auth/test";
 import { exportJWK, generateKeyPair } from "jose";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+	vi,
+} from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
 import type { OAuthClient } from "./types/oauth";
@@ -113,9 +121,7 @@ describe("private_key_jwt e2e", async () => {
 		await server.close();
 	});
 
-	it("should complete full sign-in flow using private_key_jwt across RP and provider", async ({
-		onTestFinished,
-	}) => {
+	it("should complete full sign-in flow using private_key_jwt across RP and provider", async () => {
 		// Set up the Relying Party with genericOAuth using private_key_jwt
 		const { customFetchImpl: rpFetchImpl } = await getTestInstance({
 			account: {
@@ -219,9 +225,7 @@ describe("private_key_jwt e2e", async () => {
 		expect(callbackUrl).toContain("/success");
 	});
 
-	it("should complete full sign-in flow using a trusted jwks_uri client", async ({
-		onTestFinished,
-	}) => {
+	it("should complete full sign-in flow using a trusted jwks_uri client", async () => {
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		const fetchSpy = vi.fn((input: RequestInfo | URL, init?: RequestInit) => {
 			const url =

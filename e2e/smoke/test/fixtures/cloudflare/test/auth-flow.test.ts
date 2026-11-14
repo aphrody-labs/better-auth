@@ -6,7 +6,7 @@ import {
 	describe,
 	expect,
 	it,
-} from "vitest";
+} from "bun:test";
 import { createTestHarness } from "wrangler";
 
 const server = createTestHarness({

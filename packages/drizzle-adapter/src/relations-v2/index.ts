@@ -745,8 +745,7 @@ export const drizzleAdapter = (db: DB, config: DrizzleAdapterConfig) => {
 							logger.info("Falling back to regular query");
 						} else {
 							let includes:
-								| Record<string, { limit: number } | boolean>
-								| undefined;
+								Record<string, { limit: number } | boolean> | undefined;
 
 							const renamedJoinResults: { key: string; target: string }[] = [];
 							const relationKeys = getRelationKeysByModel().get(queryModel);
@@ -1143,9 +1142,8 @@ export const drizzleAdapter = (db: DB, config: DrizzleAdapterConfig) => {
 					return (updated[0] as any) ?? null;
 				},
 				async createSchema(props) {
-					const { generateDrizzleSchema } = await import(
-						"./generate-drizzle-schema"
-					);
+					const { generateDrizzleSchema } =
+						await import("./generate-drizzle-schema");
 					return await generateDrizzleSchema({
 						adapterConfig: config,
 						options: options,

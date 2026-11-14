@@ -1,6 +1,6 @@
 import { createAccessControl } from "better-auth/plugins/access";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import {
 	adminAc,
 	defaultStatements,

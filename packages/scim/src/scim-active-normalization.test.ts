@@ -4,7 +4,7 @@ import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { scim } from ".";
 import { normalizeSCIMUserEntraCompatibilityRequestBody } from "./active-normalization";
 import type { SCIMProjectedUserState } from "./configuration";

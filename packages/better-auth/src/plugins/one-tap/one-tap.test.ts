@@ -3,7 +3,7 @@ import type { BetterAuthClientPlugin } from "@better-auth/core";
 import type { GoogleProfile } from "@better-auth/core/social-providers";
 import type { oneTap as oneTapFromSubpath } from "better-auth/plugins/one-tap";
 import { jwtVerify } from "jose";
-import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { afterEach, describe, expect, expectTypeOf, it, vi } from "bun:test";
 import { createAuthClient } from "../../client";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { lastLoginMethod } from "../last-login-method";

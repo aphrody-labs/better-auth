@@ -1,5 +1,5 @@
 import { atom } from "nanostores";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { isJsonEqual, withEquality } from "./equality";
 
 describe("isJsonEqual", () => {

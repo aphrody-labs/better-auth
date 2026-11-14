@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { testWithTmpDir } from "../../../../test/test-utils";
 import { possibleAuthConfigPaths } from "../../../utils/config-paths";
 import { FRAMEWORKS } from "../configs/frameworks.config";

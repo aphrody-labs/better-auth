@@ -96,8 +96,7 @@ type RPInitiatedLogoutFields = {
 };
 
 type RPInitiatedLogoutClientInput =
-	| RPInitiatedLogoutFields
-	| { query: RPInitiatedLogoutFields };
+	RPInitiatedLogoutFields | { query: RPInitiatedLogoutFields };
 
 declare module "@better-auth/core" {
 	interface BetterAuthPluginRegistry<AuthOptions, Options> {

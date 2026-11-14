@@ -1,6 +1,6 @@
 import type { JSONValue, LanguageModel } from "ai";
 import { asSchema } from "ai";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { StructuredGenerator } from "../src/ai/generate-structured.ts";
 import { models } from "../src/ai/models.ts";
 import {

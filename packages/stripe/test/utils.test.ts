@@ -1,5 +1,5 @@
 import type Stripe from "stripe";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { StripeOptions } from "../src/types";
 import { escapeStripeSearchValue, resolvePlanItem } from "../src/utils";
 

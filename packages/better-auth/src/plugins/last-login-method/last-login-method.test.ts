@@ -9,7 +9,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createAuthMiddleware } from "../../api";
 import { parseCookies, parseSetCookieHeader } from "../../cookies";
 import { signJWT } from "../../crypto";

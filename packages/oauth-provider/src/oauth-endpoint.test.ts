@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import { isMissingValueIssue, mapIssuesToOAuthError } from "./oauth-endpoint";
 

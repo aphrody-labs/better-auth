@@ -119,8 +119,7 @@ export interface ZoomProfile extends Record<string, any> {
 	/* cspell:disable-next-line */
 	/** Custom attributes that have been assigned to the user (Example: [{ "key": "cbf_cywdkexrtqc73f97gd4w6g", "name": "A1", "value": "1" }]) */
 	custom_attributes?:
-		| { key: string; name: string; value: string }[]
-		| undefined;
+		{ key: string; name: string; value: string }[] | undefined;
 	/* cspell:disable-next-line */
 	/** The employee's unique ID. This field only returns when SAML single sign-on (SSO) is enabled. The `login_type` value is `101` (SSO) (Example: "HqDyI037Qjili1kNsSIrIg") */
 	employee_unique_id?: string | undefined;

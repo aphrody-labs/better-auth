@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import type { PluginConfig } from "../configs/temp-plugins.config";
 import { tempPluginsConfig } from "../configs/temp-plugins.config";

@@ -1,6 +1,6 @@
 import path from "node:path";
 import { vol } from "memfs";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { testWithTmpDir } from "../../../../test/test-utils";
 
 const fs = vol.promises;

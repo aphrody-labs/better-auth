@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "bun:test";
 import { createTestHarness } from "wrangler";
 
 /** Holds the first request to each path open; answers later ones with a discovery document. */

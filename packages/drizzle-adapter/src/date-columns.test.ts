@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { fromDriverDate, toDriverDate } from "./date-columns";
 
 // The e2e suites cover ISO writes and reads on PostgreSQL and SQLite; these

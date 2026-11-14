@@ -1,4 +1,4 @@
-import { expect } from "vitest";
+import { expect } from "bun:test";
 
 const SCIM_MEDIA_TYPE = "application/scim+json";
 const SCIM_USER_SCHEMA = "urn:ietf:params:scim:schemas:core:2.0:User";

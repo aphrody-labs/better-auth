@@ -27,9 +27,11 @@ export const th: TranslationDictionary = {
 	EMAIL_CAN_NOT_BE_UPDATED: "ไม่สามารถอัปเดตอีเมลได้",
 	CREDENTIAL_ACCOUNT_NOT_FOUND: "ไม่พบบัญชีข้อมูลรับรอง",
 	SESSION_EXPIRED: "เซสชันหมดอายุ กรุณายืนยันตัวตนใหม่เพื่อดำเนินการนี้",
-	FAILED_TO_UNLINK_LAST_ACCOUNT: "คุณไม่สามารถยกเลิกการเชื่อมต่อบัญชีสุดท้ายของคุณได้",
+	FAILED_TO_UNLINK_LAST_ACCOUNT:
+		"คุณไม่สามารถยกเลิกการเชื่อมต่อบัญชีสุดท้ายของคุณได้",
 	ACCOUNT_NOT_FOUND: "ไม่พบบัญชี",
-	USER_ALREADY_HAS_PASSWORD: "ผู้ใช้มีรหัสผ่านอยู่แล้ว กรุณาระบุรหัสผ่านเพื่อลบบัญชี",
+	USER_ALREADY_HAS_PASSWORD:
+		"ผู้ใช้มีรหัสผ่านอยู่แล้ว กรุณาระบุรหัสผ่านเพื่อลบบัญชี",
 	VERIFICATION_EMAIL_NOT_ENABLED: "ไม่ได้เปิดใช้งานอีเมลยืนยัน",
 	EMAIL_ALREADY_VERIFIED: "อีเมลได้รับการยืนยันแล้ว",
 	EMAIL_MISMATCH: "อีเมลไม่ตรงกัน",

@@ -1,6 +1,6 @@
 import type { BetterAuthOptions, BetterAuthPlugin } from "@better-auth/core";
 import type { GoogleProfile, JoinConfig, JoinOption } from "better-auth/types";
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import { createAuthEndpoint } from "../api";
 import { betterAuth } from "../auth/minimal";
 import type { InferCtx } from "../client/path-to-object";

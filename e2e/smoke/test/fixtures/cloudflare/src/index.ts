@@ -72,9 +72,10 @@ app.get("/_test/d1-concurrency/:query", async (c) => {
 
 	const slow = c.req.param("query") === "slow";
 	const query = concurrencyDatabase.selectFrom("sqlite_master");
-	await (slow
-		? query.select("name as slow_marker")
-		: query.select("name as fast_marker")
+	await (
+		slow
+			? query.select("name as slow_marker")
+			: query.select("name as fast_marker")
 	)
 		.limit(1)
 		.execute();

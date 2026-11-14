@@ -1,5 +1,5 @@
 import { BASE_ERROR_CODES } from "@better-auth/core/error";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { admin } from "../../plugins/admin/admin";
 import { emailOTP } from "../../plugins/email-otp";
 import { getTestInstance } from "../../test-utils/test-instance";

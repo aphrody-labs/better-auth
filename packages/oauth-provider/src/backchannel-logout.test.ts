@@ -28,7 +28,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import * as z from "zod";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
@@ -481,7 +481,9 @@ describe("oauth back-channel logout", async () => {
 		for (const token of tokensAfterCommit.refreshTokens) {
 			expect(token.revoked ?? null).toBeNull();
 		}
-		const transactionOnlyToken = await (await auth.$context).adapter.findOne<{
+		const transactionOnlyToken = await (
+			await auth.$context
+		).adapter.findOne<{
 			revoked?: Date | null;
 		}>({
 			model: "oauthAccessToken",

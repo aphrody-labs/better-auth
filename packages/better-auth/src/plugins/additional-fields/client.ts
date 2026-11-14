@@ -27,7 +27,7 @@ export const inferAdditionalFields = <
 		? T
 		: T extends {
 					options: BetterAuthOptions;
-				}
+			  }
 			? T["options"]
 			: never;
 

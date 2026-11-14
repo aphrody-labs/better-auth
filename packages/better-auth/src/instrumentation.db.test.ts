@@ -20,7 +20,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { getTestInstance } from "./test-utils";
 
 let exporter: InMemorySpanExporter;

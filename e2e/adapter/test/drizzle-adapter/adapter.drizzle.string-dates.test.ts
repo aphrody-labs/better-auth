@@ -18,7 +18,7 @@ import {
 import { drizzle as drizzlePostgresJs } from "drizzle-orm/postgres-js";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import postgres from "postgres";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 
 const originalTZ = process.env.TZ;
 beforeAll(() => {

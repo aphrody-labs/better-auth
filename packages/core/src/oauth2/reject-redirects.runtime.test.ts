@@ -1,4 +1,4 @@
-import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeEach, describe, expect, it, vi } from "bun:test";
 import { refreshAccessToken } from "./refresh-access-token";
 import { fetchRefusingRedirects } from "./reject-redirects";
 

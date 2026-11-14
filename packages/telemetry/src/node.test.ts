@@ -1,4 +1,4 @@
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "bun:test";
 import { createTelemetry } from "./node";
 import { hashToBase64 } from "./utils/hash";
 

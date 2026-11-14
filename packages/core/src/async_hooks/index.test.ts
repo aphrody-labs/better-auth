@@ -7,7 +7,7 @@ import {
 	expectTypeOf,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 
 function mockNativeConstructorError(error: Error) {
 	vi.doMock("node:async_hooks", () => ({

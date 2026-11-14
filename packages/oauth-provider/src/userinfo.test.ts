@@ -14,7 +14,7 @@ import { getTestInstance } from "better-auth/test";
 import type { APIError } from "better-call";
 import type { JWK } from "jose";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
 import type { OAuthClient } from "./types/oauth";
@@ -980,8 +980,7 @@ describe("oauth userinfo", async () => {
 		// Requested UserInfo claims resolve only at /userinfo; they never surface
 		// in the RFC 7662 introspection response shown to a resource server.
 		const introspectionClaims = introspection.data as
-			| Record<string, unknown>
-			| undefined;
+			Record<string, unknown> | undefined;
 		expect(introspectionClaims?.name).toBeUndefined();
 		expect(introspectionClaims?.email).toBeUndefined();
 	});

@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { username } from "better-auth/plugins";
-import { expectTypeOf } from "vitest";
+import { expectTypeOf } from "bun:test";
 
 export const auth = betterAuth({
 	emailAndPassword: {

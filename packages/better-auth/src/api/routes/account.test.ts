@@ -5,18 +5,18 @@ import type {
 } from "@better-auth/core/social-providers";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
-import type { MockInstance } from "vitest";
+import type { MockInstance } from "bun:test";
+import assert from "node:assert";
 import {
 	afterAll,
 	afterEach,
-	assert,
 	beforeAll,
 	beforeEach,
 	describe,
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { betterAuth } from "../../auth/minimal";
 import { parseSetCookieHeader } from "../../cookies";
 import {

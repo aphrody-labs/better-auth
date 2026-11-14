@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import { createTelemetry } from "./index";
 import { getProjectId } from "./project-id";
 import type { TelemetryEvent } from "./types";

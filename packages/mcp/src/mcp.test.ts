@@ -21,7 +21,7 @@ import { createAuthClient } from "better-auth/client";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import { decodeJwt } from "jose";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { createMcpProtectedRequestHandler, mcp, requireMcpAuth } from "./index";
 
 const AUTHORIZATION_SERVER = "https://auth.example.test";

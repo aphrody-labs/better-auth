@@ -6,7 +6,7 @@ import {
 	SchemaMismatchError,
 } from "@better-auth/core/db/internal";
 import { memoryAdapter } from "@better-auth/memory-adapter";
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { betterAuth } from "./full";
 import { betterAuth as betterAuthMinimal } from "./minimal";
 

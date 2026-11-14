@@ -36,8 +36,7 @@ function isAuthQueryStateEqual<T>(
 
 export const useAuthQuery = <T>(
 	initializedAtom:
-		| PreinitializedWritableAtom<any>
-		| PreinitializedWritableAtom<any>[],
+		PreinitializedWritableAtom<any> | PreinitializedWritableAtom<any>[],
 	path: string,
 	$fetch: BetterFetch,
 	options?:

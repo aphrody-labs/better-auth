@@ -25,12 +25,7 @@ export interface PrismaConfig {
 	 * Database provider.
 	 */
 	provider:
-		| "sqlite"
-		| "cockroachdb"
-		| "mysql"
-		| "postgresql"
-		| "sqlserver"
-		| "mongodb";
+		"sqlite" | "cockroachdb" | "mysql" | "postgresql" | "sqlserver" | "mongodb";
 
 	/**
 	 * Enable debug logs for the adapter

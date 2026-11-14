@@ -2,7 +2,7 @@ import type { GenericEndpointContext, User } from "better-auth";
 import { betterAuth } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
 import { organization } from "better-auth/plugins";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { sso } from "..";
 import {
 	assignOrganizationByDomain,

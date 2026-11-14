@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import * as semanticConventions from "@opentelemetry/semantic-conventions";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as attributes from "./attributes";
 
 const SEMANTIC_CONVENTIONS = "@opentelemetry/semantic-conventions";

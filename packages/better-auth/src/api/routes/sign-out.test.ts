@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { parseSetCookieHeader } from "../../cookies";
 import type { GenericOAuthConfig } from "../../plugins/generic-oauth";
 import { genericOAuth } from "../../plugins/generic-oauth";

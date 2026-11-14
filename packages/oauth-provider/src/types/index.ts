@@ -30,16 +30,10 @@ export type {
 export type { ClientRegistrationRequest } from "./zod";
 
 export type StoreTokenType =
-	| "access_token"
-	| "refresh_token"
-	| "authorization_code"
-	| (string & {});
+	"access_token" | "refresh_token" | "authorization_code" | (string & {});
 
 type InternallySupportedScopes =
-	| "openid"
-	| "profile"
-	| "email"
-	| "offline_access";
+	"openid" | "profile" | "email" | "offline_access";
 export type Scope = LiteralString | InternallySupportedScopes;
 
 /**
@@ -55,17 +49,14 @@ export interface OAuthClientRegistrationResponse extends OAuthClient {
  * OAuth client metadata returned by administrative create and update
  * endpoints.
  */
-export interface OAuthClientAdministrativeResponse
-	extends OAuthClientRegistrationResponse {
+export interface OAuthClientAdministrativeResponse extends OAuthClientRegistrationResponse {
 	/** Server-authorized scope ceiling for `client_credentials` tokens. */
 	client_credentials_scopes: Scope[];
 }
 
 export type Prompt = "none" | "consent" | "login" | "create" | "select_account";
 export type AuthorizePrompt =
-	| Prompt
-	| "login consent"
-	| "select_account consent";
+	Prompt | "login consent" | "select_account consent";
 
 /**
  * Runtime-owned HTTP transport for resources referenced by externally
@@ -697,13 +688,7 @@ export interface OAuthOptions<
 	resourcePrivileges?: (context: {
 		headers: Headers;
 		action:
-			| "create"
-			| "read"
-			| "update"
-			| "delete"
-			| "list"
-			| "link"
-			| "unlink";
+			"create" | "read" | "update" | "delete" | "list" | "link" | "unlink";
 		user?: User & Record<string, unknown>;
 		session?: Session & Record<string, unknown>;
 		resourceId?: string;
@@ -1771,8 +1756,10 @@ export interface OAuthClientResource {
  * authorization request included one. Mirrors the runtime
  * `storedAuthorizationQuerySchema`.
  */
-export interface StoredAuthorizationQuery
-	extends Omit<OAuthAuthorizationQuery, "redirect_uri"> {
+export interface StoredAuthorizationQuery extends Omit<
+	OAuthAuthorizationQuery,
+	"redirect_uri"
+> {
 	redirect_uri?: string;
 }
 

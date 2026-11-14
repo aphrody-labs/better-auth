@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest",
-    "coverage": "vitest run --coverage --coverage.provider=istanbul",
+    "test": "bun test --preload ../bun-test.plugin.ts --preload ../bun-test.setup.ts --parallel=4",
+    "coverage": "bun test --preload ../bun-test.plugin.ts --preload ../bun-test.setup.ts --coverage --coverage-reporter=lcov",
     "lint:package": "publint run --strict",
     "lint:types": "attw --profile esm-only --pack ."
   },
@@ -12,7 +12,6 @@
     "@better-auth/core": "workspace:*",
     "@better-fetch/fetch": "catalog:",
     "better-auth": "workspace:*",
-    "undici": "^7.30.0",
-    "vitest": "catalog:vitest"
+    "undici": "^7.30.0"
   }
 }

@@ -146,9 +146,7 @@ export interface SCIMManagedConnectionOptions {
 
 /** Durable lifecycle state for one persisted SCIM connection binding. */
 export type SCIMConnectionDecommissionStatus =
-	| "active"
-	| "reconciling"
-	| "complete";
+	"active" | "reconciling" | "complete";
 
 /** Components of a SCIM User's name. */
 export interface SCIMName {
@@ -221,8 +219,7 @@ export interface SCIMCanonicalEntitlement {
 
 /** A manager reference containing an identifier, resource URI, or both. */
 export type SCIMCanonicalManager =
-	| { value: string; $ref?: string }
-	| { value?: string; $ref: string };
+	{ value: string; $ref?: string } | { value?: string; $ref: string };
 
 /** Supported attributes from the standard Enterprise User extension. */
 export interface SCIMEnterpriseUser {

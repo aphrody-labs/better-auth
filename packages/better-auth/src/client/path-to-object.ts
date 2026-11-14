@@ -172,9 +172,7 @@ type InferBodyCtx<Body, FetchOptions extends ClientFetchOption> =
 type PrettifyUnion<T> = T extends unknown ? Prettify<T> : never;
 
 type HasRequiredKeysInUnion<T> = true extends (
-	T extends unknown
-		? HasRequiredKeys<T>
-		: never
+	T extends unknown ? HasRequiredKeys<T> : never
 )
 	? true
 	: false;

@@ -6,7 +6,15 @@ import { generateRandomString, makeSignature } from "better-auth/crypto";
 import { createAuthorizationURL } from "better-auth/oauth2";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import {
+	afterEach,
+	beforeAll,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+	vi,
+} from "bun:test";
 import * as z from "zod";
 import { formatErrorURL, validateIssuerUrl } from "./authorize";
 import { oauthProviderClient } from "./client";
@@ -1380,9 +1388,7 @@ describe("oauth authorize - consented resources", async () => {
 		});
 	});
 
-	it("should persist multiple resource values onto OAuthConsent.resources", async ({
-		onTestFinished,
-	}) => {
+	it("should persist multiple resource values onto OAuthConsent.resources", async () => {
 		if (!oauthClientNeedsConsent?.client_id) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1448,9 +1454,7 @@ describe("oauth authorize - consented resources", async () => {
 		]);
 	});
 
-	it("should persist only accepted UserInfo claims onto OAuthConsent", async ({
-		onTestFinished,
-	}) => {
+	it("should persist only accepted UserInfo claims onto OAuthConsent", async () => {
 		const dedicatedClient = await auth.api.adminCreateOAuthClient({
 			headers,
 			body: {

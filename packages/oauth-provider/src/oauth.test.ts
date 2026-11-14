@@ -20,8 +20,9 @@ import {
 	describe,
 	expect,
 	it,
+	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProviderResourceClient } from "./client-resource";
 import { oauthProvider } from "./oauth";
@@ -83,9 +84,7 @@ describe("oauth - init", () => {
 		).rejects.toThrowError("jwt_config");
 	});
 
-	it("should pass without the jwt plugin and disableJwtPlugin set", async ({
-		expect,
-	}) => {
+	it("should pass without the jwt plugin and disableJwtPlugin set", async () => {
 		await expect(
 			getTestInstance({
 				plugins: [
@@ -211,7 +210,7 @@ describe("oauth - init", () => {
 describe("oauth - OpenAPI response schemas", () => {
 	it.for(["/oauth2/consent", "/oauth2/continue"])(
 		"documents the redirect response for POST %s",
-		async (path, { expect }) => {
+		async (path) => {
 			const { auth } = await getTestInstance(
 				{
 					plugins: [
@@ -379,9 +378,7 @@ describe("oauth", async () => {
 	}
 
 	// Tests if it is oauth2 compatible
-	it("should sign in using generic oauth plugin", async ({
-		onTestFinished,
-	}) => {
+	it("should sign in using generic oauth plugin", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -459,9 +456,7 @@ describe("oauth", async () => {
 		expect(callbackUrl).toContain("/success");
 	});
 
-	it("should return a JSON redirect after email sign-in in a fetch-based oauth flow", async ({
-		onTestFinished,
-	}) => {
+	it("should return a JSON redirect after email sign-in in a fetch-based oauth flow", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -533,9 +528,7 @@ describe("oauth", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/7041
 	 */
-	it("should return JSON redirect after sign-in without Sec-Fetch-Mode header", async ({
-		onTestFinished,
-	}) => {
+	it("should return JSON redirect after sign-in without Sec-Fetch-Mode header", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -606,9 +599,7 @@ describe("oauth", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/7041
 	 */
-	it("should still return 302 redirect for navigate-mode requests (form submissions)", async ({
-		onTestFinished,
-	}) => {
+	it("should still return 302 redirect for navigate-mode requests (form submissions)", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -677,9 +668,7 @@ describe("oauth", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/7041
 	 */
-	it("should still return 302 redirect for html accept requests without Sec-Fetch-Mode", async ({
-		onTestFinished,
-	}) => {
+	it("should still return 302 redirect for html accept requests without Sec-Fetch-Mode", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -745,9 +734,7 @@ describe("oauth", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/7041
 	 */
-	it("should return JSON error redirect when client is deleted during OAuth flow", async ({
-		onTestFinished,
-	}) => {
+	it("should return JSON error redirect when client is deleted during OAuth flow", async () => {
 		// Create a separate client that we'll delete mid-flow
 		const { headers: adminHeaders } = await signInWithTestUser();
 		const tempClient = await authorizationServer.api.adminCreateOAuthClient({
@@ -843,9 +830,7 @@ describe("oauth", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/7041
 	 */
-	it("should return JSON error redirect when client is disabled during OAuth flow", async ({
-		onTestFinished,
-	}) => {
+	it("should return JSON error redirect when client is disabled during OAuth flow", async () => {
 		const { headers: adminHeaders } = await signInWithTestUser();
 		const tempClient = await authorizationServer.api.adminCreateOAuthClient({
 			headers: adminHeaders,
@@ -943,9 +928,7 @@ describe("oauth", async () => {
 		expect(signInResponse.url).toContain("error=client_disabled");
 	});
 
-	it("should sign in using generic oauth discovery", async ({
-		onTestFinished,
-	}) => {
+	it("should sign in using generic oauth discovery", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1390,9 +1373,7 @@ describe("oauth - prompt", async () => {
 		isUserRegistered = true;
 	});
 
-	it("create - should return JSON redirect when continuing from setup", async ({
-		onTestFinished,
-	}) => {
+	it("create - should return JSON redirect when continuing from setup", async () => {
 		isUserRegistered = false;
 		onTestFinished(() => {
 			isUserRegistered = true;
@@ -1496,7 +1477,7 @@ describe("oauth - prompt", async () => {
 		expect(continueRes.url).toContain(`client_id=${tempClient.client_id}`);
 	});
 
-	it("consent - should sign in", async ({ onTestFinished }) => {
+	it("consent - should sign in", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1588,9 +1569,7 @@ describe("oauth - prompt", async () => {
 		expect(headers.get("cookie")).toContain("better-auth.session_token=");
 	});
 
-	it("consent - should sign in given previous consent (see previous test)", async ({
-		onTestFinished,
-	}) => {
+	it("consent - should sign in given previous consent (see previous test)", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1703,9 +1682,7 @@ describe("oauth - prompt", async () => {
 		expect(consentRedirectUri).toContain(`state=`);
 	});
 
-	it("consent - should issue code when user consents to fewer scopes", async ({
-		onTestFinished,
-	}) => {
+	it("consent - should issue code when user consents to fewer scopes", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1809,9 +1786,7 @@ describe("oauth - prompt", async () => {
 		expect(tokens.data?.scopes).not.toContain("read:posts");
 	});
 
-	it("select_account - should sign in requesting account selection", async ({
-		onTestFinished,
-	}) => {
+	it("select_account - should sign in requesting account selection", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1893,9 +1868,7 @@ describe("oauth - prompt", async () => {
 	 * fix it called the raw authorize function directly, skipping the dispatch
 	 * pipeline, so hooks ran for the standalone request but not the resume.
 	 */
-	it("runs configured hooks when authorize resumes from continue", async ({
-		onTestFinished,
-	}) => {
+	it("runs configured hooks when authorize resumes from continue", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2063,9 +2036,7 @@ describe("oauth - prompt", async () => {
 		}
 	});
 
-	it("login+consent - should always redirect to login and force consent (notice consent previously given)", async ({
-		onTestFinished,
-	}) => {
+	it("login+consent - should always redirect to login and force consent (notice consent previously given)", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2166,9 +2137,7 @@ describe("oauth - prompt", async () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/discussions/9261
 	 */
-	it("login+consent - should not accept stale login prompt without reauthentication", async ({
-		onTestFinished,
-	}) => {
+	it("login+consent - should not accept stale login prompt without reauthentication", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2248,9 +2217,7 @@ describe("oauth - prompt", async () => {
 		expect(consentRes.url).not.toContain("code=");
 	});
 
-	it("select_account+consent - should always redirect to select_account and force consent (notice consent previously given)", async ({
-		onTestFinished,
-	}) => {
+	it("select_account+consent - should always redirect to select_account and force consent (notice consent previously given)", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2330,9 +2297,7 @@ describe("oauth - prompt", async () => {
 		enableSelectAccount = false;
 	});
 
-	it("shall allow user to post login via continue", async ({
-		onTestFinished,
-	}) => {
+	it("shall allow user to post login via continue", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2408,9 +2373,7 @@ describe("oauth - prompt", async () => {
 		enablePostLogin = false;
 	});
 
-	it("shall not let a client self-attest post login completion via continue", async ({
-		onTestFinished,
-	}) => {
+	it("shall not let a client self-attest post login completion via continue", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2484,9 +2447,7 @@ describe("oauth - prompt", async () => {
 		expect(continueRes.url).not.toContain(`code=`);
 	});
 
-	it("shall allow user to select an organization/team post login and consent", async ({
-		onTestFinished,
-	}) => {
+	it("shall allow user to select an organization/team post login and consent", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2596,9 +2557,7 @@ describe("oauth - prompt", async () => {
 		enablePostLogin = false;
 	});
 
-	it("consent accept should not re-trigger postLogin redirect", async ({
-		onTestFinished,
-	}) => {
+	it("consent accept should not re-trigger postLogin redirect", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2691,9 +2650,7 @@ describe("oauth - prompt", async () => {
 		expect(consentRes.url).not.toContain("/select-organization");
 	});
 
-	it("consent accept should not bypass postLogin when posted with a pre-postLogin signed query", async ({
-		onTestFinished,
-	}) => {
+	it("consent accept should not bypass postLogin when posted with a pre-postLogin signed query", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2763,9 +2720,7 @@ describe("oauth - prompt", async () => {
 		expect(consentRes.url).not.toContain("code=");
 	});
 
-	it("consent accept should not skip postLogin when the ba_pl marker is from another session", async ({
-		onTestFinished,
-	}) => {
+	it("consent accept should not skip postLogin when the ba_pl marker is from another session", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}

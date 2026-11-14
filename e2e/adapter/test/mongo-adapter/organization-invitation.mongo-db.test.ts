@@ -2,7 +2,7 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { betterAuth } from "better-auth";
 import { organization } from "better-auth/plugins/organization";
 import { MongoClient, ObjectId } from "mongodb";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 
 const client = new MongoClient("mongodb://127.0.0.1:27017");
 const db = client.db("better-auth-organization-invitation");

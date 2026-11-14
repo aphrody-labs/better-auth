@@ -62,11 +62,7 @@ export type DBFieldAttribute = {
 		 * @default "cascade"
 		 */
 		onDelete?:
-			| "no action"
-			| "restrict"
-			| "cascade"
-			| "set null"
-			| "set default";
+			"no action" | "restrict" | "cascade" | "set null" | "set default";
 	};
 	unique?: boolean;
 	/**

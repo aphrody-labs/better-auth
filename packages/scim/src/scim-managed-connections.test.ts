@@ -3,7 +3,7 @@ import { runWithTransaction } from "@better-auth/core/context";
 import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-dialect";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
 import type {
 	SCIMAuthenticationOptions,
 	SCIMConnectionOptions,
@@ -123,9 +123,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("creates, lists, and gets a tenant-scoped connection without storing its token", async ({
-		onTestFinished,
-	}) => {
+	it("creates, lists, and gets a tenant-scoped connection without storing its token", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const api = instance.auth.api as unknown as Record<
 			string,
@@ -213,9 +211,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/12066
 	 */
-	it("lists more than 100 connections of a provisioning domain", async ({
-		onTestFinished,
-	}) => {
+	it("lists more than 100 connections of a provisioning domain", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1_000);
 		for (let index = 0; index < 101; index++) {
@@ -239,9 +235,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("joins an ambient transaction for create, rotate, and revoke", async ({
-		onTestFinished,
-	}) => {
+	it("joins an ambient transaction for create, rotate, and revoke", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const context = await instance.auth.$context;
 		const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1_000);
@@ -366,9 +360,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10592
 	 */
-	it("joins an ambient transaction for decommission without deadlocking", async ({
-		onTestFinished,
-	}) => {
+	it("joins an ambient transaction for decommission without deadlocking", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const context = await instance.auth.$context;
 		const created = await instance.auth.api.createSCIMManagedConnection({
@@ -439,9 +431,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("uses the native adapter transaction when no ambient transaction exists", async ({
-		onTestFinished,
-	}) => {
+	it("uses the native adapter transaction when no ambient transaction exists", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const context = await instance.auth.$context;
 		type TestTransaction = {
@@ -500,9 +490,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("requires a bounded creation request ID and atomically rejects duplicate creation", async ({
-		onTestFinished,
-	}) => {
+	it("requires a bounded creation request ID and atomically rejects duplicate creation", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1_000);
 		const validBody = {
@@ -610,9 +598,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("authenticates generated tokens, overlaps rotation, revokes immediately, and throttles last-used writes", async ({
-		onTestFinished,
-	}) => {
+	it("authenticates generated tokens, overlaps rotation, revokes immediately, and throttles last-used writes", async () => {
 		const instance = await createManagedInstance(onTestFinished, {
 			lastUsedWriteIntervalSeconds: 3600,
 		});
@@ -717,9 +703,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("decommissions managed credentials before canonical reconciliation and remains retry-safe", async ({
-		onTestFinished,
-	}) => {
+	it("decommissions managed credentials before canonical reconciliation and remains retry-safe", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		const created = await instance.auth.api.createSCIMManagedConnection({
 			body: {
@@ -803,9 +787,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("uses tenant-qualified not-found behavior and atomically enforces active credential slots", async ({
-		onTestFinished,
-	}) => {
+	it("uses tenant-qualified not-found behavior and atomically enforces active credential slots", async () => {
 		const instance = await createManagedInstance(onTestFinished, {
 			maxActiveCredentials: 2,
 		});
@@ -871,9 +853,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("keeps the managed bearer namespace catalog-only while preserving static-first dispatch", async ({
-		onTestFinished,
-	}) => {
+	it("keeps the managed bearer namespace catalog-only while preserving static-first dispatch", async () => {
 		let verifierCalls = 0;
 		const staticToken = "ba_scim_credential_static-credential.static-secret";
 		const instance = await createManagedInstance(onTestFinished, {
@@ -941,9 +921,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("enforces explicit future expiry and exact scopes at issuance and request time", async ({
-		onTestFinished,
-	}) => {
+	it("enforces explicit future expiry and exact scopes at issuance and request time", async () => {
 		const instance = await createManagedInstance(onTestFinished);
 		await expect(
 			instance.auth.api.createSCIMManagedConnection({
@@ -992,9 +970,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("reclaims expired slots and never exceeds the cap during rotate-revoke races", async ({
-		onTestFinished,
-	}) => {
+	it("reclaims expired slots and never exceeds the cap during rotate-revoke races", async () => {
 		const instance = await createManagedInstance(onTestFinished, {
 			maxActiveCredentials: 2,
 		});
@@ -1084,9 +1060,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("enforces a reduced active credential cap across existing slot layouts", async ({
-		onTestFinished,
-	}) => {
+	it("enforces a reduced active credential cap across existing slot layouts", async () => {
 		const instance = await createManagedInstance(onTestFinished, {
 			maxActiveCredentials: 2,
 		});
@@ -1165,9 +1139,7 @@ describe("SCIM managed connections", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/pull/10475
 	 */
-	it("keeps credentials disabled after a canonical decommission failure and completes on retry", async ({
-		onTestFinished,
-	}) => {
+	it("keeps credentials disabled after a canonical decommission failure and completes on retry", async () => {
 		let failDecommission = false;
 		const instance = await createManagedInstance(onTestFinished, {
 			projection: {

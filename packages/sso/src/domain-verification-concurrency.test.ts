@@ -1,5 +1,5 @@
 import { getTestInstance } from "better-auth/test";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { sso } from ".";
 import { ssoClient } from "./client";
 

@@ -2,7 +2,7 @@ import type { BetterAuthPlugin } from "@better-auth/core";
 import { createAuthMiddleware } from "@better-auth/core/api";
 import type { SecondaryStorage } from "@better-auth/core/db";
 import { createOTP } from "@better-auth/utils/otp";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { symmetricDecrypt } from "../../crypto";
 import { convertSetCookieToCookie } from "../../test-utils/headers";
 import { getTestInstance } from "../../test-utils/test-instance";

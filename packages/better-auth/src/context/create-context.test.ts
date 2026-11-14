@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { createAuthEndpoint } from "../api";
 import { getAdapter } from "../db/adapter-kysely";
 import { jwt } from "../plugins";
@@ -1640,7 +1640,7 @@ describe("base context creation", () => {
 				const getDatabaseType = () => "memory";
 				return createAuthContext(adapter, opts, getDatabaseType);
 			};
-			initBaseNonTest({
+			(initBaseNonTest({
 				secret: "short",
 			}),
 				expect(log).toHaveBeenCalledWith(
@@ -1648,7 +1648,7 @@ describe("base context creation", () => {
 					expect.stringContaining(
 						"`session.cookieCache.refreshCache` is enabled while `database` or `secondaryStorage` is configured",
 					),
-				);
+				));
 
 			vi.doUnmock("@better-auth/core/env");
 			vi.resetModules();

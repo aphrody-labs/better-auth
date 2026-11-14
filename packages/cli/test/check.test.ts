@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "bun:test";
 import { getAuth } from "../src/utils/get-config";
 import { auth as fixtureAuth } from "./fixtures/check-schema-auth";
 import { cliPath } from "./utils";

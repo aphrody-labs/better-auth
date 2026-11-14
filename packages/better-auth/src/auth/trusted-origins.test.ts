@@ -1,5 +1,5 @@
 import { createAuthEndpoint } from "@better-auth/core/api";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import * as z from "zod";
 import { getTrustedOrigins } from "../context/helpers";
 import { getTestInstance } from "../test-utils";
@@ -316,7 +316,7 @@ describe("trusted origins", () => {
 			).resolves.toBe(true);
 		});
 
-		it("should reject urls with malicious domain with wildcard trusted origins", async (ctx) => {
+		it("should reject urls with malicious domain with wildcard trusted origins", async () => {
 			const { isTrustedOrigin } = await createAuthTestInstance({
 				trustedOrigins: ["*.example.com"],
 			});

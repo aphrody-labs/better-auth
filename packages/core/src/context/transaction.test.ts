@@ -1,4 +1,4 @@
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import type { DBAdapter, DBTransactionAdapter } from "../db/adapter";
 import { logger } from "../env";
 import { __getBetterAuthGlobal } from "./global";

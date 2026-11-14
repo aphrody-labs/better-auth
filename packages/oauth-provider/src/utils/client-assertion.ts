@@ -27,8 +27,7 @@ import { getAuthEndpointUrl, getClient } from "./index";
 
 type JwksCache = Map<string, { jwks: JSONWebKeySet; fetchedAt: number }>;
 type FetchedJwksResult =
-	| { valid: true; jwks: JSONWebKeySet }
-	| { valid: false };
+	{ valid: true; jwks: JSONWebKeySet } | { valid: false };
 
 // Provider-scoped JWKS URI caches with 5-minute TTL and bounded size.
 const jwksCaches = new WeakMap<OAuthOptions<Scope[]>, JwksCache>();

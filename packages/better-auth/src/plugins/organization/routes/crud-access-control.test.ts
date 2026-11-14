@@ -1,5 +1,5 @@
 import type { DBFieldAttribute } from "@better-auth/core/db";
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import { createAuthClient } from "../../../client";
 import { parseSetCookieHeader } from "../../../cookies";
 import { getTestInstance } from "../../../test-utils/test-instance";

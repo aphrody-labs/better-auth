@@ -1,5 +1,5 @@
 import type { BetterAuthOptions, GenerateIdFn } from "@better-auth/core";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../../test-utils/test-instance";
 import { createAccessControl } from "../../access";
 import { adminAc, defaultStatements, memberAc, ownerAc } from "../access";

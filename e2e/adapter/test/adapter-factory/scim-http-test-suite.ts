@@ -4,7 +4,7 @@ import { createTestSuite } from "@better-auth/test-utils/adapter";
 import { runSCIMLifecycle } from "@better-auth/test-utils/scim";
 import { toNodeHandler } from "better-auth/node";
 import { createHttpTestServer } from "better-auth/test";
-import { expect } from "vitest";
+import { expect } from "bun:test";
 
 interface SCIMHttpTestSuiteOptions {
 	connectionId: string;

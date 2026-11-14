@@ -2,7 +2,7 @@ import type { DBAdapter } from "@better-auth/core/db/adapter";
 import { memoryAdapter } from "@better-auth/memory-adapter";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { oauthProvider } from "./oauth";
 import type { OAuthOptions, OAuthResourceInput, Scope } from "./types";
 

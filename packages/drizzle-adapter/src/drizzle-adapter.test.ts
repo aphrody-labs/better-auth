@@ -6,7 +6,7 @@ import {
 	text,
 	timestamp,
 } from "drizzle-orm/pg-core";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import type { DB } from "./drizzle-adapter";
 import { drizzleAdapter } from "./drizzle-adapter";
 import { drizzleAdapter as drizzleRelationsV2Adapter } from "./relations-v2";

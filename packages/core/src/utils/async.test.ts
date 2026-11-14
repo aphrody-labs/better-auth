@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { mapConcurrent } from "./async";
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));

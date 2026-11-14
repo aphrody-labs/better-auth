@@ -22,7 +22,7 @@ import { genericOAuth } from "better-auth/plugins";
 import { getTestInstance } from "better-auth/test";
 import type { Dispatcher } from "undici";
 import { getGlobalDispatcher, MockAgent, setGlobalDispatcher } from "undici";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 
 const IDP_ORIGIN = "https://idp.example.test";
 const PROVIDER_ID = "test-stateless";

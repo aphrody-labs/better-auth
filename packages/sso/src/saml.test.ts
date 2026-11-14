@@ -41,7 +41,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { getMigrations } from "../../better-auth/src/db/get-migration";
 import { getAuthStateVerificationIdentifier } from "../../better-auth/src/state";
 import { sso, validateSAMLTimestamp } from ".";
@@ -3580,8 +3580,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -3698,8 +3697,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -3766,8 +3764,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -3849,8 +3846,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -3932,8 +3928,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -4004,8 +3999,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -4089,8 +4083,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -4157,8 +4150,7 @@ describe("SAML SSO - IdP Initiated Flow", () => {
 		});
 
 		let samlResponse:
-			| { samlResponse: string; entityEndpoint?: string }
-			| undefined;
+			{ samlResponse: string; entityEndpoint?: string } | undefined;
 		await betterFetch("http://localhost:8081/api/sso/saml2/idp/post", {
 			onSuccess: async (context) => {
 				samlResponse = context.data as {
@@ -6641,25 +6633,23 @@ describe("SAML E2E: SP-initiated flow", () => {
 
 		// 6. Verify an account was linked to the SSO provider
 		const accounts = await db.findMany({ model: "account" });
-		const ssoAccount = accounts.find((a: any) => a.providerId === "e2e-saml") as
-			| Record<string, any>
-			| undefined;
+		const ssoAccount = accounts.find(
+			(a: any) => a.providerId === "e2e-saml",
+		) as Record<string, any> | undefined;
 		expect(ssoAccount).toBeDefined();
 		expect(ssoAccount!.accountId).toBe("test@email.com");
 
 		// 7. Verify the user exists and is linked
 		const users = await db.findMany({ model: "user" });
 		const ssoUser = users.find((u: any) => u.id === ssoAccount!.userId) as
-			| Record<string, any>
-			| undefined;
+			Record<string, any> | undefined;
 		expect(ssoUser).toBeDefined();
 		expect(ssoUser!.email).toBe("test@email.com");
 
 		// 8. Verify a session was created for the SSO user
 		const sessions = await db.findMany({ model: "session" });
 		const ssoSession = sessions.find((s: any) => s.userId === ssoUser!.id) as
-			| Record<string, any>
-			| undefined;
+			Record<string, any> | undefined;
 		expect(ssoSession).toBeDefined();
 		expect(ssoSession!.expiresAt).toBeDefined();
 	});

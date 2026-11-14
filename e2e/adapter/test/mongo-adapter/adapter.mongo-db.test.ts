@@ -3,7 +3,7 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { createTestSuite, testAdapter } from "@better-auth/test-utils/adapter";
 import type { BetterAuthOptions, Session, User } from "better-auth";
 import { MongoClient, ObjectId } from "mongodb";
-import { expect, vi } from "vitest";
+import { expect, vi } from "bun:test";
 import {
 	authFlowTestSuite,
 	caseInsensitiveTestSuite,

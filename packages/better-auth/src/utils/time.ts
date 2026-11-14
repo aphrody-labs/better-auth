@@ -28,9 +28,7 @@ type BaseTimeString = `${number}${UnitAnyCase}` | `${number} ${UnitAnyCase}`;
  * Supports formats like "7d", "30m", "1 hour", "2 hours ago", "-5m", etc.
  */
 export type TimeString =
-	| BaseTimeString
-	| `${BaseTimeString}${Suffix}`
-	| `${Prefix}${BaseTimeString}`;
+	BaseTimeString | `${BaseTimeString}${Suffix}` | `${Prefix}${BaseTimeString}`;
 
 const REGEX =
 	/^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mo|years?|yrs?|y)(?: (ago|from now))?$/i;

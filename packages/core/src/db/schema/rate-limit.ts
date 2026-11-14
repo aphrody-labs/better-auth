@@ -26,8 +26,8 @@ export type BaseRateLimit = z.infer<typeof rateLimitSchema>;
  * Rate limit schema type used by better-auth for rate limiting
  */
 export type RateLimit<
-	DBOptions extends
-		BetterAuthOptions["rateLimit"] = BetterAuthOptions["rateLimit"],
+	DBOptions extends BetterAuthOptions["rateLimit"] =
+		BetterAuthOptions["rateLimit"],
 	Plugins extends BetterAuthOptions["plugins"] = BetterAuthOptions["plugins"],
 > = Prettify<
 	BaseRateLimit &

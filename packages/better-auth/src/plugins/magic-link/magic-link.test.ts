@@ -1,7 +1,7 @@
 import type { DBTransactionAdapter } from "@better-auth/core/db/adapter";
 import { memoryAdapter } from "@better-auth/memory-adapter";
 import { hex } from "@better-auth/utils/hex";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { createAuthClient } from "../../client";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { magicLink } from ".";

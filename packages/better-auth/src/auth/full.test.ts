@@ -4,7 +4,7 @@ import {
 	createAuthMiddleware,
 } from "@better-auth/core/api";
 import type { router } from "better-auth/api";
-import { describe, expect, expectTypeOf, test } from "vitest";
+import { describe, expect, expectTypeOf, test } from "bun:test";
 import { createAuthClient } from "../client";
 import { getTestInstance } from "../test-utils";
 import type { Auth } from "../types";

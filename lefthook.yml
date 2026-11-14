@@ -5,16 +5,16 @@ output:
 pre-commit:
   parallel: true
   commands:
-    biome:
-      run: pnpm biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+    lint:
+      run: bun lint --no-script --quiet --fix {staged_files}
       stage_fixed: true
     spell:
-      run: pnpm cspell --cache --no-progress --no-summary --no-must-find-files {staged_files}
+      run: bunx cspell --cache --no-progress --no-summary --no-must-find-files {staged_files}
     format:
       glob: "docs/**/*.{md,mdx}"
       root: "docs/"
-      run: node_modules/.bin/remark {staged_files} --output --quiet
+      run: bunx remark {staged_files} --output --quiet
       stage_fixed: true
     lockfile:
-      glob: "{package.json,pnpm-lock.yaml,pnpm-workspace.yaml,packages/*/package.json}"
-      run: pnpm install --frozen-lockfile --ignore-scripts
+      glob: "{package.json,bun.lock,packages/*/package.json}"
+      run: bun install --frozen-lockfile --ignore-scripts

@@ -1,5 +1,5 @@
 import type { D1Database as CloudflareD1Database } from "@cloudflare/workers-types";
-import { describe, expectTypeOf, it } from "vitest";
+import { describe, expectTypeOf, it } from "bun:test";
 import type { D1Database } from "./database";
 
 describe("D1Database", () => {

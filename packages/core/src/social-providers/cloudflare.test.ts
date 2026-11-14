@@ -1,6 +1,7 @@
 import type { BetterFetchResponse } from "@better-fetch/fetch";
 import { betterFetch } from "@better-fetch/fetch";
-import { assertType, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { describe, expect, expectTypeOf, it, vi } from "bun:test";
+const assertType = <T>(_value: T): void => {};
 
 vi.mock(import("@better-fetch/fetch"), () => ({
 	betterFetch: vi.fn(),

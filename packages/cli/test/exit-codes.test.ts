@@ -10,7 +10,7 @@ import {
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { cliPath } from "./utils";
 
 const projects: string[] = [];

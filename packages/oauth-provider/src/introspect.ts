@@ -649,8 +649,7 @@ async function resolveIntrospectionSub(
 	// caller for same-client and refresh-token introspection, so reuse the
 	// already-loaded client there instead of a second lookup.
 	const issuerClientId = (payload.client_id ?? payload.azp) as
-		| string
-		| undefined;
+		string | undefined;
 	if (!issuerClientId) return payload;
 	const issuingClient =
 		issuerClientId === introspectingClient.clientId
