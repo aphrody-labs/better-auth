@@ -213,9 +213,9 @@ describe("PostgreSQL schema validation", () => {
 		}
 	});
 
-	beforeEach(({ skip }) => {
+	beforeEach(() => {
 		if (!postgresAvailable)
-			skip("Local PostgreSQL test database is unavailable");
+			throw new Error("Local PostgreSQL test database is unavailable");
 	});
 
 	it("keeps the migration fallback when search_path is empty", async () => {

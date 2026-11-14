@@ -1,3 +1,4 @@
+import assert from "node:assert";
 import { DatabaseSync } from "node:sqlite";
 import type { Kysely } from "kysely";
 import { sql } from "kysely";
@@ -41,7 +42,7 @@ afterAll(async () => {
 it("closes the SQLite database the instance used", async () => {
 	const { auth } = await getTestInstance();
 	const { database } = auth.options;
-	expect.assert.instanceOf(database, DatabaseSync);
+	assert.ok(database instanceof DatabaseSync);
 	expect(database.isOpen).toBe(true);
 	sqlite = database;
 	fileHookAuth = auth;
@@ -52,7 +53,7 @@ it("destroys the Postgres pool the instance used", async () => {
 		testWith: "postgres",
 	});
 	const { database } = auth.options;
-	expect.assert(database && "db" in database);
+	assert.ok(database && "db" in database);
 	postgres = database.db;
 	await expect(sql`select 1`.execute(postgres)).resolves.toBeDefined();
 });
