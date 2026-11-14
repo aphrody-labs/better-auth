@@ -1,7 +1,7 @@
 import { createAuthMiddleware } from "better-auth/api";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { oauthProvider } from "./oauth";
 
 /**
