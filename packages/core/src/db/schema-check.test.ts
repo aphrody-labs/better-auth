@@ -5,8 +5,9 @@ import {
 	expect,
 	expectTypeOf,
 	it,
+	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import type { BetterAuthOptions } from "../types";
 import {
 	createSchemaCheck,
@@ -47,9 +48,7 @@ describe("createSchemaCheck", () => {
 			expect(find).toHaveBeenCalledTimes(3);
 		});
 
-		it("lets a later check complete while an earlier lookup is still pending", async ({
-			onTestFinished,
-		}) => {
+		it("lets a later check complete while an earlier lookup is still pending", async () => {
 			let finish = (_findings: SchemaFinding[]) => {};
 			const pending = new Promise<SchemaFinding[]>((resolve) => {
 				finish = resolve;
@@ -245,7 +244,7 @@ describe("checksSchema", () => {
 
 	it.for(["development", "production", "test"])(
 		"checks in %s unless disabled",
-		async (environment, { onTestFinished }) => {
+		async (environment) => {
 			onTestFinished(() => {
 				vi.unstubAllEnvs();
 				vi.resetModules();

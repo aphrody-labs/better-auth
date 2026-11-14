@@ -52,8 +52,7 @@ type PasskeyCeremony = "registration" | "authentication";
 type StoredChallengeValue = WebAuthnChallengeValue & {
 	type?: PasskeyCeremony;
 	registrationSource?:
-		| { type: "session"; tokenHash: string }
-		| { type: "resolver" };
+		{ type: "session"; tokenHash: string } | { type: "resolver" };
 };
 
 /**

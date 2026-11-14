@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import type { BetterAuthOptions } from "../../types";
 import { createAdapterFactory } from "./factory";
 import type { CleanedWhere, CustomAdapter, Where } from "./index";
@@ -101,9 +101,7 @@ describe("createAdapterFactory fallback join", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/12064
 	 */
-	it("reports a failed join query only through the configured logger", async ({
-		onTestFinished,
-	}) => {
+	it("reports a failed join query only through the configured logger", async () => {
 		const driverError = new Error('select from "user" where id = user-id');
 		const log = vi.fn();
 		const consoleError = vi
@@ -524,9 +522,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		model: "verification",
 		where: [{ field: "identifier", value: "token" }],
 	};
-	it("lets only one independent adapter consume a credential", async ({
-		onTestFinished,
-	}) => {
+	it("lets only one independent adapter consume a credential", async () => {
 		const { db, first, second } = setup(onTestFinished);
 		const results = await Promise.all([
 			first.consumeOne(request),
@@ -538,9 +534,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT count(*) AS count FROM verification").get(),
 		).toMatchObject({ count: 0 });
 	});
-	it("does not lose concurrent increments starting from null", async ({
-		onTestFinished,
-	}) => {
+	it("does not lose concurrent increments starting from null", async () => {
 		const { db, first, second } = setup(onTestFinished);
 		const results = await Promise.all(
 			[first, second, first].map((adapter) =>
@@ -555,9 +549,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: 3,
 		});
 	});
-	it("increments despite unrelated concurrent writes", async ({
-		onTestFinished,
-	}) => {
+	it("increments despite unrelated concurrent writes", async () => {
 		const { db, raw, first } = setup(onTestFinished);
 		const update = raw.updateMany;
 		raw.updateMany = async (args) => {
@@ -571,9 +563,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT counter, value FROM verification").get(),
 		).toMatchObject({ counter: 1, value: "secret-changed" });
 	});
-	it("treats an undefined legacy read as a missing row", async ({
-		onTestFinished,
-	}) => {
+	it("treats an undefined legacy read as a missing row", async () => {
 		const { raw, first } = setup(onTestFinished);
 		// Legacy JavaScript adapters commonly return rows[0].
 		raw.findOne = async <T>() => undefined as T | null;
@@ -582,9 +572,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			first.incrementOne({ ...request, increment: { attempts: 1 } }),
 		).resolves.toBeNull();
 	});
-	it("uses stored counters even when output transformation is lossy", async ({
-		onTestFinished,
-	}) => {
+	it("uses stored counters even when output transformation is lossy", async () => {
 		const { raw, db } = setup(onTestFinished);
 		db.exec("UPDATE verification SET counter = 2");
 		const adapter = createAdapterFactory({
@@ -612,9 +600,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		});
 	});
 
-	it("returns the row produced by its own update", async ({
-		onTestFinished,
-	}) => {
+	it("returns the row produced by its own update", async () => {
 		const { db, raw, first } = setup(onTestFinished);
 		const update = raw.updateMany;
 		raw.updateMany = async (args) => {
@@ -626,9 +612,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			await first.incrementOne({ ...request, increment: { attempts: 1 } }),
 		).toMatchObject({ attempts: 1 });
 	});
-	it("does not return a credential replaced between read and delete", async ({
-		onTestFinished,
-	}) => {
+	it("does not return a credential replaced between read and delete", async () => {
 		const { db, raw, first } = setup(onTestFinished);
 		const remove = raw.deleteMany;
 		raw.deleteMany = async (args) => {
@@ -640,9 +624,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			value: "replacement",
 		});
 	});
-	it("keeps OR selectors from widening the guarded deletion", async ({
-		onTestFinished,
-	}) => {
+	it("keeps OR selectors from widening the guarded deletion", async () => {
 		const { db, first } = setup(onTestFinished);
 		db.exec(
 			"INSERT INTO verification VALUES ('b', 'other', 'other-secret', 0, NULL)",
@@ -658,9 +640,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT count(*) AS count FROM verification").get(),
 		).toMatchObject({ count: 1 });
 	});
-	it("rejects contention exhaustion instead of reporting a missing row", async ({
-		onTestFinished,
-	}) => {
+	it("rejects contention exhaustion instead of reporting a missing row", async () => {
 		const { raw, first } = setup(onTestFinished);
 		raw.updateMany = async () => 0;
 		await expect(
@@ -669,7 +649,7 @@ describe("legacy adapter atomic fallbacks", () => {
 	});
 	it.for([2, -1, 0.5, Number.NaN])(
 		"rejects invalid affected counts (%s)",
-		async (count, { onTestFinished }) => {
+		async (count) => {
 			const { raw, first } = setup(onTestFinished);
 			raw.deleteMany = async () => count;
 			raw.updateMany = async () => count;
@@ -679,9 +659,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			).rejects.toThrow(/affected/);
 		},
 	);
-	it("identifies invalid increment input before writing", async ({
-		onTestFinished,
-	}) => {
+	it("identifies invalid increment input before writing", async () => {
 		const { first, db } = setup(onTestFinished);
 		await expect(
 			first.incrementOne({ ...request, increment: { attempts: Number.NaN } }),
@@ -690,9 +668,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: null,
 		});
 	});
-	it("rejects bigint counters without coercion or writes", async ({
-		onTestFinished,
-	}) => {
+	it("rejects bigint counters without coercion or writes", async () => {
 		const { raw, first, db } = setup(onTestFinished);
 		const read = raw.findOne;
 		raw.findOne = async <T>(args: { where: CleanedWhere[] }) =>
@@ -707,7 +683,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: null,
 		});
 	});
-	it("rejects invalid counters before writing", async ({ onTestFinished }) => {
+	it("rejects invalid counters before writing", async () => {
 		const { db, first } = setup(onTestFinished);
 		db.exec("UPDATE verification SET counter = 'invalid'");
 		await expect(
@@ -717,9 +693,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: "invalid",
 		});
 	});
-	it("handles an absent nullable counter with the null guard", async ({
-		onTestFinished,
-	}) => {
+	it("handles an absent nullable counter with the null guard", async () => {
 		const { raw, first, second, db } = setup(onTestFinished);
 		const find = raw.findOne;
 		raw.findOne = async <T>(args: { where: CleanedWhere[] }) => {
@@ -739,9 +713,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: 2,
 		});
 	});
-	it("honors a counter guard after losing a race", async ({
-		onTestFinished,
-	}) => {
+	it("honors a counter guard after losing a race", async () => {
 		const { db, first, second } = setup(onTestFinished);
 		db.exec("UPDATE verification SET counter = 1");
 		const guarded = {
@@ -758,9 +730,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			counter: 0,
 		});
 	});
-	it("completes a no-op without relying on changed-row counts", async ({
-		onTestFinished,
-	}) => {
+	it("completes a no-op without relying on changed-row counts", async () => {
 		const { db, raw, first } = setup(onTestFinished);
 		db.exec("UPDATE verification SET counter = 1");
 		raw.updateMany = async () => {
@@ -770,9 +740,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			await first.incrementOne({ ...request, increment: { attempts: 0 } }),
 		).toMatchObject({ attempts: 1 });
 	});
-	it("compares date values when a set-only update is a no-op", async ({
-		onTestFinished,
-	}) => {
+	it("compares date values when a set-only update is a no-op", async () => {
 		const { raw, first } = setup(onTestFinished);
 		const find = raw.findOne;
 		const time = new Date("2026-01-01T00:00:00Z");
@@ -792,9 +760,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		).toMatchObject({ updatedAt: time });
 	});
 
-	it("fails before writing when the row id is missing", async ({
-		onTestFinished,
-	}) => {
+	it("fails before writing when the row id is missing", async () => {
 		const { raw, first, db } = setup(onTestFinished);
 		raw.findOne = async <T>() =>
 			({ identifier: "token", value: "secret" }) as T;
@@ -803,9 +769,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT count(*) AS count FROM verification").get(),
 		).toMatchObject({ count: 1 });
 	});
-	it("allows unrelated structured data in returned rows", async ({
-		onTestFinished,
-	}) => {
+	it("allows unrelated structured data in returned rows", async () => {
 		const { raw, first, db } = setup(onTestFinished);
 		const find = raw.findOne;
 		raw.findOne = async <T>(args: { where: CleanedWhere[] }) => {
@@ -823,9 +787,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		).toMatchObject({ count: 0 });
 	});
 
-	it("rejects malformed reads instead of treating them as missing", async ({
-		onTestFinished,
-	}) => {
+	it("rejects malformed reads instead of treating them as missing", async () => {
 		const { raw, first, db } = setup(onTestFinished);
 		raw.findOne = async <T>() => false as T;
 		await expect(first.consumeOne(request)).rejects.toThrow(/snapshot or null/);
@@ -833,9 +795,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT count(*) AS count FROM verification").get(),
 		).toMatchObject({ count: 1 });
 	});
-	it("propagates write failures without reporting a successful increment", async ({
-		onTestFinished,
-	}) => {
+	it("propagates write failures without reporting a successful increment", async () => {
 		const { first, raw, db } = setup(onTestFinished);
 		const failure = new Error("backend unavailable");
 		raw.updateMany = async () => {
@@ -881,9 +841,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		});
 	});
 
-	it("rejects increments that cannot change a large counter", async ({
-		onTestFinished,
-	}) => {
+	it("rejects increments that cannot change a large counter", async () => {
 		const { first, db } = setup(onTestFinished);
 		db.prepare("UPDATE verification SET counter = ?").run(2 ** 53);
 		await expect(
@@ -894,9 +852,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		});
 	});
 
-	it("omits undefined assignments even when input transformation is disabled", async ({
-		onTestFinished,
-	}) => {
+	it("omits undefined assignments even when input transformation is disabled", async () => {
 		const { first, raw, db } = setup(onTestFinished, true);
 		const write = raw.updateMany;
 		raw.updateMany = async (args) => {
@@ -914,7 +870,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			db.prepare("SELECT value, counter FROM verification").get(),
 		).toMatchObject({ value: "secret", counter: 1 });
 	});
-	it("preserves explicit null assignments", async ({ onTestFinished }) => {
+	it("preserves explicit null assignments", async () => {
 		const { first, db } = setup(onTestFinished, true);
 		expect(
 			await first.incrementOne({
@@ -927,9 +883,7 @@ describe("legacy adapter atomic fallbacks", () => {
 			value: null,
 		});
 	});
-	it("treats undefined-only assignments as a no-op", async ({
-		onTestFinished,
-	}) => {
+	it("treats undefined-only assignments as a no-op", async () => {
 		const { first, raw } = setup(onTestFinished, true);
 		raw.updateMany = async () => {
 			throw new Error("Undefined assignments must not write");
@@ -943,9 +897,7 @@ describe("legacy adapter atomic fallbacks", () => {
 		).toMatchObject({ value: "secret" });
 	});
 
-	it("returns null when the selector does not match", async ({
-		onTestFinished,
-	}) => {
+	it("returns null when the selector does not match", async () => {
 		const { first } = setup(onTestFinished);
 		const missing = {
 			...request,

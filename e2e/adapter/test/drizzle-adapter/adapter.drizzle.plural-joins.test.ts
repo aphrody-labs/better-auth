@@ -21,7 +21,7 @@ import Database from "better-sqlite3";
 import { relations } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 
 // ── Schema with PLURAL export names (typical Drizzle convention) ──
 

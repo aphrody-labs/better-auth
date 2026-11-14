@@ -7,3 +7,53 @@ minimumReleaseAgeExcludes = ["@better-auth/*","@better-fetch/fetch","better-call
 [run]
 # `node` in scripts and shebangs resolves to Bun.
 bun = true
+
+# bun lint / bun fmt replace biome (see docs/better-auth/FORK.md in aphrody/src).
+[lint]
+typeAware = true
+ignorePatterns = ["**/dist/**", "**/build/**", "**/.output/**", "**/.tsc/**", "**/.contentlayer/**", "**/.tmp/**", "**/pages.gen.ts", "**/tmp-docs-fetch/**", "**/dev/cloudflare/drizzle/**", "**/node_modules/**", "docs/**/.source/**"]
+
+[lint.rules]
+"eslint/prefer-const" = ["warn", { destructuring = "all" }]
+"eslint/no-debugger" = "error"
+"eslint/no-dupe-keys" = "warn"
+"eslint/no-unused-vars" = "warn"
+"typescript/ban-ts-comment" = ["error", { "ts-expect-error" = false, "ts-nocheck" = false, "ts-check" = false, "ts-ignore" = true }]
+"typescript/consistent-type-imports" = ["error", { fixStyle = "separate-type-imports", disallowTypeAnnotations = false }]
+"typescript/no-unnecessary-type-constraint" = "warn"
+"unicorn/prefer-date-now" = "error"
+"unicorn/no-useless-switch-case" = "warn"
+"unicorn/prefer-node-protocol" = "error"
+# Type-aware rules: biome nursery equivalents were narrower, so these report as warnings.
+"typescript/no-floating-promises" = "warn"
+"typescript/no-misused-promises" = "warn"
+"eslint/no-restricted-syntax" = ["warn",
+  { selector = "ImportDeclaration[source.value='zod'] > ImportSpecifier[imported.name='z']", message = "Use `import * as z from \"zod\"` instead of `import { z }`." },
+  { selector = "UnaryExpression[operator='delete']", message = "Avoid `delete`; assign undefined or rebuild the object." },
+  { selector = "BinaryExpression[operator='instanceof'][right.name=/APIError$/]", message = "Use isAPIError() from better-auth/api or @better-auth/core/utils/is-api-error. instanceof misses an APIError from another copy of better-call." },
+]
+# Not part of the biome rule set (bun lint enables them by default).
+"typescript/unbound-method" = "off"
+"typescript/only-throw-error" = "off"
+"typescript/restrict-template-expressions" = "off"
+"typescript/no-unsafe-return" = "off"
+"typescript/no-unsafe-argument" = "off"
+"typescript/no-unnecessary-type-assertion" = "off"
+"typescript/no-duplicate-type-constituents" = "off"
+"typescript/await-thenable" = "off"
+"typescript/no-empty-object-type" = "off"
+"typescript/no-redundant-type-constituents" = "off"
+"react-hooks/rules-of-hooks" = "off"
+"eslint/no-unsafe-optional-chaining" = "off"
+"bun:test/valid-expect" = "off"
+"bun:test/valid-describe-callback" = "off"
+
+# Buffer is banned in library sources (use Uint8Array), allowed in tests and packages/sso.
+[[lint.overrides]]
+files = ["packages/**/src/**"]
+rules = { "eslint/no-restricted-globals" = ["error", { name = "Buffer", message = "Buffer is deprecated. Use `Uint8Array` instead." }], "typescript/no-restricted-types" = ["error", { types = { Buffer = { message = "Buffer is deprecated. Use `Uint8Array` instead.", fixWith = "Uint8Array" } } }] }
+
+[[lint.overrides]]
+files = ["**/*.test.*", "**/*.spec.*", "**/test/**", "**/__tests__/**", "packages/sso/**"]
+rules = { "eslint/no-restricted-globals" = "off", "typescript/no-restricted-types" = "off" }
+

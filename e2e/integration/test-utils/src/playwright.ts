@@ -83,9 +83,11 @@ export async function terminate(child: ChildProcess): Promise<void> {
 			try {
 				process.kill(-pid, "SIGKILL");
 			} catch (error) {
-				if (
-					!(error instanceof Error && "code" in error && error.code === "ESRCH")
-				) {
+				if (!(
+					error instanceof Error &&
+					"code" in error &&
+					error.code === "ESRCH"
+				)) {
 					throw error;
 				}
 			}

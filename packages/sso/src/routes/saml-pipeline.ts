@@ -540,8 +540,7 @@ export async function processSAMLResponse(
 
 	if (assertionId) {
 		const conditions = (extract as SAMLAssertionExtract).conditions as
-			| SAMLConditions
-			| undefined;
+			SAMLConditions | undefined;
 		const clockSkew =
 			options?.saml?.clockSkew ?? constants.DEFAULT_CLOCK_SKEW_MS;
 		const expiresAt = conditions?.notOnOrAfter

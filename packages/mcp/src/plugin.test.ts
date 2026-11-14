@@ -14,7 +14,7 @@ import {
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { beforeAll, describe, expect, it, onTestFinished, vi } from "vitest";
+import { beforeAll, describe, expect, it, onTestFinished, vi } from "bun:test";
 import { createMcpProtectedRequestHandler, mcp, requireMcpAuth } from "./index";
 
 describe("mcp plugin", async () => {

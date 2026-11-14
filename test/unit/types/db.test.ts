@@ -9,7 +9,7 @@ import type {
 	User,
 	Verification,
 } from "@better-auth/core/db";
-import { expectTypeOf, test } from "vitest";
+import { expectTypeOf, test } from "bun:test";
 
 const testPlugin = () => {
 	return {

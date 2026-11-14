@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { jwt } from ".";
 import type { Jwk } from "./types";

@@ -1,5 +1,4 @@
-// @vitest-environment node
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../test-utils/test-instance";
 import { getGlobalBroadcastChannel } from "./broadcast-channel";
 import { createAuthClient as createVueClient } from "./vue";

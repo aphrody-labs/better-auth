@@ -2,7 +2,7 @@ import { DatabaseSync } from "node:sqlite";
 import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-dialect";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { scim } from ".";
 
 const SCIM_USER_SCHEMA = "urn:ietf:params:scim:schemas:core:2.0:User";

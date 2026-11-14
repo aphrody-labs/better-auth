@@ -1,7 +1,7 @@
 import type { User } from "better-auth";
 import { betterAuth } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import type { SCIMDeclaredConnectionVerificationResult } from ".";
 import { SCIM_REQUIRES_NATIVE_TRANSACTIONS, scim } from ".";
 

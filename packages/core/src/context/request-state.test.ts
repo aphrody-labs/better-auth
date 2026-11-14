@@ -1,4 +1,4 @@
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { __getBetterAuthGlobal } from "./global";
 import type { RequestStateWeakMap } from "./request-state";
 import {

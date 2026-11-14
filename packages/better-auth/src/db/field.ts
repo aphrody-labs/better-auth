@@ -3,29 +3,27 @@ import type { DBFieldAttribute, InferDBValueType } from "@better-auth/core/db";
 export type InferFieldsOutput<Fields extends Record<string, DBFieldAttribute>> =
 	Fields extends Record<infer Key, DBFieldAttribute>
 		? {
-				[key in Key as Fields[key]["returned"] extends false
-					? never
-					: Fields[key]["required"] extends false
-						? Fields[key]["defaultValue"] extends
-								| boolean
-								| string
-								| number
-								| Date
-							? key
-							: never
-						: key]: InferFieldOutput<Fields[key]>;
-			} & {
-				[key in Key as Fields[key]["returned"] extends false
-					? never
-					: Fields[key]["required"] extends false
-						? Fields[key]["defaultValue"] extends
-								| boolean
-								| string
-								| number
-								| Date
-							? never
+				[
+					key in Key as Fields[key]["returned"] extends false
+						? never
+						: Fields[key]["required"] extends false
+							? Fields[key]["defaultValue"] extends
+									boolean | string | number | Date
+								? key
+								: never
 							: key
-						: never]?: InferFieldOutput<Fields[key]> | null;
+				]: InferFieldOutput<Fields[key]>;
+			} & {
+				[
+					key in Key as Fields[key]["returned"] extends false
+						? never
+						: Fields[key]["required"] extends false
+							? Fields[key]["defaultValue"] extends
+									boolean | string | number | Date
+								? never
+								: key
+							: never
+				]?: InferFieldOutput<Fields[key]> | null;
 			}
 		: never;
 
@@ -37,25 +35,27 @@ export type InferFieldsInputClient<
 > =
 	Fields extends Record<infer Key, DBFieldAttribute>
 		? {
-				[key in Key as Fields[key]["required"] extends false
-					? never
-					: Fields[key]["defaultValue"] extends string | number | boolean | Date
+				[
+					key in Key as Fields[key]["required"] extends false
 						? never
-						: Fields[key]["input"] extends false
-							? never
-							: key]: InferFieldInput<Fields[key]>;
-			} & {
-				[key in Key as Fields[key]["input"] extends false
-					? never
-					: Fields[key]["required"] extends false
-						? key
 						: Fields[key]["defaultValue"] extends
-									| string
-									| number
-									| boolean
-									| Date
+									string | number | boolean | Date
+							? never
+							: Fields[key]["input"] extends false
+								? never
+								: key
+				]: InferFieldInput<Fields[key]>;
+			} & {
+				[
+					key in Key as Fields[key]["input"] extends false
+						? never
+						: Fields[key]["required"] extends false
 							? key
-							: never]?: InferFieldInput<Fields[key]> | undefined | null;
+							: Fields[key]["defaultValue"] extends
+										string | number | boolean | Date
+								? key
+								: never
+				]?: InferFieldInput<Fields[key]> | undefined | null;
 			}
 		: never;
 

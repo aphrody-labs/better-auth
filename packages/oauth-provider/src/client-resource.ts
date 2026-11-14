@@ -35,8 +35,7 @@ export const oauthProviderResourceClient = <
 	auth?: T,
 ) => {
 	let oauthProviderPlugin:
-		| ReturnType<typeof getOAuthProviderPlugin>
-		| undefined;
+		ReturnType<typeof getOAuthProviderPlugin> | undefined;
 	const getOauthProviderPlugin = async () => {
 		if (!oauthProviderPlugin) {
 			oauthProviderPlugin = auth

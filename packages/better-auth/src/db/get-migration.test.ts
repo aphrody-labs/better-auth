@@ -3,7 +3,7 @@ import type { BetterAuthOptions } from "@better-auth/core";
 import { BetterAuthError } from "@better-auth/core/error";
 import type { DatabaseConnection, Dialect, TableMetadata } from "kysely";
 import { PostgresAdapter, PostgresQueryCompiler } from "kysely";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { organization } from "../plugins/organization";
 import { getMigrations, UnsafeMigrationError } from "./get-migration";
 import { getSchema } from "./get-schema";

@@ -3,7 +3,7 @@ import { DatabaseSync } from "node:sqlite";
 import type { BetterAuthOptions } from "@better-auth/core";
 import type { DatabaseConnection, Dialect, QueryResult } from "kysely";
 import { CompiledQuery, Kysely } from "kysely";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { kyselyAdapter } from "./kysely-adapter";
 import { NodeSqliteDialect } from "./node-sqlite-dialect";
 

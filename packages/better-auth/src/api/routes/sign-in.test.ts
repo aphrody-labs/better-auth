@@ -1,5 +1,5 @@
 import { APIError, BASE_ERROR_CODES } from "@better-auth/core/error";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { parseSetCookieHeader } from "../../cookies";
 import { getTestInstance } from "../../test-utils/test-instance";
 

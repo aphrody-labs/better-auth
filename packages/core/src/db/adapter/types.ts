@@ -14,8 +14,10 @@ export type AdapterFactoryOptions = {
 	adapter: AdapterFactoryCustomizeAdapterCreator;
 };
 
-export interface AdapterFactoryConfig
-	extends Omit<DBAdapterFactoryConfig<BetterAuthOptions>, "transaction"> {
+export interface AdapterFactoryConfig extends Omit<
+	DBAdapterFactoryConfig<BetterAuthOptions>,
+	"transaction"
+> {
 	/**
 	 * Execute multiple operations in a transaction.
 	 *

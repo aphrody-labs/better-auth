@@ -38,9 +38,7 @@ type Optional<T> = {
 };
 
 export type StoreIdentifierOption =
-	| "plain"
-	| "hashed"
-	| { hash: (identifier: string) => Promise<string> };
+	"plain" | "hashed" | { hash: (identifier: string) => Promise<string> };
 
 export type GenerateIdFn = (options: {
 	model: ModelNames;

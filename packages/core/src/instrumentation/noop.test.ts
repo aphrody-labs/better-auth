@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { noopOpenTelemetryAPI } from "./noop";
 
 // @see https://github.com/better-auth/better-auth/issues/8765

@@ -1,5 +1,5 @@
 import { exec } from "node:child_process";
-import { afterEach, beforeEach, describe, expect, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi } from "bun:test";
 import { testWithTmpDir } from "./test-utils";
 
 vi.mock("node:child_process", () => ({

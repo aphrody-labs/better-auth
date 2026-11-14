@@ -2,7 +2,7 @@ import type { BetterAuthPlugin } from "@better-auth/core";
 import { APIError, BASE_ERROR_CODES } from "@better-auth/core/error";
 import { base32 } from "@better-auth/utils/base32";
 import { createOTP } from "@better-auth/utils/otp";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { createAuthMiddleware } from "../../api";
 import { createAuthClient } from "../../client";
 import { applySetCookies, parseSetCookieHeader } from "../../cookies";

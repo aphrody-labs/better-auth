@@ -3,7 +3,7 @@ import { safeJSONParse } from "@better-auth/core/utils/json";
 import { magicLinkClient } from "better-auth/client/plugins";
 import { magicLink } from "better-auth/plugins";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 interface VerificationEmail {
 	email: string;

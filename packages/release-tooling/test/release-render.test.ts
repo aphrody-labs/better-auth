@@ -9,7 +9,7 @@ import {
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import type { JSONValue } from "ai";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { formatReleaseBody } from "../src/release-notes/render.ts";
 
 const repositoryRoot = resolve(import.meta.dirname, "../../..");

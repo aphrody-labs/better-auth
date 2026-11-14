@@ -1,10 +1,10 @@
-// @vitest-environment happy-dom
+import "../test-utils/dom-env";
 
 import { isProxy } from "node:util/types";
 import type { BetterFetchError } from "@better-fetch/fetch";
 import type { ReadableAtom } from "nanostores";
 import type { Accessor } from "solid-js";
-import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { afterEach, describe, expect, expectTypeOf, it, vi } from "bun:test";
 import type { Ref } from "vue";
 import type { Session, SessionQueryParams } from "../types";
 import { createAuthClient as createLynxClient } from "./lynx";

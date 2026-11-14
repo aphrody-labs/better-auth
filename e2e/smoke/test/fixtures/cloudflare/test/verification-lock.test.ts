@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
-import { afterAll, afterEach, beforeAll, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, expect, it } from "bun:test";
 import { createTestHarness } from "wrangler";
 
 /** Holds the query request open, and answers `/held` once it arrives. */

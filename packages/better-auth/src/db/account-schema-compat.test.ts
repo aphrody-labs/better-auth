@@ -5,7 +5,7 @@ import { SchemaMismatchError } from "@better-auth/core/db/internal";
 import { kyselyAdapter } from "@better-auth/kysely-adapter";
 import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-dialect";
 import { CamelCasePlugin, Kysely } from "kysely";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { betterAuth } from "../auth/full";
 import { getMigrations } from "./get-migration";
 
@@ -84,9 +84,7 @@ async function signUpAndLinkSocialAccount(
  * @see https://github.com/better-auth/better-auth/issues/11146
  */
 describe("account table compatibility across v1 releases", () => {
-	it("asks for no migration and links accounts without the issuer column", async ({
-		onTestFinished,
-	}) => {
+	it("asks for no migration and links accounts without the issuer column", async () => {
 		const database = createDatabase(ACCOUNT_TABLE);
 		onTestFinished(() => database.close());
 		const { auth, warnings } = createAuth(database);
@@ -112,9 +110,7 @@ describe("account table compatibility across v1 releases", () => {
 		expect(warnings).toEqual([]);
 	});
 
-	it("keeps accounts written by 1.7 readable through their provider key", async ({
-		onTestFinished,
-	}) => {
+	it("keeps accounts written by 1.7 readable through their provider key", async () => {
 		const database = createDatabase(ACCOUNT_TABLE_WITH_ISSUER);
 		onTestFinished(() => database.close());
 		seedAccountWrittenBy17(database);
@@ -129,9 +125,7 @@ describe("account table compatibility across v1 releases", () => {
 		expect(found?.userId).toBe("u1");
 	});
 
-	it("rejects every request until the required issuer column is relaxed", async ({
-		onTestFinished,
-	}) => {
+	it("rejects every request until the required issuer column is relaxed", async () => {
 		const database = createDatabase(ACCOUNT_TABLE_WITH_ISSUER);
 		onTestFinished(() => database.close());
 		seedAccountWrittenBy17(database);
@@ -166,9 +160,7 @@ describe("account table compatibility across v1 releases", () => {
 		expect(read).toBe(signUp);
 	});
 
-	it("surfaces the raw constraint error when the check is disabled", async ({
-		onTestFinished,
-	}) => {
+	it("surfaces the raw constraint error when the check is disabled", async () => {
 		const database = createDatabase(ACCOUNT_TABLE_WITH_ISSUER);
 		onTestFinished(() => database.close());
 		const { auth } = createAuth(database, {
@@ -185,9 +177,7 @@ describe("account table compatibility across v1 releases", () => {
 });
 
 describe("schema check with the adapter passed as a function", () => {
-	it("accepts the plural table names the adapter uses", async ({
-		onTestFinished,
-	}) => {
+	it("accepts the plural table names the adapter uses", async () => {
 		const database = new DatabaseSync(":memory:");
 		onTestFinished(() => database.close());
 		let ddl = [
@@ -210,9 +200,7 @@ describe("schema check with the adapter passed as a function", () => {
 		).resolves.toBeNull();
 	});
 
-	it("rejects every request until the required issuer column is relaxed", async ({
-		onTestFinished,
-	}) => {
+	it("rejects every request until the required issuer column is relaxed", async () => {
 		const database = createDatabase(ACCOUNT_TABLE_WITH_ISSUER);
 		onTestFinished(() => database.close());
 		const db = new Kysely({ dialect: new NodeSqliteDialect({ database }) });
@@ -229,9 +217,7 @@ describe("schema check timing", () => {
 	/**
 	 * @see https://www.better-auth.com/docs/concepts/database#programmatic-migrations
 	 */
-	it("rechecks the schema after programmatic migrations", async ({
-		onTestFinished,
-	}) => {
+	it("rechecks the schema after programmatic migrations", async () => {
 		const database = new DatabaseSync(":memory:");
 		onTestFinished(() => database.close());
 		const { auth } = createAuth(database);
@@ -254,7 +240,7 @@ describe("schema check timing", () => {
 		});
 	});
 
-	it("reports drift to the first auth request", async ({ onTestFinished }) => {
+	it("reports drift to the first auth request", async () => {
 		const database = createDatabase(ACCOUNT_TABLE_WITH_ISSUER);
 		onTestFinished(() => database.close());
 		const log = vi.fn();
@@ -280,9 +266,7 @@ describe("schema check timing", () => {
 		).toMatchObject({ count: 0 });
 	});
 
-	it("does not inspect the database when validation is disabled", async ({
-		onTestFinished,
-	}) => {
+	it("does not inspect the database when validation is disabled", async () => {
 		const database = new DatabaseSync(":memory:");
 		onTestFinished(() => database.close());
 		const { auth, warnings } = createAuth(database, {
@@ -297,9 +281,7 @@ describe("schema check timing", () => {
 		expect(warnings).toEqual([]);
 	});
 
-	it("does not wait on a connection an ambient transaction holds", async ({
-		onTestFinished,
-	}) => {
+	it("does not wait on a connection an ambient transaction holds", async () => {
 		const database = createDatabase(ACCOUNT_TABLE);
 		onTestFinished(() => database.close());
 		const { auth } = createAuth(database, {
@@ -330,9 +312,7 @@ create table "session" ("id" text not null primary key, "expires_at" date not nu
 create table "account" ("id" text not null primary key, "account_id" text not null, "provider_id" text not null, "user_id" text not null references "user" ("id") on delete cascade, "access_token" text, "refresh_token" text, "id_token" text, "access_token_expires_at" date, "refresh_token_expires_at" date, "scope" text, "password" text, "created_at" date not null, "updated_at" date not null);
 create table "verification" ("id" text not null primary key, "identifier" text not null, "value" text not null, "expires_at" date not null, "created_at" date not null, "updated_at" date not null);`;
 
-	it("compares the names the plugin exposes, not the ones the database stores", async ({
-		onTestFinished,
-	}) => {
+	it("compares the names the plugin exposes, not the ones the database stores", async () => {
 		const database = new DatabaseSync(":memory:");
 		onTestFinished(() => database.close());
 		database.exec(SNAKE_CASE_TABLES);

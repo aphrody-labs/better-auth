@@ -376,8 +376,7 @@ export type ProviderOptions<Profile extends object = object> = {
 	 * Custom function to refresh a token
 	 */
 	refreshAccessToken?:
-		| ((refreshToken: string) => Promise<OAuth2Tokens>)
-		| undefined;
+		((refreshToken: string) => Promise<OAuth2Tokens>) | undefined;
 	/**
 	 * Custom function to map the provider profile to a
 	 * user.

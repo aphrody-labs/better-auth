@@ -7,7 +7,7 @@ import {
 	PostgresQueryCompiler,
 	SqliteDialect,
 } from "kysely";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { kyselyAdapter } from "./kysely-adapter";
 import { NodeSqliteDialect } from "./node-sqlite-dialect";
 
@@ -31,9 +31,7 @@ describe("kysely-adapter", () => {
 		expect(adapter).toBeDefined();
 	});
 
-	it("keeps model identity when a custom name matches another schema key", async ({
-		onTestFinished,
-	}) => {
+	it("keeps model identity when a custom name matches another schema key", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		sqlite.exec(`
 			CREATE TABLE account (

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { twoFactor } from "../plugins/two-factor";
 import { getTestInstance } from "../test-utils/test-instance";
 import type { User } from "../types";

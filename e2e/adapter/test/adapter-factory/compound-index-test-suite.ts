@@ -1,6 +1,6 @@
 import type { BetterAuthOptions, BetterAuthPlugin } from "@better-auth/core";
 import { createTestSuite } from "@better-auth/test-utils/adapter";
-import { expect } from "vitest";
+import { expect } from "bun:test";
 
 const compoundIndexName = "compound_identity_uidx";
 const compoundIndexTableName = "compound_index_subject";
@@ -41,13 +41,11 @@ const compoundIndexBetterAuthOptions = {
 
 interface CompoundIndexTestSuiteOptions {
 	rerunMigrations?:
-		| ((options: BetterAuthOptions) => Promise<string>)
-		| undefined;
+		((options: BetterAuthOptions) => Promise<string>) | undefined;
 	mismatchError?: RegExp | string | undefined;
 	verifyIndexState?: (() => Promise<void>) | undefined;
 	verifyMismatchedIndexRejected?:
-		| ((options: BetterAuthOptions) => Promise<void>)
-		| undefined;
+		((options: BetterAuthOptions) => Promise<void>) | undefined;
 }
 
 interface CompoundIndexSubject {

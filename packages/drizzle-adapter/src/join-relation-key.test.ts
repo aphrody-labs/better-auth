@@ -1,6 +1,6 @@
 import type { BetterAuthDBSchema } from "@better-auth/core/db";
 import { initGetDefaultModelName } from "@better-auth/core/db/adapter";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import {
 	buildRelationKeysByModel,
 	getOneToOneRelationKey,

@@ -68,7 +68,9 @@ export function getWithHooks(
 
 		let created: any = null;
 		if (!customCreateFn || customCreateFn.executeMainFn) {
-			created = await (await getCurrentAdapter(adapter)).create<T>({
+			created = await (
+				await getCurrentAdapter(adapter)
+			).create<T>({
 				model,
 				data: actualData as any,
 				forceAllowId: true,
@@ -147,7 +149,9 @@ export function getWithHooks(
 
 		const updated =
 			!customUpdateFn || customUpdateFn.executeMainFn
-				? await (await getCurrentAdapter(adapter)).update<T>({
+				? await (
+						await getCurrentAdapter(adapter)
+					).update<T>({
 						model,
 						update: actualData,
 						where,
@@ -222,7 +226,9 @@ export function getWithHooks(
 
 		const updated =
 			!customUpdateFn || customUpdateFn.executeMainFn
-				? await (await getCurrentAdapter(adapter)).updateMany({
+				? await (
+						await getCurrentAdapter(adapter)
+					).updateMany({
 						model,
 						update: actualData,
 						where,
@@ -265,7 +271,9 @@ export function getWithHooks(
 		let entityToDelete: T | null = null;
 
 		try {
-			const entities = await (await getCurrentAdapter(adapter)).findMany<T>({
+			const entities = await (
+				await getCurrentAdapter(adapter)
+			).findMany<T>({
 				model,
 				where,
 				limit: 1,
@@ -305,7 +313,9 @@ export function getWithHooks(
 			!customDeleteFn || customDeleteFn.executeMainFn;
 		const deleted =
 			shouldRunAdapterDelete && entityToDelete
-				? await (await getCurrentAdapter(adapter)).delete({
+				? await (
+						await getCurrentAdapter(adapter)
+					).delete({
 						model,
 						where,
 					})
@@ -349,7 +359,9 @@ export function getWithHooks(
 		let entitiesToDelete: T[] = [];
 
 		try {
-			entitiesToDelete = await (await getCurrentAdapter(adapter)).findMany<T>({
+			entitiesToDelete = await (
+				await getCurrentAdapter(adapter)
+			).findMany<T>({
 				model,
 				where,
 			});
@@ -385,7 +397,9 @@ export function getWithHooks(
 
 		const deleted =
 			!customDeleteFn || customDeleteFn.executeMainFn
-				? await (await getCurrentAdapter(adapter)).deleteMany({
+				? await (
+						await getCurrentAdapter(adapter)
+					).deleteMany({
 						model,
 						where,
 					})
@@ -448,7 +462,9 @@ export function getWithHooks(
 		if (beforeHooks.length) {
 			if (!snapshot) {
 				try {
-					const rows = await (await getCurrentAdapter(adapter)).findMany<T>({
+					const rows = await (
+						await getCurrentAdapter(adapter)
+					).findMany<T>({
 						model,
 						where: hookWhere,
 						limit: 1,

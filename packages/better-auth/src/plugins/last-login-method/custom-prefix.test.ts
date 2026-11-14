@@ -1,5 +1,5 @@
 import type { BetterAuthOptions } from "@better-auth/core";
-import { test as baseTest, describe, expect } from "vitest";
+import { test as baseTest, describe, expect } from "bun:test";
 import type { CookieAttributes } from "../../cookies";
 import { parseSetCookieHeader } from "../../cookies";
 import { getTestInstance } from "../../test-utils/test-instance";

@@ -12,7 +12,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 
 // Its own database, so suites that recreate `better_auth` cannot drop it mid-run.
 const DATABASE = "better_auth_session_cutoff";

@@ -101,8 +101,7 @@ export type StripePlan = {
 	 * @see https://docs.stripe.com/billing/subscriptions/prorations
 	 */
 	prorationBehavior?:
-		| Stripe.SubscriptionUpdateParams.ProrationBehavior
-		| undefined;
+		Stripe.SubscriptionUpdateParams.ProrationBehavior | undefined;
 	/**
 	 * Additional line items to include in the checkout session.
 	 *

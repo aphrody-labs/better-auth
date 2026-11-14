@@ -112,8 +112,7 @@ export type SCIMCollectionQueryError =
 	  };
 
 export type SCIMQueryParseResult<Value> =
-	| { ok: true; value: Value }
-	| { ok: false; error: SCIMCollectionQueryError };
+	{ ok: true; value: Value } | { ok: false; error: SCIMCollectionQueryError };
 
 export interface SCIMCollectionQuery<Attribute extends string> {
 	filters: readonly SCIMEqualityFilter<Attribute>[];

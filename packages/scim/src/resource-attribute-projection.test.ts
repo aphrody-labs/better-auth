@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "bun:test";
 import { parseSCIMCollectionQuery } from "./collection-query";
 import { projectSCIMResourceAttributes } from "./resource-attribute-projection";
 

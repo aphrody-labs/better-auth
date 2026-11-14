@@ -5,7 +5,7 @@ import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { getMigrations } from "better-auth/db/migration";
 import { getHttpTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
 import { scim } from ".";
 import type { SCIMProjectedUserState } from "./configuration";
 
@@ -46,9 +46,7 @@ describe("SCIM HTTP end-to-end", () => {
 	/**
 	 * @see https://github.com/better-auth/better-auth/issues/8549
 	 */
-	it("provisions users and groups through a real HTTP listener", async ({
-		onTestFinished,
-	}) => {
+	it("provisions users and groups through a real HTTP listener", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		const projectedStates: SCIMProjectedUserState[] = [];
 		let rejectRoleProjection = false;

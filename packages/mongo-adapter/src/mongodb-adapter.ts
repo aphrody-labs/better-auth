@@ -1039,8 +1039,8 @@ export const mongodbAdapter = (
 		};
 
 	let lazyAdapter:
-		| ((options: BetterAuthOptions) => DBAdapter<BetterAuthOptions>)
-		| null = null;
+		((options: BetterAuthOptions) => DBAdapter<BetterAuthOptions>) | null =
+		null;
 	let adapterOptions: AdapterFactoryOptions | null = null;
 	adapterOptions = {
 		config: {

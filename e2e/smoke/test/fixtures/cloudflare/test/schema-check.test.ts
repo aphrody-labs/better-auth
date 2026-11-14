@@ -1,4 +1,5 @@
-import { describe, expect, it, onTestFailed, onTestFinished } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
+import { onTestFailed } from "../../../../../../bun-test.compat";
 import { createTestHarness } from "wrangler";
 
 /**

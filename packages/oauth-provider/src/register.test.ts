@@ -10,7 +10,7 @@ import { jwt } from "better-auth/plugins/jwt";
 import type { Organization } from "better-auth/plugins/organization";
 import { organization } from "better-auth/plugins/organization";
 import { getTestInstance } from "better-auth/test";
-import { beforeAll, describe, expect, it, onTestFinished, vi } from "vitest";
+import { beforeAll, describe, expect, it, onTestFinished, vi } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
 import { checkOAuthClient, oauthToSchema, schemaToOAuth } from "./register";
@@ -1137,8 +1137,7 @@ describe("oauth register - organization", async () => {
 			},
 		});
 		const sessionData = session.data?.session as
-			| { activeOrganizationId?: string }
-			| undefined;
+			{ activeOrganizationId?: string } | undefined;
 		expect(sessionData?.activeOrganizationId).toBe(org?.id);
 	});
 

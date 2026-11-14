@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { getAuthTables, getAuthTablesWithResolvedIndexes } from "../get-tables";
 import type { SecondaryStorage } from "../type";
 

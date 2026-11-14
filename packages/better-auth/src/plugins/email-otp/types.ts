@@ -19,10 +19,7 @@ export interface EmailOTPOptions {
 			email: string;
 			otp: string;
 			type:
-				| "sign-in"
-				| "email-verification"
-				| "forget-password"
-				| "change-email";
+				"sign-in" | "email-verification" | "forget-password" | "change-email";
 		},
 		ctx?: GenericEndpointContext | undefined,
 	) => Promise<void>;
@@ -45,10 +42,7 @@ export interface EmailOTPOptions {
 		data: {
 			email: string;
 			type:
-				| "sign-in"
-				| "email-verification"
-				| "forget-password"
-				| "change-email";
+				"sign-in" | "email-verification" | "forget-password" | "change-email";
 		},
 		ctx?: GenericEndpointContext,
 	) => string | undefined;

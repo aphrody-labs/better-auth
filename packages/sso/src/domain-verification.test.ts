@@ -4,7 +4,7 @@ import { createAuthClient } from "better-auth/client";
 import { setCookieToHeader } from "better-auth/cookies";
 import type { SecondaryStorage } from "better-auth/db";
 import { bearer, organization } from "better-auth/plugins";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { sso } from ".";
 import { ssoClient } from "./client";
 import type { SSOOptions } from "./types";

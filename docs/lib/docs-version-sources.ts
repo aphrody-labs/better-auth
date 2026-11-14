@@ -1,6 +1,4 @@
-import docsVersionSourcesManifest from "./docs-version-sources.json" with {
-	type: "json",
-};
+import docsVersionSourcesManifest from "./docs-version-sources.json" with { type: "json" };
 import type { DocsVersionId } from "./docs-versions";
 
 export interface DocsVersionSource {

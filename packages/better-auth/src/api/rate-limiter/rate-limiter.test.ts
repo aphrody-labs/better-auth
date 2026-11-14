@@ -1,6 +1,6 @@
 import type { SecondaryStorage } from "@better-auth/core/db";
 import { createRateLimitKey, normalizeIP } from "@better-auth/core/utils/ip";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import type { RateLimit } from "../../types";
 
@@ -699,9 +699,8 @@ describe("missing client IP warning", () => {
 		vi.stubEnv("TEST", "false");
 		vi.resetModules();
 
-		const { getTestInstance: getTestInstanceReloaded } = await import(
-			"../../test-utils/test-instance"
-		);
+		const { getTestInstance: getTestInstanceReloaded } =
+			await import("../../test-utils/test-instance");
 		const log = vi.fn();
 		const { client } = await getTestInstanceReloaded({
 			rateLimit: {
@@ -727,9 +726,8 @@ describe("missing client IP warning", () => {
 		vi.stubEnv("TEST", "false");
 		vi.resetModules();
 
-		const { getTestInstance: getTestInstanceReloaded } = await import(
-			"../../test-utils/test-instance"
-		);
+		const { getTestInstance: getTestInstanceReloaded } =
+			await import("../../test-utils/test-instance");
 		const { client } = await getTestInstanceReloaded({
 			rateLimit: {
 				enabled: true,
@@ -765,9 +763,8 @@ describe("forwarded IP chains", () => {
 		vi.resetModules();
 
 		const store = new Map<string, string>();
-		const { getTestInstance: getTestInstanceReloaded } = await import(
-			"../../test-utils/test-instance"
-		);
+		const { getTestInstance: getTestInstanceReloaded } =
+			await import("../../test-utils/test-instance");
 		const { client, testUser } = await getTestInstanceReloaded({
 			rateLimit: {
 				enabled: true,
@@ -804,9 +801,8 @@ describe("forwarded IP chains", () => {
 		vi.resetModules();
 
 		const store = new Map<string, string>();
-		const { getTestInstance: getTestInstanceReloaded } = await import(
-			"../../test-utils/test-instance"
-		);
+		const { getTestInstance: getTestInstanceReloaded } =
+			await import("../../test-utils/test-instance");
 		const { client, testUser } = await getTestInstanceReloaded({
 			rateLimit: {
 				enabled: true,

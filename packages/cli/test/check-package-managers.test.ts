@@ -2,7 +2,7 @@ import { exec as execMock } from "node:child_process";
 import { join } from "node:path";
 import { env } from "@better-auth/core/env";
 import { fs } from "memfs";
-import { afterEach, describe, expect, vi } from "vitest";
+import { afterEach, describe, expect, vi } from "bun:test";
 import { detectPackageManager } from "../src/utils/check-package-managers";
 import { testWithTmpDir } from "./test-utils";
 

@@ -18,7 +18,7 @@ import {
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { betterAuth } from "../auth/full";
 import { init } from "../context/init";
 import { getTestInstance } from "../test-utils/test-instance";

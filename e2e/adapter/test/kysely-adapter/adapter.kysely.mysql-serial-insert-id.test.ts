@@ -11,7 +11,7 @@ import {
 	expect,
 	it,
 	onTestFinished,
-} from "vitest";
+} from "bun:test";
 
 const DATABASE = "better_auth_serial_insert_id";
 const ROOT_URI = "mysql://root:root_password@localhost:3307/";

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 
 vi.mock("@better-fetch/fetch", () => ({
 	betterFetch: vi.fn(),
@@ -47,21 +47,23 @@ function mockGraphResponses(responses: {
 	debug?: ReturnType<typeof debugTokenResponse>;
 	me?: ReturnType<typeof profileResponse>;
 }) {
-	const graphFetch = vi.when(mockedBetterFetch, { onUnmatched: "throw" });
+	const queue = new Map<string, unknown>();
 	if (responses.debug) {
-		graphFetch
-			.calledWith("https://graph.facebook.com/debug_token", expect.anything())
-			.thenResolve(responses.debug, { times: 1 });
+		queue.set("https://graph.facebook.com/debug_token", responses.debug);
 	}
 	if (responses.me) {
-		graphFetch
-			.calledWith(
-				"https://graph.facebook.com/me?fields=id,name,email,picture",
-				expect.anything(),
-			)
-			.thenResolve(responses.me, { times: 1 });
+		queue.set(
+			"https://graph.facebook.com/me?fields=id,name,email,picture",
+			responses.me,
+		);
 	}
-	return graphFetch;
+	mockedBetterFetch.mockImplementation((async (url: string) => {
+		if (!queue.has(url)) throw new Error(`Unexpected betterFetch call: ${url}`);
+		const response = queue.get(url);
+		queue.delete(url);
+		return response;
+	}) as never);
+	return { isExhausted: () => queue.size === 0 };
 }
 
 describe("facebook.getUserInfo (opaque access token)", () => {
@@ -84,7 +86,7 @@ describe("facebook.getUserInfo (opaque access token)", () => {
 		} as any);
 		expect(res?.user).not.toHaveProperty("id");
 		expect(res?.user.email).toBe("u1@example.com");
-		expect(graphFetch).toHaveBeenExhausted();
+		expect(graphFetch.isExhausted()).toBe(true);
 		expect(typeof provider.accountSubject).toBe("function");
 		if (typeof provider.accountSubject !== "function" || !res) return;
 		expect(
@@ -108,7 +110,7 @@ describe("facebook.getUserInfo (opaque access token)", () => {
 			accessToken: "foreign-app-token",
 		} as any);
 		expect(res).toBeNull();
-		expect(graphFetch).toHaveBeenExhausted();
+		expect(graphFetch.isExhausted()).toBe(true);
 	});
 
 	it("rejects when the profile id does not match the validated token", async () => {
@@ -125,7 +127,7 @@ describe("facebook.getUserInfo (opaque access token)", () => {
 			accessToken: "opaque-access-token",
 		} as any);
 		expect(res).toBeNull();
-		expect(graphFetch).toHaveBeenExhausted();
+		expect(graphFetch.isExhausted()).toBe(true);
 	});
 
 	it("rejects when no access token is supplied", async () => {

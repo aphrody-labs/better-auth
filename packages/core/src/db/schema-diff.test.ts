@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { SchemaFinding } from "./schema-diff";
 import {
 	diffSchema,
@@ -189,9 +189,8 @@ describe("schema diagnostic output", () => {
 			"account",
 			"verification",
 		].map((table) => ({ kind: "missing-table", table }));
-		expect(
-			new SchemaMismatchError(findings, "database").message,
-		).toMatchInlineSnapshot(`
+		expect(new SchemaMismatchError(findings, "database").message)
+			.toMatchInlineSnapshot(`
 "Database schema mismatch
 
   Missing tables

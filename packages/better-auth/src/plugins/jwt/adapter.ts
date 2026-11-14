@@ -95,7 +95,9 @@ export const getJwksAdapter = (
 		) => {
 			const candidates = options?.adapter?.getJwks
 				? await options.adapter.getJwks(ctx)
-				: await (await getCurrentAdapter(baseAdapter)).findMany<Jwk>({
+				: await (
+						await getCurrentAdapter(baseAdapter)
+					).findMany<Jwk>({
 						model: "jwks",
 					});
 			if (!candidates) return undefined;

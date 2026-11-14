@@ -37,8 +37,7 @@ export interface HuggingFaceProfile {
 		| undefined;
 }
 
-export interface HuggingFaceOptions
-	extends ProviderOptions<HuggingFaceProfile> {
+export interface HuggingFaceOptions extends ProviderOptions<HuggingFaceProfile> {
 	clientId: string;
 }
 

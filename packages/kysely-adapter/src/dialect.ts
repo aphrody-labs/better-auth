@@ -183,9 +183,8 @@ export const createKyselyAdapter = async (config: BetterAuthOptions) => {
 
 	// Cloudflare D1
 	if ("batch" in db && "exec" in db && "prepare" in db) {
-		const { createD1IndexIntrospector, D1SqliteDialect } = await import(
-			"./d1-sqlite-dialect"
-		);
+		const { createD1IndexIntrospector, D1SqliteDialect } =
+			await import("./d1-sqlite-dialect");
 		dialect = new D1SqliteDialect({
 			database: db,
 		});

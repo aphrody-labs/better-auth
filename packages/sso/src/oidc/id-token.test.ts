@@ -1,5 +1,5 @@
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { assertOIDCAuthorizedParty, validateOIDCIdToken } from "./discovery";
 
 describe("OIDC authorized party validation", () => {
@@ -21,10 +21,13 @@ describe("OIDC authorized party validation", () => {
 		[{ aud: "workforce-client", azp: "another-client" }, "incorrect azp"],
 	])(
 		"rejects %s (%s)",
-		(payload: {
-			aud: string | string[];
-			azp?: string;
-		}, _label) => {
+		(
+			payload: {
+				aud: string | string[];
+				azp?: string;
+			},
+			_label,
+		) => {
 			expect(() =>
 				assertOIDCAuthorizedParty(payload, "workforce-client"),
 			).toThrow("OIDC ID token authorized party does not match the client");

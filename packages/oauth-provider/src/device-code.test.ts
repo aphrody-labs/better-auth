@@ -5,7 +5,7 @@ import { deviceAuthorization } from "better-auth/plugins/device-authorization";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import { decodeJwt, exportJWK, generateKeyPair, SignJWT } from "jose";
-import { describe, expect, expectTypeOf, it, vi } from "vitest";
+import { describe, expect, expectTypeOf, it, vi } from "bun:test";
 import { oauthDeviceAuthorizationClient, oauthProviderClient } from "./client";
 import {
 	DEVICE_CODE_GRANT_TYPE,
@@ -387,8 +387,7 @@ describe("oauth-provider device-code grant", async () => {
 		expect(successes[0]?.data?.token_type).toBe("DPoP");
 		// The loser either finds the code claimed or sees the winner's poll time.
 		const loser = results.find((result) => result.error !== null)?.error as
-			| { error?: string }
-			| undefined;
+			{ error?: string } | undefined;
 		expect(["invalid_grant", "slow_down"]).toContain(loser?.error);
 	});
 

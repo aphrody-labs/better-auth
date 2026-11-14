@@ -1,6 +1,6 @@
 import type { JWK } from "jose";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { beforeEach, describe, expect, it, test, vi } from "vitest";
+import { beforeEach, describe, expect, it, test, vi } from "bun:test";
 
 vi.mock("@better-fetch/fetch", () => ({
 	betterFetch: vi.fn(),

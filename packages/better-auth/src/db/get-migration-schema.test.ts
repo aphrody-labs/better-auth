@@ -11,7 +11,8 @@ import {
 	describe,
 	expect,
 	it,
-} from "vitest";
+	onTestFinished,
+} from "bun:test";
 import { betterAuth } from "../auth/full";
 import { getMigrations, matchType } from "./get-migration";
 
@@ -215,9 +216,7 @@ describe.runIf(isPostgresAvailable)(
 			expect(sessionTable).toBeDefined();
 		});
 
-		it("ignores other schemas that are dropped while it reads", async ({
-			onTestFinished,
-		}) => {
+		it("ignores other schemas that are dropped while it reads", async () => {
 			const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
 			const dropped = `ba_dropped_${randomUUID().replaceAll("-", "")}`;
 			onTestFinished(async () => {

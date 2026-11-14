@@ -9,7 +9,7 @@ import Database from "better-sqlite3";
 import { defineRelations } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 
 const account = sqliteTable("account", {
 	id: text("id").primaryKey(),
@@ -17,9 +17,7 @@ const account = sqliteTable("account", {
 });
 
 describe("relations-v2 schema validation", () => {
-	it("checks relations-only configuration without querying the database", async ({
-		onTestFinished,
-	}) => {
+	it("checks relations-only configuration without querying the database", async () => {
 		const client = new Database(":memory:");
 		onTestFinished(() => {
 			client.close();
@@ -46,9 +44,7 @@ describe("relations-v2 schema validation", () => {
 		expect(logQuery).not.toHaveBeenCalled();
 	});
 
-	it("uses explicit schema overrides before relation tables", async ({
-		onTestFinished,
-	}) => {
+	it("uses explicit schema overrides before relation tables", async () => {
 		const client = new Database(":memory:");
 		onTestFinished(() => {
 			client.close();
@@ -107,9 +103,7 @@ describe("relations-v2 schema validation", () => {
 		},
 	);
 
-	it("uses relation tables before fullSchema and preserves renamed model keys", async ({
-		onTestFinished,
-	}) => {
+	it("uses relation tables before fullSchema and preserves renamed model keys", async () => {
 		const client = new Database(":memory:");
 		onTestFinished(() => {
 			client.close();
@@ -137,9 +131,7 @@ describe("relations-v2 schema validation", () => {
 		});
 	});
 
-	it("keeps explicit validation when runtime validation is disabled", async ({
-		onTestFinished,
-	}) => {
+	it("keeps explicit validation when runtime validation is disabled", async () => {
 		const client = new Database(":memory:");
 		onTestFinished(() => {
 			client.close();

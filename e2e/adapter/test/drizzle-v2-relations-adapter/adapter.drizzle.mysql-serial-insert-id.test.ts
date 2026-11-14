@@ -13,7 +13,7 @@
  * @see https://dev.mysql.com/doc/refman/8.4/en/information-functions.html#function_last-insert-id
  */
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 
 const INSERT_ID = 42;
 const storedRow = { id: INSERT_ID, label: "widget-a" };

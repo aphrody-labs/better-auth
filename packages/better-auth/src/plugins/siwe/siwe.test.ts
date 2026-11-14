@@ -1,4 +1,5 @@
-import { assert, describe, expect, it } from "vitest";
+import assert from "node:assert";
+import { describe, expect, it } from "bun:test";
 import { getTestInstance } from "../../test-utils/test-instance";
 import { siweClient } from "./client";
 import { siwe } from "./index";
@@ -512,9 +513,9 @@ describe("siwe", async () => {
 		expect(error).toBeNull();
 		expect(data?.success).toBe(true);
 		assert(data, "SIWE verification should return a user");
-		const accounts = await (await auth.$context).internalAdapter.findAccounts(
-			data.user.id,
-		);
+		const accounts = await (
+			await auth.$context
+		).internalAdapter.findAccounts(data.user.id);
 		expect(accounts).toContainEqual(
 			expect.objectContaining({
 				providerId: "siwe",
@@ -1202,12 +1203,12 @@ describe("siwe", async () => {
 		expect(data?.success).toBe(true);
 
 		// Fetch wallet address from the adapter
-		const walletAddresses: any[] = await (await auth.$context).adapter.findMany(
-			{
-				model: "walletAddress",
-				where: [{ field: "address", operator: "eq", value: walletAddress }],
-			},
-		);
+		const walletAddresses: any[] = await (
+			await auth.$context
+		).adapter.findMany({
+			model: "walletAddress",
+			where: [{ field: "address", operator: "eq", value: walletAddress }],
+		});
 		expect(walletAddresses.length).toBe(1);
 		expect(walletAddresses[0]?.address).toBe(walletAddress); // checksummed
 
@@ -1220,7 +1221,9 @@ describe("siwe", async () => {
 		});
 		expect(data2?.success).toBe(true); // Should succeed with existing address
 
-		const walletAddressesAfter = await (await auth.$context).adapter.findMany({
+		const walletAddressesAfter = await (
+			await auth.$context
+		).adapter.findMany({
 			model: "walletAddress",
 			where: [{ field: "address", operator: "eq", value: walletAddress }],
 		});
@@ -1259,15 +1262,15 @@ describe("siwe", async () => {
 		expect(firstUser.data?.success).toBe(true);
 
 		// Verify wallet address record was created
-		const walletAddresses: any[] = await (await auth.$context).adapter.findMany(
-			{
-				model: "walletAddress",
-				where: [
-					{ field: "address", operator: "eq", value: testAddress },
-					{ field: "chainId", operator: "eq", value: testChainId },
-				],
-			},
-		);
+		const walletAddresses: any[] = await (
+			await auth.$context
+		).adapter.findMany({
+			model: "walletAddress",
+			where: [
+				{ field: "address", operator: "eq", value: testAddress },
+				{ field: "chainId", operator: "eq", value: testChainId },
+			],
+		});
 		expect(walletAddresses.length).toBe(1);
 		expect(walletAddresses[0]?.address).toBe(testAddress);
 		expect(walletAddresses[0]?.chainId).toBe(testChainId);
@@ -1296,7 +1299,9 @@ describe("siwe", async () => {
 		expect(walletAddressesAfter.length).toBe(1); // Still only one record
 
 		// Verify total user count (should be only 1 user created)
-		const allUsers: any[] = await (await auth.$context).adapter.findMany({
+		const allUsers: any[] = await (
+			await auth.$context
+		).adapter.findMany({
 			model: "user",
 		});
 		const usersWithTestAddress = allUsers.filter((user) =>

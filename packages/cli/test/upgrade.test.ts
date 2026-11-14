@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import prompts from "prompts";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import type { Spinner } from "yocto-spinner";
 import { upgradeAction } from "../src/commands/upgrade";
 import { detectPackageManager } from "../src/utils/check-package-managers";

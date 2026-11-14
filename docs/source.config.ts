@@ -12,9 +12,7 @@ import {
 	remarkAutoTypeTable,
 } from "fumadocs-typescript";
 import * as z from "zod";
-import packageMetadata from "../packages/better-auth/package.json" with {
-	type: "json",
-};
+import packageMetadata from "../packages/better-auth/package.json" with { type: "json" };
 import { docsVersionSources } from "./lib/docs-version-sources";
 import type { DocsVersion } from "./lib/docs-versions";
 import { docsVersions } from "./lib/docs-versions";

@@ -14,7 +14,7 @@ import { signJWT } from "better-auth/crypto";
 import { getTestInstance } from "better-auth/test";
 import type { Dispatcher } from "undici";
 import { getGlobalDispatcher, MockAgent, setGlobalDispatcher } from "undici";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 
 const DEFAULT_SECRET = "better-auth-secret-123456789";
 

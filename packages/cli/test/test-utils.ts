@@ -1,5 +1,5 @@
 import { vol } from "memfs";
-import { test } from "vitest";
+import { test } from "bun:test";
 
 export const testWithTmpDir = test.extend<{
 	tmp: string;

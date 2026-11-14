@@ -8,7 +8,15 @@ import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import type { Listener } from "listhen";
 import { listen } from "listhen";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+	vi,
+} from "bun:test";
 import { cimd, createCimdClientDiscovery } from "./index";
 
 const PKCE_CHALLENGE = "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM";
@@ -75,9 +83,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		await server.close();
 	});
 
-	it("should auto-create a public client from a URL client_id on authorize", async ({
-		onTestFinished,
-	}) => {
+	it("should auto-create a public client from a URL client_id on authorize", async () => {
 		// Stub fetch to serve the metadata document for the external URL
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		vi.stubGlobal(
@@ -147,9 +153,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		});
 	});
 
-	it("does not fetch or take over an existing managed HTTPS client", async ({
-		onTestFinished,
-	}) => {
+	it("does not fetch or take over an existing managed HTTPS client", async () => {
 		const managedClientId =
 			"https://managed-client.example.com/client-metadata.json";
 		const context = await authorizationServer.$context;
@@ -250,9 +254,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		});
 	});
 
-	it("persists an omitted application_type as null", async ({
-		onTestFinished,
-	}) => {
+	it("persists an omitted application_type as null", async () => {
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		const omittedTypeUrl =
 			"https://web-client.example.com/client-metadata.json";
@@ -310,9 +312,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		expect(storedClient).toMatchObject({ applicationType: null });
 	});
 
-	it("should complete authorize and consent flow with a CIMD client", async ({
-		onTestFinished,
-	}) => {
+	it("should complete authorize and consent flow with a CIMD client", async () => {
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		vi.stubGlobal(
 			"fetch",
@@ -390,9 +390,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		expect(config.registration_endpoint).toBeUndefined();
 	});
 
-	it("should reject metadata document where client_id does not match URL", async ({
-		onTestFinished,
-	}) => {
+	it("should reject metadata document where client_id does not match URL", async () => {
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		const mismatchedUrl = "https://mismatch.example.com/client-metadata.json";
 		vi.stubGlobal(
@@ -454,9 +452,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		expect(errorStatus).toBeGreaterThanOrEqual(400);
 	});
 
-	it("enforces application_type redirect URI constraints from the metadata document", async ({
-		onTestFinished,
-	}) => {
+	it("enforces application_type redirect URI constraints from the metadata document", async () => {
 		const originalFetch = globalThis.fetch.bind(globalThis);
 		const nativeClientUrl = "https://native.example.com/client-metadata.json";
 		const loopbackRedirect = "http://127.0.0.1:5099/callback";
@@ -518,9 +514,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		expect(errorStatus).toBeGreaterThanOrEqual(400);
 	});
 
-	it("allows a cross-origin registered redirect but rejects a different authorization redirect", async ({
-		onTestFinished,
-	}) => {
+	it("allows a cross-origin registered redirect but rejects a different authorization redirect", async () => {
 		const clientId = "https://distributed-client.example/client.json";
 		const registeredRedirect = "https://callback.example/callback";
 		const requestedRedirect = "https://callback.example/other";
@@ -595,9 +589,7 @@ describe("Client ID Metadata Document - integration", async () => {
 		).toMatchObject({ redirectUris: [registeredRedirect] });
 	});
 
-	it("accepts same-origin private_key_jwt key discovery without unrelated trustedOrigins", async ({
-		onTestFinished,
-	}) => {
+	it("accepts same-origin private_key_jwt key discovery without unrelated trustedOrigins", async () => {
 		const clientId = "https://key-client.example.com/client-metadata.json";
 		const redirectUri = "https://key-client.example.com/callback";
 		const originalFetch = globalThis.fetch.bind(globalThis);

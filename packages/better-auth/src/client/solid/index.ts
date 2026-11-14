@@ -32,11 +32,13 @@ type InferResolvedHooks<O extends BetterAuthClientOptions> = O extends {
 				? GetAtoms extends (fetch: any) => infer Atoms
 					? Atoms extends Record<string, any>
 						? {
-								[key in keyof Atoms as IsSignal<key> extends true
-									? never
-									: key extends string
-										? `use${Capitalize<key>}`
-										: never]: () => Accessor<ReturnType<Atoms[key]["get"]>>;
+								[
+									key in keyof Atoms as IsSignal<key> extends true
+										? never
+										: key extends string
+											? `use${Capitalize<key>}`
+											: never
+								]: () => Accessor<ReturnType<Atoms[key]["get"]>>;
 							}
 						: {}
 					: {}

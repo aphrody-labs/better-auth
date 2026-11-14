@@ -2,7 +2,7 @@ import type { AuthContext } from "@better-auth/core";
 import { logger } from "@better-auth/core/env";
 import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { oauthProvider } from "./oauth";
 import {
 	collectResourceInputs,

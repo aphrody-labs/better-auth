@@ -4,7 +4,8 @@ import { createTestSuite, testAdapter } from "@better-auth/test-utils/adapter";
 import { getMigrations } from "better-auth/db/migration";
 import { Kysely, MysqlDialect } from "kysely";
 import { createPool } from "mysql2/promise";
-import { assert, expect } from "vitest";
+import assert from "node:assert";
+import { expect } from "bun:test";
 import {
 	authFlowTestSuite,
 	caseInsensitiveTestSuite,

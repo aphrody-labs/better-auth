@@ -5,7 +5,7 @@ import {
 	SchemaMismatchError,
 	schemaCheckFor,
 } from "@better-auth/core/db/internal";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { prismaAdapter } from "./prisma-adapter";
 import type { PrismaRuntimeDataModel } from "./schema-check";
 import { findPrismaSchemaProblems } from "./schema-check";

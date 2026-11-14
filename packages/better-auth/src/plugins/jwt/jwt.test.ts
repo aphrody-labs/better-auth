@@ -15,7 +15,7 @@ import {
 	jwtVerify,
 	SignJWT,
 } from "jose";
-import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { beforeEach, describe, expect, expectTypeOf, it, vi } from "bun:test";
 import { getSessionFromCtx } from "../../api";
 import { betterAuth } from "../../auth/full";
 import { createAuthClient } from "../../client";

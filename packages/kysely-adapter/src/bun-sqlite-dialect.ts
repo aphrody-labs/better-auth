@@ -59,8 +59,7 @@ export interface BunSqliteDialectConfig {
 	 * Called once when the first query is executed.
 	 */
 	onCreateConnection?:
-		| ((connection: DatabaseConnection) => Promise<void>)
-		| undefined;
+		((connection: DatabaseConnection) => Promise<void>) | undefined;
 }
 
 class BunSqliteDriver implements Driver {

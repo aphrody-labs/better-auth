@@ -189,8 +189,7 @@ export async function userInfoEndpoint(
 	} catch (error) {
 		if (isAPIError(error) && error.status === "UNAUTHORIZED") {
 			const body = error.body as
-				| { error?: string; error_description?: string }
-				| undefined;
+				{ error?: string; error_description?: string } | undefined;
 			const code = body?.error ?? "invalid_token";
 			const description = body?.error_description ?? error.message;
 			if (usesDpopScheme) {

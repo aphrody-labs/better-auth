@@ -11,12 +11,7 @@ export type PrismaResolverOptions = {
 	 * @default "postgresql"
 	 */
 	provider?:
-		| "sqlite"
-		| "cockroachdb"
-		| "mysql"
-		| "postgresql"
-		| "sqlserver"
-		| "mongodb";
+		"sqlite" | "cockroachdb" | "mysql" | "postgresql" | "sqlserver" | "mongodb";
 	usePlural?: boolean;
 };
 

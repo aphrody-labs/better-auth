@@ -3,7 +3,7 @@ import { NodeSqliteDialect } from "@better-auth/kysely-adapter/node-sqlite-diale
 import { betterAuth } from "better-auth";
 import { getMigrations } from "better-auth/db/migration";
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, onTestFinished } from "bun:test";
 import { scim } from ".";
 
 const USER_SCHEMA = "urn:ietf:params:scim:schemas:core:2.0:User";
@@ -80,9 +80,7 @@ function createLegacySCIMAuth(sqlite: DatabaseSync) {
 }
 
 describe("SCIM SQLite integration", () => {
-	it("adds serializedAttributes as a nullable column that migrates populated legacy rows", async ({
-		onTestFinished,
-	}) => {
+	it("adds serializedAttributes as a nullable column that migrates populated legacy rows", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		onTestFinished(() => sqlite.close());
 		createLegacySCIMUserTable(sqlite);
@@ -128,9 +126,7 @@ describe("SCIM SQLite integration", () => {
 		});
 	});
 
-	it("upgrades a populated legacy table and provisions a new user through the real HTTP endpoint", async ({
-		onTestFinished,
-	}) => {
+	it("upgrades a populated legacy table and provisions a new user through the real HTTP endpoint", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		onTestFinished(() => sqlite.close());
 		createLegacySCIMUserTable(sqlite);
@@ -214,9 +210,7 @@ describe("SCIM SQLite integration", () => {
 		});
 	});
 
-	it("persists and queries canonical resources through a native transaction adapter", async ({
-		onTestFinished,
-	}) => {
+	it("persists and queries canonical resources through a native transaction adapter", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		onTestFinished(() => sqlite.close());
 		const { auth, db } = await getTestInstance(

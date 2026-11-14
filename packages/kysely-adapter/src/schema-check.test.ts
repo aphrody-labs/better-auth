@@ -14,7 +14,15 @@ import {
 	sql,
 } from "kysely";
 import { Pool } from "pg";
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	onTestFinished,
+	vi,
+} from "bun:test";
 import { NodeSqliteDialect } from "./node-sqlite-dialect";
 import {
 	findSchemaProblems,
@@ -116,9 +124,7 @@ describe("toPhysicalSchema", () => {
 /**
  * @see https://github.com/better-auth/better-auth/issues/11346
  */
-it("validates SQLite without dialect introspection", async ({
-	onTestFinished,
-}) => {
+it("validates SQLite without dialect introspection", async () => {
 	const sqlite = new DatabaseSync(":memory:");
 	sqlite.exec(
 		"CREATE TABLE widget (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL)",
@@ -152,9 +158,7 @@ it("validates SQLite without dialect introspection", async ({
 /**
  * @see https://www.sqlite.org/lang_createtable.html#rowids_and_the_integer_primary_key
  */
-it("distinguishes generated and required SQLite primary keys", async ({
-	onTestFinished,
-}) => {
+it("distinguishes generated and required SQLite primary keys", async () => {
 	const sqlite = new DatabaseSync(":memory:");
 	sqlite.exec(
 		"CREATE TABLE generated (seq INTEGER PRIMARY KEY NOT NULL, id TEXT NOT NULL UNIQUE)",
@@ -214,9 +218,7 @@ describe("PostgreSQL schema validation", () => {
 			skip("Local PostgreSQL test database is unavailable");
 	});
 
-	it("keeps the migration fallback when search_path is empty", async ({
-		onTestFinished,
-	}) => {
+	it("keeps the migration fallback when search_path is empty", async () => {
 		const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
 		const db = new Kysely({
 			dialect: new PostgresDialect({ pool }),
@@ -233,9 +235,7 @@ describe("PostgreSQL schema validation", () => {
 		});
 	});
 
-	it("reads PostgreSQL metadata without changing the schema", async ({
-		onTestFinished,
-	}) => {
+	it("reads PostgreSQL metadata without changing the schema", async () => {
 		const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
 		const db = new Kysely({ dialect: new PostgresDialect({ pool }) });
 		onTestFinished(() => db.destroy());
@@ -246,9 +246,7 @@ describe("PostgreSQL schema validation", () => {
 		).resolves.toEqual([{ kind: "missing-table", table }]);
 	});
 
-	it("resolves role schemas and each table in search-path order", async ({
-		onTestFinished,
-	}) => {
+	it("resolves role schemas and each table in search-path order", async () => {
 		const role = `ba_readiness_${randomUUID().replaceAll("-", "")}`;
 		const fallback = `${role}_fallback`;
 		const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
@@ -287,9 +285,7 @@ describe("PostgreSQL schema validation", () => {
 		).resolves.toEqual([]);
 	});
 
-	it("ignores schemas outside the search path that are dropped during the check", async ({
-		onTestFinished,
-	}) => {
+	it("ignores schemas outside the search path that are dropped during the check", async () => {
 		const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
 		const db = new Kysely({ dialect: new PostgresDialect({ pool }) });
 		const other = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
@@ -317,7 +313,7 @@ describe("PostgreSQL schema validation", () => {
 		}
 	});
 
-	it("finds tables stored as foreign tables", async ({ onTestFinished }) => {
+	it("finds tables stored as foreign tables", async () => {
 		const pool = new Pool({ connectionString: CONNECTION_STRING, max: 1 });
 		const db = new Kysely({ dialect: new PostgresDialect({ pool }) });
 		const name = `ba_foreign_${randomUUID().replaceAll("-", "")}`;

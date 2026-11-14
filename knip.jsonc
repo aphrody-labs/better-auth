@@ -29,7 +29,7 @@
 		"packages/sso/src/saml/assertions.ts": ["exports"],
 		"packages/sso/src/oidc/discovery.ts": ["exports"]
 	},
-	"ignoreDependencies": ["@changesets/cli", "@vitest/coverage-istanbul"],
+	"ignoreDependencies": ["@changesets/cli"],
 	"rules": {
 		// @cloudflare/workers-types is a valid optional peer dep reference
 		"optionalPeerDependencies": "off",
@@ -58,7 +58,7 @@
 		},
 		"packages/release-tooling": {
 			"entry": ["src/commands/*.ts!"],
-			"project": ["src/**/*.ts!", "test/**/*.ts!", "vitest.config.ts!"]
+			"project": ["src/**/*.ts!", "test/**/*.ts!"]
 		},
 		"packages/test-utils": {},
 		"packages/expo": {
@@ -69,9 +69,6 @@
 			"entry": ["src/index.ts!", "src/client.typecheck.ts"],
 			"project": ["src/**/*.ts!", "test/**/*.ts"]
 		}
-	},
-	"vitest": {
-		"entry": ["**/*.test.ts", "**/*.spec.ts"]
 	},
 	"ignoreWorkspaces": ["demo/**", "docs/**", "e2e/**"]
 }

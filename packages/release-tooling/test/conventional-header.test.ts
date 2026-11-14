@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { parseConventionalHeader } from "../src/conventional-header.ts";
 
 describe("parseConventionalHeader", () => {

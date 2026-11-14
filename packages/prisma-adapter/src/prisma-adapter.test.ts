@@ -1,5 +1,5 @@
 import type { BetterAuthOptions } from "@better-auth/core";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { prismaAdapter } from "./prisma-adapter";
 
 describe("prisma-adapter", () => {

@@ -1,6 +1,6 @@
-// @vitest-environment happy-dom
+import "../test-utils/dom-env";
 
-import { afterEach, describe, expect, it, onTestFinished, vi } from "vitest";
+import { afterEach, describe, expect, it, onTestFinished, vi } from "bun:test";
 import { organizationClient } from "../plugins/organization/client";
 import { getClientConfig } from "./config";
 import { createDynamicPathProxy } from "./proxy";

@@ -1104,8 +1104,7 @@ export function patchSCIMUser(
 
 			const connection = ctx.context.scimConnection;
 			let attemptedUpdate:
-				| Parameters<typeof assertSCIMUserUpdateAvailable>[1]
-				| undefined;
+				Parameters<typeof assertSCIMUserUpdateAvailable>[1] | undefined;
 			const updatedSCIMUser = await runSCIMWriteWithUniquenessCheck(
 				() =>
 					runIdentityMutationTransaction(adapter, async (trx) => {

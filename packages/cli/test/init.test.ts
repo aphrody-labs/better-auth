@@ -2,7 +2,7 @@ import { exec as execMock } from "node:child_process";
 import path from "node:path";
 import { vol } from "memfs";
 import prompts from "prompts";
-import { afterEach, beforeEach, describe, expect, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi } from "bun:test";
 import { initAction } from "../src/commands/init";
 import { generateDrizzleSchema } from "../src/generators/drizzle";
 import { generatePrismaSchema } from "../src/generators/prisma";

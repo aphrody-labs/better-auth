@@ -1,5 +1,5 @@
 import { APIError, kAPIErrorHeaderSymbol } from "better-call";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createAuthEndpoint } from "./index";
 
 describe("createAuthEndpoint metadata.noStore", () => {

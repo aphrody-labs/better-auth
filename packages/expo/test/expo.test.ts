@@ -12,7 +12,7 @@ import {
 	onTestFinished,
 	test,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { getAuthStateVerificationIdentifier } from "../../better-auth/src/state";
 import { expo } from "../src";
 import { expoClient, normalizeCookieName, storageAdapter } from "../src/client";
@@ -207,7 +207,7 @@ describe("expo", async () => {
 
 	it("should get cookies", async () => {
 		const c = await client.getCookie();
-		expect(c).includes("better-auth.session_token");
+		expect(c).toContain("better-auth.session_token");
 	});
 
 	it("should remove expired cookies from store when Max-Age=0", async () => {
@@ -244,9 +244,8 @@ describe("expo", async () => {
 	});
 
 	it("should skip cookies with empty names", async () => {
-		const { parseSetCookieHeader, getSetCookie } = await import(
-			"../src/client"
-		);
+		const { parseSetCookieHeader, getSetCookie } =
+			await import("../src/client");
 
 		// Simulate malformed cookie header starting with semicolon
 		const malformedHeader = "; abc.state=xyz; Path=/";

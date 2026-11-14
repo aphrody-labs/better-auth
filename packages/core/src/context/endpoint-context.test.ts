@@ -1,4 +1,4 @@
-import { describe, expect, it, onTestFinished, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import type { AuthEndpointContext } from "./endpoint-context";
 import { __getBetterAuthGlobal } from "./global";
 

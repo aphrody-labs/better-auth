@@ -8,8 +8,7 @@ export type FilteredAPI<API> = Omit<
 			? K extends "getSession"
 				? never
 				: API[K]["options"]["metadata"] extends
-							| { isAction: false }
-							| { scope: "http" }
+							{ isAction: false } | { scope: "http" }
 					? K
 					: never
 			: never

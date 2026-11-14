@@ -25,7 +25,7 @@ import {
 	jwtVerify,
 	SignJWT,
 } from "jose";
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "bun:test";
 import { oauthProviderClient } from "./client";
 import { oauthProvider } from "./oauth";
 import { confirmationTokenType, getOAuthProviderApi } from "./token";
@@ -188,9 +188,7 @@ describe("oauth token - authorization_code", async () => {
 		return tokens;
 	}
 
-	it("scope openid should provide access_token and id_token", async ({
-		expect,
-	}) => {
+	it("scope openid should provide access_token and id_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -257,9 +255,7 @@ describe("oauth token - authorization_code", async () => {
 		expect(tokens.data?.scope).toBe(scopes.join(" "));
 	});
 
-	it("scope openid+profile should provide access_token and id_token", async ({
-		expect,
-	}) => {
+	it("scope openid+profile should provide access_token and id_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -297,9 +293,7 @@ describe("oauth token - authorization_code", async () => {
 		expect(idToken.payload.email).toBeUndefined();
 	});
 
-	it("scope openid+email should provide access_token and id_token", async ({
-		expect,
-	}) => {
+	it("scope openid+email should provide access_token and id_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -337,9 +331,7 @@ describe("oauth token - authorization_code", async () => {
 		expect(idToken.payload.email).toBeUndefined();
 	});
 
-	it("scope openid+offline_access should provide opaque access_token, id_token, and refresh_token", async ({
-		expect,
-	}) => {
+	it("scope openid+offline_access should provide opaque access_token, id_token, and refresh_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -377,9 +369,7 @@ describe("oauth token - authorization_code", async () => {
 		expect(idToken.payload.email).toBeUndefined();
 	});
 
-	it("scope openid+offline_access & specified resource should provide JWT access_token, id_token, and refresh_token", async ({
-		expect,
-	}) => {
+	it("scope openid+offline_access & specified resource should provide JWT access_token, id_token, and refresh_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1161,9 +1151,7 @@ describe("oauth token - refresh_token", async () => {
 		});
 	});
 
-	it("should refresh token with same scopes, opaque access token", async ({
-		expect,
-	}) => {
+	it("should refresh token with same scopes, opaque access token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1207,9 +1195,7 @@ describe("oauth token - refresh_token", async () => {
 		expect(tokens?.refresh_token).not.toEqual(newTokens.data?.refresh_token);
 	});
 
-	it("rejects refresh token use by a different client with invalid_grant", async ({
-		expect,
-	}) => {
+	it("rejects refresh token use by a different client with invalid_grant", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1261,9 +1247,7 @@ describe("oauth token - refresh_token", async () => {
 		).toBe("invalid refresh token");
 	});
 
-	it("should preserve auth_time in id_token after refresh (OIDC Core 1.0 Section 12.2)", async ({
-		expect,
-	}) => {
+	it("should preserve auth_time in id_token after refresh (OIDC Core 1.0 Section 12.2)", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1304,9 +1288,7 @@ describe("oauth token - refresh_token", async () => {
 		expect(refreshedIdToken.auth_time).toBe(originalIdToken.auth_time);
 	});
 
-	it("should refresh token with same scopes, JWT access token", async ({
-		expect,
-	}) => {
+	it("should refresh token with same scopes, JWT access token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1361,9 +1343,7 @@ describe("oauth token - refresh_token", async () => {
 		expect(accessToken.payload.scope).toBe(scopes.join(" "));
 	});
 
-	it("should refresh token with lesser scopes, opaque access token", async ({
-		expect,
-	}) => {
+	it("should refresh token with lesser scopes, opaque access token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1408,9 +1388,7 @@ describe("oauth token - refresh_token", async () => {
 		expect(tokens?.refresh_token).not.toEqual(newTokens.data?.refresh_token);
 	});
 
-	it("should refresh token with lesser scopes, JWT access token", async ({
-		expect,
-	}) => {
+	it("should refresh token with lesser scopes, JWT access token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -1466,9 +1444,7 @@ describe("oauth token - refresh_token", async () => {
 		expect(accessToken.payload.scope).toBe(newScopes.join(" "));
 	});
 
-	it("should refresh token even when removing offline_scope", async ({
-		expect,
-	}) => {
+	it("should refresh token even when removing offline_scope", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2692,7 +2668,7 @@ describe("oauth token - client_credentials", async () => {
 		expect(responseHeaders?.get("WWW-Authenticate")).toBe("Basic");
 	});
 
-	it("should match created client scopes", async ({ expect }) => {
+	it("should match created client scopes", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -2869,9 +2845,7 @@ describe("oauth token - customIdTokenClaims precedence", async () => {
 		jwks = createLocalJWKSet(jwksResult.data);
 	});
 
-	it("custom claims can add profile claim names to id_token", async ({
-		expect,
-	}) => {
+	it("custom claims can add profile claim names to id_token", async () => {
 		if (!oauthClient?.client_id || !oauthClient?.client_secret) {
 			throw Error("beforeAll not run properly");
 		}
@@ -3763,18 +3737,14 @@ describe("id token claim override security", async () => {
 		return decodeJwt(tokens.data!.id_token!);
 	}
 
-	it("customIdTokenClaims cannot override authentication context claims", async ({
-		expect,
-	}) => {
+	it("customIdTokenClaims cannot override authentication context claims", async () => {
 		const claims = await getIdTokenClaims();
 		expect(claims.acr).toBe("0");
 		expect(claims.auth_time).not.toBe(0);
 		expect(claims.amr).toBeUndefined();
 	});
 
-	it("customIdTokenClaims cannot override provider-owned id token claims", async ({
-		expect,
-	}) => {
+	it("customIdTokenClaims cannot override provider-owned id token claims", async () => {
 		const claims = await getIdTokenClaims();
 		expect(claims.sub).not.toBe("evil");
 		expect(claims.iss).not.toBe("https://evil.com");
@@ -3816,7 +3786,7 @@ describe("loopback redirect URI matching", async () => {
 	const providerId = "test";
 	const state = "123";
 
-	it("127.0.0.1 with different ports should succeed", async ({ expect }) => {
+	it("127.0.0.1 with different ports should succeed", async () => {
 		const registeredUri = "http://127.0.0.1:8080/callback";
 		const requestedUri = "http://127.0.0.1:9090/callback";
 
@@ -3872,7 +3842,7 @@ describe("loopback redirect URI matching", async () => {
 		expect(tokens.data?.access_token).toBeDefined();
 	});
 
-	it("[::1] with different ports should succeed", async ({ expect }) => {
+	it("[::1] with different ports should succeed", async () => {
 		const registeredUri = "http://[::1]:8080/callback";
 		const requestedUri = "http://[::1]:3000/callback";
 
@@ -3928,7 +3898,7 @@ describe("loopback redirect URI matching", async () => {
 		expect(tokens.data?.access_token).toBeDefined();
 	});
 
-	it("loopback with different path should be rejected", async ({ expect }) => {
+	it("loopback with different path should be rejected", async () => {
 		const registeredUri = "http://127.0.0.1:8080/callback";
 		const requestedUri = "http://127.0.0.1:8080/other-path";
 
@@ -3992,9 +3962,7 @@ describe("scope preservation through authorization code flow", async () => {
 	const redirectUri = `${rpBaseUrl}/api/auth/callback/${providerId}`;
 	const state = "123";
 
-	it("scopes from authorization request should survive into token response", async ({
-		expect,
-	}) => {
+	it("scopes from authorization request should survive into token response", async () => {
 		const oauthClient = await auth.api.adminCreateOAuthClient({
 			headers,
 			body: {
@@ -4159,9 +4127,7 @@ describe("at_hash in id tokens", async () => {
 		return tokens.data!;
 	}
 
-	it("should include at_hash when id token is issued with access token", async ({
-		expect,
-	}) => {
+	it("should include at_hash when id token is issued with access token", async () => {
 		const tokens = await getTokens(["openid"]);
 		expect(tokens.id_token).toBeDefined();
 		expect(tokens.access_token).toBeDefined();
@@ -4176,9 +4142,7 @@ describe("at_hash in id tokens", async () => {
 	 * EdDSA (Ed25519) uses SHA-512 per RFC 8032.
 	 * at_hash = base64url(left-half(SHA-512(access_token)))
 	 */
-	it("at_hash should match manual computation for EdDSA", async ({
-		expect,
-	}) => {
+	it("at_hash should match manual computation for EdDSA", async () => {
 		const tokens = await getTokens(["openid"]);
 		const decoded = decodeJwt(tokens.id_token!);
 
@@ -4193,16 +4157,12 @@ describe("at_hash in id tokens", async () => {
 		expect(decoded.at_hash).toBe(expectedAtHash);
 	});
 
-	it("at_hash should not be present without openid scope", async ({
-		expect,
-	}) => {
+	it("at_hash should not be present without openid scope", async () => {
 		const tokens = await getTokens(["offline_access"], validResource);
 		expect(tokens.id_token).toBeUndefined();
 	});
 
-	it("customIdTokenClaims should not receive accessToken", async ({
-		expect,
-	}) => {
+	it("customIdTokenClaims should not receive accessToken", async () => {
 		let receivedKeys: string[] = [];
 		const {
 			auth: testAuth,

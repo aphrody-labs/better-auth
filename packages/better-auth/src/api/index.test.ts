@@ -4,7 +4,7 @@ import type {
 	BetterAuthPlugin,
 } from "@better-auth/core";
 import { createAuthMiddleware } from "@better-auth/core/api";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { getTestInstance } from "../test-utils/test-instance";
 import { createAuthEndpoint, getEndpoints } from "./index";
 

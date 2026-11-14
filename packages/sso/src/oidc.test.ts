@@ -5,7 +5,7 @@ import { organization } from "better-auth/plugins";
 import { getTestInstance } from "better-auth/test";
 import { createLocalJWKSet, exportJWK, generateKeyPair, jwtVerify } from "jose";
 import { OAuth2Server } from "oauth2-mock-server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "bun:test";
 import { getAuthStateVerificationIdentifier } from "../../better-auth/src/state";
 import { sso } from ".";
 import { ssoClient } from "./client";

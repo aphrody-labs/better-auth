@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { docsVersionSources } from "./docs-version-sources";
 import type { VersionAvailability } from "./docs-versions";
 import {

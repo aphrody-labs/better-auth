@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import { parseCookies, parseSetCookieHeader } from "../../cookies";
 import { symmetricEncodeJWT } from "../../crypto";
 import { getTestInstance } from "../../test-utils/test-instance";

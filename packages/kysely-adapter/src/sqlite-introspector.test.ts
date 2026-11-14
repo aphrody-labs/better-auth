@@ -1,7 +1,7 @@
 import type { SQLInputValue } from "node:sqlite";
 import { DatabaseSync } from "node:sqlite";
 import { Kysely } from "kysely";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import { BunSqliteDialect } from "./bun-sqlite-dialect";
 import {
 	DEFAULT_MIGRATION_LOCK_TABLE,
@@ -260,9 +260,7 @@ describe("SQLite generated primary keys", () => {
 		},
 	);
 
-	it("BunSqliteDialect recognizes an INTEGER PRIMARY KEY", async ({
-		onTestFinished,
-	}) => {
+	it("BunSqliteDialect recognizes an INTEGER PRIMARY KEY", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		sqlite.exec("CREATE TABLE entries (id INTEGER PRIMARY KEY, name TEXT)");
 		const db = new Kysely({
@@ -276,9 +274,7 @@ describe("SQLite generated primary keys", () => {
 	});
 
 	/** @see https://github.com/better-auth/better-auth/issues/10551 */
-	it("uses statement-form PRAGMA when dialect introspection is unavailable", async ({
-		onTestFinished,
-	}) => {
+	it("uses statement-form PRAGMA when dialect introspection is unavailable", async () => {
 		const sqlite = new DatabaseSync(":memory:");
 		const generatedName = 'generated"name';
 		sqlite.exec('CREATE TABLE "generated""name" (id INTEGER PRIMARY KEY)');

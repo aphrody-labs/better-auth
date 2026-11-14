@@ -4,7 +4,7 @@ import type { DBAdapter } from "@better-auth/core/db/adapter";
 import { APIError } from "@better-auth/core/error";
 import type { MemoryDB } from "@better-auth/memory-adapter";
 import { memoryAdapter } from "@better-auth/memory-adapter";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "bun:test";
 import * as z from "zod";
 import { getTestInstance } from "../../test-utils/test-instance";
 import type { DeviceAuthorizationGrant } from ".";

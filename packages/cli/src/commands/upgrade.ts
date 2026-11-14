@@ -6,9 +6,7 @@ import * as semver from "semver";
 import type { PackageJson } from "type-fest";
 import yoctoSpinner from "yocto-spinner";
 import * as z from "zod";
-import changesetConfig from "../../../../.changeset/config.json" with {
-	type: "json",
-};
+import changesetConfig from "../../../../.changeset/config.json" with { type: "json" };
 import { detectPackageManager } from "../utils/check-package-managers";
 import { getPackageInfo } from "../utils/get-package-info";
 import { installDependencies } from "../utils/install-dependencies";

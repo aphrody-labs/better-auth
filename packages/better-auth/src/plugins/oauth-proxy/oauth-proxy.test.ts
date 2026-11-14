@@ -10,7 +10,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import {
 	addOAuthServerContext,
 	createAuthMiddleware,
@@ -101,9 +101,9 @@ describe("oauth-proxy", async () => {
 		);
 		expect(payload.isOAuthProxy).toBe(true);
 		expect(
-			await (await auth.$context).internalAdapter.findVerificationValue(
-				`auth-state:${payload.state}`,
-			),
+			await (
+				await auth.$context
+			).internalAdapter.findVerificationValue(`auth-state:${payload.state}`),
 		).not.toBeNull();
 	});
 

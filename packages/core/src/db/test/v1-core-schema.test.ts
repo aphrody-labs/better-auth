@@ -20,7 +20,7 @@
  * custom `fieldName` mappings, none of which this file covers.
  */
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { getAuthTables } from "../get-tables";
 import type { BaseAccount } from "../schema/account";
 import type { BaseSession } from "../schema/session";

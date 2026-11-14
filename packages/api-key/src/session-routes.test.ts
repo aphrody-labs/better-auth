@@ -4,7 +4,8 @@ import { organization } from "better-auth/plugins/organization";
 import { phoneNumber } from "better-auth/plugins/phone-number";
 import { twoFactor } from "better-auth/plugins/two-factor";
 import { getTestInstance } from "better-auth/test";
-import { assert, describe, expect, it } from "vitest";
+import assert from "node:assert";
+import { describe, expect, it } from "bun:test";
 import { apiKey } from ".";
 
 /**

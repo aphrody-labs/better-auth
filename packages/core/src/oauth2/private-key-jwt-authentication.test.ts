@@ -1,6 +1,6 @@
 import { base64 } from "@better-auth/utils/base64";
 import { decodeJwt, exportJWK, generateKeyPair } from "jose";
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "bun:test";
 
 vi.mock("@better-fetch/fetch", () => ({
 	betterFetch: vi.fn(),

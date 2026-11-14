@@ -206,11 +206,9 @@ function getSSOProviderBuiltInFieldName(
 	key: SSOProviderBuiltInFieldKey,
 ) {
 	const fieldNames = options?.fields as
-		| Partial<Record<SSOProviderBuiltInFieldKey, string>>
-		| undefined;
+		Partial<Record<SSOProviderBuiltInFieldKey, string>> | undefined;
 	const schemaFieldNames = options?.schema?.ssoProvider?.fields as
-		| Partial<Record<SSOProviderBuiltInFieldKey, string>>
-		| undefined;
+		Partial<Record<SSOProviderBuiltInFieldKey, string>> | undefined;
 	return fieldNames?.[key] ?? schemaFieldNames?.[key] ?? key;
 }
 

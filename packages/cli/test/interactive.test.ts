@@ -1,5 +1,5 @@
 import { PassThrough } from "node:stream";
-import { afterEach, describe, expect, it, onTestFinished, vi } from "vitest";
+import { afterEach, describe, expect, it, onTestFinished, vi } from "bun:test";
 import { requireInteractive } from "../src/utils/interactive";
 import { prompt } from "../src/utils/prompt";
 

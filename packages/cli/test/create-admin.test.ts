@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { admin } from "better-auth/plugins";
 import Database from "better-sqlite3";
 import prompts from "prompts";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
 import { createAdminAction } from "../src/commands/create-admin";
 import { migrateAction } from "../src/commands/migrate";
 import * as config from "../src/utils/get-config";

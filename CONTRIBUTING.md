@@ -68,7 +68,7 @@ pnpm test
 Or filter by file or directory:
 
 ```bash
-pnpm vitest packages/better-auth/src/plugins/organization --run
+bun test packages/better-auth/src/plugins/organization
 ```
 
 ### Unit Tests

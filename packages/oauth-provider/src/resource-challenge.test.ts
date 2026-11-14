@@ -4,7 +4,7 @@ import {
 	verifyAccessTokenRequest,
 } from "better-auth/oauth2";
 import { APIError } from "better-call";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createResourceServerChallenge } from "./resource-challenge";
 
 function catchChallenge(resource: string | string[]) {

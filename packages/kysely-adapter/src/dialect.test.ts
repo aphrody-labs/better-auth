@@ -14,7 +14,7 @@ import {
 	PostgresIntrospector,
 	PostgresQueryCompiler,
 } from "kysely";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, onTestFinished, vi } from "bun:test";
 import {
 	createD1IndexIntrospector,
 	D1SqliteDialect,
@@ -182,7 +182,7 @@ describe("D1 index introspection", () => {
 
 /** @see https://developers.cloudflare.com/d1/worker-api/d1-database/#batch */
 describe("D1 table introspection", () => {
-	it("batches column metadata for all tables", async ({ onTestFinished }) => {
+	it("batches column metadata for all tables", async () => {
 		const all = vi.fn(async () => ({
 			results: ["user", "session"].map((name) => ({
 				name,
@@ -236,9 +236,7 @@ describe("D1 table introspection", () => {
 	 * @see https://github.com/better-auth/better-auth/issues/10551
 	 * @see https://www.sqlite.org/pragma.html#pragma_index_list
 	 */
-	it("checks primary-key indexes only for INTEGER PRIMARY KEY candidates", async ({
-		onTestFinished,
-	}) => {
+	it("checks primary-key indexes only for INTEGER PRIMARY KEY candidates", async () => {
 		const all = vi.fn(async () => ({
 			results: ["plain's", "descending", "text"].map((name) => ({
 				name,

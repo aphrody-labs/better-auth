@@ -2,7 +2,7 @@ import type {
 	SSOUserResolutionContext,
 	SSOUserResolutionInput,
 } from "@better-auth/sso";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import {
 	resolveSCIMDemoSSOUser,
 	SCIM_DEMO_CONNECTION_ID_CLAIM,

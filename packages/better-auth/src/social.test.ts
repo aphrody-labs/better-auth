@@ -25,7 +25,7 @@ import {
 	it,
 	onTestFinished,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { createAuthMiddleware } from "./api";
 import { getOAuthState } from "./api/state/oauth";
 import { parseSetCookieHeader } from "./cookies";
@@ -760,7 +760,9 @@ describe("Disable signup", async () => {
 					requestSignUp,
 				});
 
-				const user = await (await auth.$context).adapter.findOne({
+				const user = await (
+					await auth.$context
+				).adapter.findOne({
 					model: "user",
 					where: [{ field: "email", value: email }],
 				});

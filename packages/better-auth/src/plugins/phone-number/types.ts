@@ -68,8 +68,7 @@ export interface PhoneNumberOptions {
 	 * by default any string is accepted
 	 */
 	phoneNumberValidator?:
-		| ((phoneNumber: string) => Awaitable<boolean>)
-		| undefined;
+		((phoneNumber: string) => Awaitable<boolean>) | undefined;
 	/**
 	 * Require a phone number verification before signing in
 	 *

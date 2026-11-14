@@ -1,5 +1,5 @@
 import { getTestInstance } from "better-auth/test";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createAuthenticator } from "../test/webauthn";
 import type { PasskeyOptions } from ".";
 import { passkey } from ".";

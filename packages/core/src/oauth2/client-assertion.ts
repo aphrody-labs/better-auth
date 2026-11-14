@@ -74,9 +74,7 @@ export const CLIENT_ASSERTION_TYPE =
 	"urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
 export type ClientAssertionGrantType =
-	| "authorization_code"
-	| "refresh_token"
-	| "client_credentials";
+	"authorization_code" | "refresh_token" | "client_credentials";
 
 export interface ClientAssertionContext {
 	clientId: string;

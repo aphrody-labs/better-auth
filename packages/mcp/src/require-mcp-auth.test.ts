@@ -1,7 +1,7 @@
 import { createInsufficientScopeError } from "better-auth/oauth2";
 import { APIError } from "better-call";
 import type { JWTPayload } from "jose";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import { requireMcpAuth } from "./require-mcp-auth";
 
 const { verifyAccessTokenRequest } = vi.hoisted(() => ({

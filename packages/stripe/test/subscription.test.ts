@@ -1,6 +1,6 @@
 import { getTestInstance } from "better-auth/test";
 import type Stripe from "stripe";
-import { describe, expect, vi } from "vitest";
+import { describe, expect, vi } from "bun:test";
 import { stripe } from "../src";
 import { stripeClient } from "../src/client";
 import type { StripeOptions, Subscription } from "../src/types";
@@ -812,11 +812,10 @@ describe("stripe subscription", () => {
 		},
 	])(
 		"should handle re-subscribing when periodEnd is in the $name",
-		async ({ periodEnd, shouldAllow }, {
-			stripeMock,
-			memory,
-			stripeOptions,
-		}) => {
+		async (
+			{ periodEnd, shouldAllow },
+			{ stripeMock, memory, stripeOptions },
+		) => {
 			const starterPriceId = "price_starter_periodend_test";
 			const subscriptionId = "sub_periodend_test_123";
 

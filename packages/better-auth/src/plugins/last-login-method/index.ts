@@ -32,8 +32,7 @@ export interface LastLoginMethodOptions {
 	 * @returns The last login method
 	 */
 	customResolveMethod?:
-		| ((ctx: GenericEndpointContext) => string | null)
-		| undefined;
+		((ctx: GenericEndpointContext) => string | null) | undefined;
 	/**
 	 * Store the last login method in the database. This will create a new field in the user table.
 	 * @default false

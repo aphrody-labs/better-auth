@@ -9,7 +9,7 @@ import {
 	expect,
 	it,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { logger } from "../env";
 import {
 	createInsufficientScopeError,
@@ -553,9 +553,8 @@ describe("verifyBearerToken", () => {
 
 	it("should not retain function jwks sources in the cache", async () => {
 		vi.resetModules();
-		const { verifyJwsAccessToken: verify, jwksCache } = await import(
-			"./verify"
-		);
+		const { verifyJwsAccessToken: verify, jwksCache } =
+			await import("./verify");
 		const { publicJWK, privateKey, kid } = await createTestJWKS();
 		const token = await createSignedToken(privateKey, kid);
 

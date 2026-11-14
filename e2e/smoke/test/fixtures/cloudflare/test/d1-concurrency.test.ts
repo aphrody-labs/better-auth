@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeAll, expect, it, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, expect, it, vi } from "bun:test";
 import { createTestHarness } from "wrangler";
 
 const server = createTestHarness({

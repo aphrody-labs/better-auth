@@ -16,7 +16,7 @@ import {
 	onTestFinished,
 	test,
 	vi,
-} from "vitest";
+} from "bun:test";
 import { parseCookies, parseSetCookieHeader } from "../../cookies";
 import { signJWT, verifyJWT } from "../../crypto";
 import { jwt } from "../../plugins";

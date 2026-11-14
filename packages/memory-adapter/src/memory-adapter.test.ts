@@ -1,6 +1,6 @@
 import type { BetterAuthOptions } from "@better-auth/core";
 import type { DBAdapter } from "@better-auth/core/db/adapter";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { MemoryDB } from "./memory-adapter";
 import { memoryAdapter } from "./memory-adapter";
 

@@ -1,5 +1,5 @@
 import { getTestInstance } from "better-auth/test";
-import { describe, expect } from "vitest";
+import { describe, expect } from "bun:test";
 import { stripe } from "../src";
 import { stripeClient } from "../src/client";
 import type { StripeOptions, Subscription } from "../src/types";

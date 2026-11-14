@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { recommendChangeset } from "../src/changesets/recommend.ts";
 import type { GitHubPullRequest, GitHubReader } from "../src/github.ts";
 

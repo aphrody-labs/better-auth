@@ -995,9 +995,8 @@ export async function extractClientCredentials(
 				confirmation: result.confirmation,
 			};
 		}
-		const { verifyClientAssertion: verify } = await import(
-			"./client-assertion"
-		);
+		const { verifyClientAssertion: verify } =
+			await import("./client-assertion");
 		const result = await verify(
 			ctx,
 			opts,

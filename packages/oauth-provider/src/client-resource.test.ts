@@ -3,7 +3,7 @@ import { jwt } from "better-auth/plugins/jwt";
 import { getTestInstance } from "better-auth/test";
 import type { Auth, BetterAuthOptions } from "better-auth/types";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
-import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { afterEach, describe, expect, expectTypeOf, it, vi } from "bun:test";
 import { oauthProviderResourceClient } from "./client-resource";
 import { oauthProvider } from "./oauth";
 

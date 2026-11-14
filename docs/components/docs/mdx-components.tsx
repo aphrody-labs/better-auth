@@ -101,11 +101,7 @@ interface Field {
 		model: string;
 		field: string;
 		onDelete?:
-			| "no action"
-			| "restrict"
-			| "cascade"
-			| "set null"
-			| "set default";
+			"no action" | "restrict" | "cascade" | "set null" | "set default";
 	};
 }
 

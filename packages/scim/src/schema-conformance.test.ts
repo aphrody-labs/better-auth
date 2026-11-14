@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
 import { openAPI } from "better-auth/plugins";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { scim } from ".";
 import {
 	APIGroupSchema,
