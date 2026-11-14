@@ -82,7 +82,7 @@ describe("telemetry", () => {
 						sendOnSignIn: false,
 						autoSignInAfterVerification: false,
 						expiresIn: undefined,
-						onEmailVerification: false,
+						beforeEmailVerification: false,
 						afterEmailVerification: false,
 					},
 					emailAndPassword: {
@@ -106,7 +106,7 @@ describe("telemetry", () => {
 						additionalFields: undefined,
 						changeEmail: {
 							enabled: undefined,
-							sendChangeEmailVerification: false,
+							sendChangeEmailConfirmation: false,
 						},
 					},
 					verification: {
@@ -117,7 +117,7 @@ describe("telemetry", () => {
 					session: {
 						modelName: undefined,
 						additionalFields: undefined,
-						cookieCache: { enabled: undefined, maxAge: undefined },
+						cookieCache: { enabled: undefined, maxAge: undefined, strategy: undefined },
 						disableSessionRefresh: undefined,
 						expiresIn: undefined,
 						fields: undefined,
@@ -149,7 +149,6 @@ describe("telemetry", () => {
 							additionalCookies: undefined,
 						},
 						database: {
-							useNumberId: false,
 							generateId: undefined,
 							defaultFindManyLimit: undefined,
 						},
@@ -295,7 +294,7 @@ describe("telemetry", () => {
 					skipTestCheck: true,
 				},
 			),
-		).resolves.not.throw(Error);
+		).resolves.toHaveProperty("publish");
 	});
 
 	it("initializes without Node built-ins in edge-like env (no process.cwd)", async () => {
@@ -304,7 +303,7 @@ describe("telemetry", () => {
 			// Simulate an edge runtime where process exists minimally but has no cwd
 			// so utils/package-json won't try to import fs/path
 			(globalThis as any).process = { env: {} } as any;
-			const track = vi.fn();
+			const track = vi.fn(async () => {});
 			await expect(
 				createTelemetry(
 					{ baseURL: "https://example.com", telemetry: { enabled: true } },

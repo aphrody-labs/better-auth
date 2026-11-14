@@ -2,8 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { testAdapter } from "@better-auth/test-utils/adapter";
-import Database from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { Database } from "bun:sqlite";
+import { drizzle } from "drizzle-orm/bun-sqlite";
 import {
 	authFlowTestSuite,
 	caseInsensitiveTestSuite,

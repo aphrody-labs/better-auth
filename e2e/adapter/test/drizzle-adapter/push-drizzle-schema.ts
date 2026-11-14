@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
 export type DrizzleKitDialect = "mysql" | "postgresql" | "sqlite";
 
@@ -43,6 +43,29 @@ export async function pushDrizzleSchema(
 	schema: string,
 	url: string,
 ) {
+	// drizzle-kit 0.x has no `bun:sqlite` driver for the CLI: push through its programmatic API.
+	if ("Bun" in globalThis && dialect === "sqlite") {
+		const require = createRequire(join(cwd, "noop.js"));
+		let pushSQLiteSchema: any;
+		try {
+			({ pushSQLiteSchema } = require("drizzle-kit/api"));
+		} catch {
+			// drizzle-kit 1.x ships no programmatic push API: use the CLI below.
+		}
+		if (typeof pushSQLiteSchema === "function") {
+			const { Database } = await import("bun:sqlite");
+			const { drizzle } = require("drizzle-orm/bun-sqlite");
+			const sqlite = new Database(resolve(cwd, url));
+			try {
+				const imports = await import(resolve(cwd, schema));
+				const { apply } = await pushSQLiteSchema(imports, drizzle(sqlite));
+				await apply();
+			} finally {
+				sqlite.close();
+			}
+			return;
+		}
+	}
 	const args = [
 		"push",
 		`--dialect=${dialect}`,
@@ -52,8 +75,18 @@ export async function pushDrizzleSchema(
 	console.log(`Running: drizzle-kit ${args.join(" ")}`);
 	// wait for the above console.log to be printed
 	await new Promise((resolve) => setTimeout(resolve, 10));
-	execFileSync(process.execPath, [resolveDrizzleKitCli(cwd), ...args], {
-		cwd,
-		stdio: "inherit",
-	});
+	execFileSync(
+		process.execPath,
+		[
+			...("Bun" in globalThis
+				? ["--preload", join(import.meta.dirname, "hide-better-sqlite3.ts")]
+				: []),
+			resolveDrizzleKitCli(cwd),
+			...args,
+		],
+		{
+			cwd,
+			stdio: "inherit",
+		},
+	);
 }

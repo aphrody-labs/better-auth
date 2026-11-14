@@ -7,9 +7,9 @@
  * model name directly.
  */
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
-import Database from "better-sqlite3";
+import { Database } from "bun:sqlite";
 import { defineRelationsPart } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { drizzle } from "drizzle-orm/bun-sqlite";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { afterAll, beforeEach, describe, expect, it } from "bun:test";
 

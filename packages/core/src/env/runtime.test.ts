@@ -19,7 +19,8 @@ describe("getRuntimeName", () => {
 	});
 
 	it("detects Bun before the Node.js version it reports", () => {
-		vi.stubGlobal("Bun", {});
+		// Under Bun the global is real and non-configurable.
+		if (!("Bun" in globalThis)) vi.stubGlobal("Bun", {});
 		vi.stubGlobal("process", { versions: { node: "24.3.0" } });
 
 		expect(getRuntimeName()).toBe("bun");
@@ -32,7 +33,8 @@ describe("getRuntimeName", () => {
 		expect(getRuntimeName()).toBe("deno");
 	});
 
-	it("returns undefined for a runtime it does not detect", () => {
+	// Bun defines a non-configurable global Bun, so an undetected runtime cannot be simulated.
+	it.skipIf("Bun" in globalThis)("returns undefined for a runtime it does not detect", () => {
 		vi.stubGlobal("navigator", undefined);
 		vi.stubGlobal("process", undefined);
 

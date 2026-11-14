@@ -3,8 +3,9 @@ import path from "node:path";
 import { kyselyAdapter } from "@better-auth/kysely-adapter";
 import { testAdapter } from "@better-auth/test-utils/adapter";
 import { getMigrations } from "better-auth/db/migration";
-import Database from "better-sqlite3";
-import { Kysely, SqliteDialect } from "kysely";
+import { Database } from "bun:sqlite";
+import { Kysely } from "kysely";
+import { BunSqliteDialect } from "../../../../packages/kysely-adapter/src/bun-sqlite-dialect";
 import {
 	authFlowTestSuite,
 	caseInsensitiveTestSuite,
@@ -21,7 +22,7 @@ const dbPath = path.join(__dirname, "test.db");
 let database = new Database(dbPath);
 
 let kyselyDB = new Kysely({
-	dialect: new SqliteDialect({ database }),
+	dialect: new BunSqliteDialect({ database }),
 });
 
 const { execute } = await testAdapter({
@@ -40,7 +41,7 @@ const { execute } = await testAdapter({
 			console.log("db doesn't exist");
 		}
 		database = new Database(dbPath);
-		kyselyDB = new Kysely({ dialect: new SqliteDialect({ database }) });
+		kyselyDB = new Kysely({ dialect: new BunSqliteDialect({ database }) });
 		const opts = Object.assign(betterAuthOptions, { database });
 		const { runMigrations } = await getMigrations(opts);
 		await runMigrations();

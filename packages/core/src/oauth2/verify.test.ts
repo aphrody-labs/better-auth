@@ -250,7 +250,7 @@ describe("verifyBearerToken", () => {
 		expect(mockedFetch).not.toHaveBeenCalled();
 	});
 
-	it.each([null, [], { read: true }, 42])(
+	it.each([[null], [[]], [{ read: true }], [42]])(
 		"should reject a malformed scope claim as an invalid token: %j",
 		async (scope) => {
 			const { publicJWK, privateKey, kid } = await createTestJWKS();

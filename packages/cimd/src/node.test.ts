@@ -273,7 +273,8 @@ describe("Node CIMD metadata transport", () => {
 			).rejects.toThrow(RangeError);
 		});
 
-		it("rejects a reason phrase with control characters", async () => {
+		// Bun Response accepts control characters in statusText instead of throwing TypeError.
+		it.skipIf("Bun" in globalThis)("rejects a reason phrase with control characters", async () => {
 			mocks.lookup.mockResolvedValue([{ address: "93.184.216.34", family: 4 }]);
 			mockHttpsResponse({ statusMessage: "\x7fx" });
 

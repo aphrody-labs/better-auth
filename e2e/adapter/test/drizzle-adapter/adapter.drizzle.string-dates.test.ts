@@ -7,8 +7,8 @@
  */
 import type { User } from "@better-auth/core/db";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
-import Database from "better-sqlite3";
-import { drizzle as drizzleSqlite } from "drizzle-orm/better-sqlite3";
+import { Database } from "bun:sqlite";
+import { drizzle as drizzleSqlite } from "drizzle-orm/bun-sqlite";
 import {
 	boolean,
 	pgTable,

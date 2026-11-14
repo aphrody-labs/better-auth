@@ -16,7 +16,8 @@ describe("detectRuntime", () => {
 		expect(detectRuntime()).toEqual({ name: "workerd", version: null });
 	});
 
-	it("reports an undetected runtime as edge", () => {
+	// Bun defines a non-configurable global Bun, so an undetected runtime cannot be simulated.
+	it.skipIf("Bun" in globalThis)("reports an undetected runtime as edge", () => {
 		vi.stubGlobal("navigator", undefined);
 		vi.stubGlobal("process", undefined);
 

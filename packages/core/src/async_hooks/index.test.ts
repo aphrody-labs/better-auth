@@ -69,7 +69,8 @@ describe("getAsyncLocalStorage", () => {
 			}
 		});
 
-		it("keeps a successful constructor when later loading becomes unavailable", async () => {
+		// Bun applies vi.doMock factories eagerly: the throwing getter fires inside mockNativeConstructorError.
+		it.skipIf("Bun" in globalThis)("keeps a successful constructor when later loading becomes unavailable", async () => {
 			const { getAsyncLocalStorage } = await import("./index");
 			expect(await getAsyncLocalStorage()).toBe(AsyncLocalStorage);
 			mockNativeConstructorError(new Error("Native export is unavailable"));

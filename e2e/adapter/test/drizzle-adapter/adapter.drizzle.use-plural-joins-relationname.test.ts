@@ -6,9 +6,9 @@
  */
 import type { Account, User } from "@better-auth/core/db";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
-import Database from "better-sqlite3";
+import { Database } from "bun:sqlite";
 import { relations } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { drizzle } from "drizzle-orm/bun-sqlite";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { afterAll, beforeAll, describe, expect, it } from "bun:test";
 
