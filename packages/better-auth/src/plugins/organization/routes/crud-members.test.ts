@@ -635,7 +635,7 @@ describe("updateMemberRole", async () => {
 
 		expect(updated.error?.status).toBe(400);
 		expect(updated.error?.message).toContain(
-			ORGANIZATION_ERROR_CODES.ROLE_NOT_FOUND,
+			ORGANIZATION_ERROR_CODES.ROLE_NOT_FOUND.code,
 		);
 	});
 

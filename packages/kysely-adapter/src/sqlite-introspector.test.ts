@@ -61,11 +61,17 @@ function isMissingKyselyMigrationModule(
 	moduleName: string,
 ): boolean {
 	if (!(error instanceof Error)) {
-		return false;
+		// bun throws a ResolveMessage that is not an Error instance
+		return String((error as { message?: unknown })?.message).includes(
+			`Cannot find module '${moduleName}'`,
+		);
 	}
 
 	const code = getErrorCode(error);
-	if (code === "ERR_PACKAGE_PATH_NOT_EXPORTED") {
+	if (
+		code === "ERR_PACKAGE_PATH_NOT_EXPORTED" ||
+		error.message.includes(`Cannot find module '${moduleName}'`)
+	) {
 		return true;
 	}
 
